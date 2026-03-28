@@ -1,6 +1,6 @@
-Spring:
+spring:
   datasource:
-    url: jdbc:postgresql://postgres:5432/inventory_auth_db
+    url: jdbc:postgresql://postgres:5432/billing_db
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:postgres}
 
