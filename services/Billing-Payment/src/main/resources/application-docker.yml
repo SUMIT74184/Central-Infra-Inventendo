@@ -1,0 +1,11 @@
+Spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/inventory_auth_db
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+
+  data:
+    redis:
+      host: redis
+      port: 6379
+      password: ${REDIS_PASSWORD:}
