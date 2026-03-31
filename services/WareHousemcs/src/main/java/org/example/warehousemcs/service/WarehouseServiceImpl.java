@@ -1,10 +1,10 @@
 package org.example.warehousemcs.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.example.warehousemcs.Dto.WarehouseAssignedEvent;
 import org.example.warehousemcs.Dto.WarehouseDTO;
 import org.example.warehousemcs.Dto.WarehouseRequest;
 import org.example.warehousemcs.model.Warehouse;
@@ -15,6 +15,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -25,11 +26,12 @@ import java.util.stream.Collectors;
 public class WarehouseServiceImpl implements WarehouseService {
 
     private final WarehouseRepository warehouseRepository;
-    private final KafkaTemplate<String,String> KafkaTemplate;
-    private final RedisTemplate<String,Object>redisTemplate;
-    private final ObjectMapper objectMapper;
+    private final KafkaTemplate<String, Object> kafkaTemplate;
+    private final RedisTemplate<String, Object> redisTemplate;
+    // private final ObjectMapper objectMapper;
 
-    private static final String WAREHOUSE_TOPIC= "warehouse-events";
+    private static final String WAREHOUSE_EVENTS_TOPIC = "warehouse-events";
+    private static final String WAREHOUSE_ASSIGNED_TOPIC = "warehouse-assigned";
     private static final String CACHE_PREFIX = "warehouse";
 
     @Override
@@ -48,33 +50,32 @@ public class WarehouseServiceImpl implements WarehouseService {
         warehouse.setActive(true);
         Warehouse savedWarehouse = warehouseRepository.save(warehouse);
 
-
         WarehouseDTO dto = mapToDTO(savedWarehouse);
         cacheWarehouse(dto);
         publishWarehouseEvent("WAREHOUSE_CREATED", dto);
 
         return dto;
     }
+
     @Override
     @Transactional
     @CacheEvict(value = "warehouses", allEntries = true)
-    public WarehouseDTO updateWarehouse(Long id, WarehouseRequest request){
-        log.info("Updating warehouse: {}",id);
+    public WarehouseDTO updateWarehouse(Long id, WarehouseRequest request) {
+        log.info("Updating warehouse: {}", id);
 
-        Warehouse warehouse =warehouseRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Warehouse not found"));
+        Warehouse warehouse = warehouseRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Warehouse not found"));
 
-
-        if(!warehouse.getTenantId().equals(request.getTenantId())){
+        if (!warehouse.getTenantId().equals(request.getTenantId())) {
             throw new RuntimeException("Unauthorized access to warehouse");
         }
 
-        updateWarehouseFields(warehouse,request);
-        Warehouse updateWarehouse =  warehouseRepository.save(warehouse);
+        updateWarehouseFields(warehouse, request);
+        Warehouse updateWarehouse = warehouseRepository.save(warehouse);
 
         WarehouseDTO dto = mapToDTO(updateWarehouse);
         cacheWarehouse(dto);
-        publishWarehouseEvent("WAREHOUSE_UPDATED",dto);
+        publishWarehouseEvent("WAREHOUSE_UPDATED", dto);
 
         return dto;
     }
@@ -106,18 +107,18 @@ public class WarehouseServiceImpl implements WarehouseService {
 
     @Override
     @Cacheable(value = "warehouses", key = "#warehouseCode + '-' + #tenantId")
-    public WarehouseDTO getWarehouseByCode(String warehouseCode,String tenantId){
+    public WarehouseDTO getWarehouseByCode(String warehouseCode, String tenantId) {
         log.info("Fetching warehouse by code: {}", warehouseCode);
 
-        Warehouse warehouse = warehouseRepository.findByWarehouseCodeAndTenantId(warehouseCode,tenantId)
-                .orElseThrow(()-> new RuntimeException("Warehouse not found"));
+        Warehouse warehouse = warehouseRepository.findByWarehouseCodeAndTenantId(warehouseCode, tenantId)
+                .orElseThrow(() -> new RuntimeException("Warehouse not found"));
 
         return mapToDTO(warehouse);
     }
 
     @Override
-    public List<WarehouseDTO>getAllWarehouses(String tenantId){
-        log.info("Fetching all warehouses for tenant: {}",tenantId);
+    public List<WarehouseDTO> getAllWarehouses(String tenantId) {
+        log.info("Fetching all warehouses for tenant: {}", tenantId);
 
         return warehouseRepository.findByTenantId((tenantId))
                 .stream()
@@ -126,29 +127,28 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
-    public List<WarehouseDTO> getActiveWarehouses(String tenantId){
-        log.info("Fetching active warehouses for tenant: {}",tenantId);
+    public List<WarehouseDTO> getActiveWarehouses(String tenantId) {
+        log.info("Fetching active warehouses for tenant: {}", tenantId);
 
-        return warehouseRepository.findByTenantIdAndActive(tenantId,true)
+        return warehouseRepository.findByTenantIdAndActive(tenantId, true)
                 .stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<WarehouseDTO> getWarehouseByStatus(String tenantId, String status){
-        log.info("Fetching warehouses by status: {} for tenant:{}",status,tenantId);
+    public List<WarehouseDTO> getWarehouseByStatus(String tenantId, String status) {
+        log.info("Fetching warehouses by status: {} for tenant:{}", status, tenantId);
 
-        return warehouseRepository.findByTenantIdAndStatus(tenantId,status)
+        return warehouseRepository.findByTenantIdAndStatus(tenantId, status)
                 .stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
 
+    public List<WarehouseDTO> getWarehousesByLocation(String tenantId, String location) {
 
-    public List<WarehouseDTO>getWarehousesByLocation(String tenantId,String location){
-
-        return warehouseRepository.findByTenantIdAndLocation(tenantId,location)
+        return warehouseRepository.findByTenantIdAndLocation(tenantId, location)
                 .stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
@@ -164,63 +164,65 @@ public class WarehouseServiceImpl implements WarehouseService {
                 .collect(Collectors.toList());
     }
 
-
     @Override
     @Transactional
     @CacheEvict(value = "warehouses", allEntries = true)
-    public void deleteWarehouse(Long id, String tenantId){
-        log.info("Deleting warehouse: {}",id);
+    public void deleteWarehouse(Long id, String tenantId) {
+        log.info("Deleting warehouse: {}", id);
 
         Warehouse warehouse = warehouseRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Warehouse not found"));
+                .orElseThrow(() -> new RuntimeException("Warehouse not found"));
 
-        if(!warehouse.getTenantId().equals(tenantId)){
+        if (!warehouse.getTenantId().equals(tenantId)) {
             throw new RuntimeException(("Unauthorized access to warehouse"));
         }
 
         warehouseRepository.delete(warehouse);
-        evictCache(id,tenantId);
-        publishWarehouseEvent("WAREHOUSE_DELETED",mapToDTO(warehouse));
+        evictCache(id, tenantId);
+        publishWarehouseEvent("WAREHOUSE_DELETED", mapToDTO(warehouse));
 
     }
-
-
 
     @Override
     @Transactional
     @CacheEvict(value = "warehouses", allEntries = true)
-    public void deactivateWarehouse(Long id, String tenantId){
+    public void deactivateWarehouse(Long id, String tenantId) {
         log.info("Deactivating warehouse: {}", id);
 
         Warehouse warehouse = warehouseRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Warehouse not found"));
+                .orElseThrow(() -> new RuntimeException("Warehouse not found"));
 
-        if(!warehouse.getTenantId().equals(tenantId)){
+        if (!warehouse.getTenantId().equals(tenantId)) {
             throw new RuntimeException("Unauthorized access to warehouse");
         }
 
         warehouse.setActive(false);
         Warehouse deactivated = warehouseRepository.save(warehouse);
         WarehouseDTO dto = mapToDTO(deactivated);
-        evictCache(id,tenantId);
-//        publishWarehouseEvent("WAREHOUSE_DEACTIVATED",mapToDTO(warehouse));
-        publishWarehouseEvent("WAREHOUSE_DEACTIVATED",dto);
+        evictCache(id, tenantId);
+        // publishWarehouseEvent("WAREHOUSE_DEACTIVATED",mapToDTO(warehouse));
+        publishWarehouseEvent("WAREHOUSE_DEACTIVATED", dto);
 
     }
 
-    private void publishWarehouseEvent(String eventType,WarehouseDTO warehouse){
-        try{
-            String message = objectMapper.writeValueAsString(
-                    new WarehouseEvent(eventType,warehouse)
-            );
-            KafkaTemplate.send(WAREHOUSE_TOPIC,warehouse.getWarehouseCode(),message);
-            log.info("Published {} event for warehouse: {}",eventType,warehouse.getWarehouseCode());
+    private void publishWarehouseEvent(String eventType, WarehouseDTO warehouse) {
+        WarehouseEvent event = new WarehouseEvent(eventType, warehouse);
+        kafkaTemplate.send(WAREHOUSE_EVENTS_TOPIC, warehouse.getWarehouseCode(), event);
+        log.info("Published {} event for warehouse: {}", eventType, warehouse.getWarehouseCode());
+    }
 
-        }catch(JsonProcessingException e){
-            log.error("Error publishing warehouse event",e);
+    public void publishWarehouseAssignment(String orderId, WarehouseDTO warehouse) {
+        WarehouseAssignedEvent assignmentEvent = WarehouseAssignedEvent.builder()
+                .orderId(orderId)
+                .tenantId(Long.parseLong(warehouse.getTenantId()))
+                .productId(null) // Fill this if applicable
+                .warehouseId(warehouse.getId())
+                .warehouseCode(warehouse.getWarehouseCode())
+                .assignedAt(LocalDateTime.now())
+                .build();
 
-        }
-
+        kafkaTemplate.send(WAREHOUSE_ASSIGNED_TOPIC, orderId, assignmentEvent);
+        log.info("Published assignment event for Order: {} to topic: {}", orderId, WAREHOUSE_ASSIGNED_TOPIC);
     }
 
     @Override
@@ -251,18 +253,18 @@ public class WarehouseServiceImpl implements WarehouseService {
         return dto;
     }
 
-    private void cacheWarehouse(WarehouseDTO warehouse){
-    String cacheKey = CACHE_PREFIX + warehouse.getId() + ":"+warehouse.getTenantId();
-    redisTemplate.opsForValue().set(cacheKey,warehouse,1, TimeUnit.HOURS);
+    private void cacheWarehouse(WarehouseDTO warehouse) {
+        String cacheKey = CACHE_PREFIX + warehouse.getId() + ":" + warehouse.getTenantId();
+        redisTemplate.opsForValue().set(cacheKey, warehouse, 1, TimeUnit.HOURS);
 
     }
 
-    private void evictCache(Long id,String tenantId){
-    String cacheKey = CACHE_PREFIX +  id + ":" + tenantId;
-    redisTemplate.delete(cacheKey);
+    private void evictCache(Long id, String tenantId) {
+        String cacheKey = CACHE_PREFIX + id + ":" + tenantId;
+        redisTemplate.delete(cacheKey);
     }
 
-    private void updateWarehouseFields(Warehouse warehouse,WarehouseRequest request){
+    private void updateWarehouseFields(Warehouse warehouse, WarehouseRequest request) {
         warehouse.setName(request.getName());
         warehouse.setLocation(request.getLocation());
         warehouse.setAddress(request.getAddress());
@@ -278,7 +280,7 @@ public class WarehouseServiceImpl implements WarehouseService {
         warehouse.setEmail(request.getEmail());
     }
 
-    private Warehouse mapToEntity(WarehouseRequest request){
+    private Warehouse mapToEntity(WarehouseRequest request) {
         Warehouse warehouse = new Warehouse();
         warehouse.setWarehouseCode(request.getWarehouseCode());
         warehouse.setName(request.getName());
@@ -319,23 +321,10 @@ public class WarehouseServiceImpl implements WarehouseService {
                 warehouse.getTenantId(),
                 warehouse.getCreatedAt(),
                 warehouse.getUpdatedAt(),
-                warehouse.getActive()
-        );
+                warehouse.getActive());
     }
 
-    private record WarehouseEvent(String eventType,WarehouseDTO warehouse){}
-
-
-
-
-
-
-
-
-
-
-
-
-
+    private record WarehouseEvent(String eventType, WarehouseDTO warehouse) {
+    }
 
 }

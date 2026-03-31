@@ -3,10 +3,10 @@ package org.example.service;
 import org.example.dto.InventoryResponse;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
+// import java.math.BigDecimal;
 
 @Component
-public class InventoryClientFallback implements InventoryClient{
+public class InventoryClientFallback implements InventoryClient {
     @Override
     public InventoryResponse getInventory(Long productId) {
         return InventoryResponse.builder()

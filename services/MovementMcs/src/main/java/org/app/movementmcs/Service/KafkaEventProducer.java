@@ -14,10 +14,10 @@ import java.util.concurrent.CompletableFuture;
 public class KafkaEventProducer {
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
-    @Value("${kafka.topics.stock-updated}")
-    private String stockUpdatedTopic;
+    @Value("${kafka.topics.stock-moved:stock-moved}")
+    private String stockMovedTopic;
 
-    @Value("${kafka.topics.warehouse-transfer}")
+    @Value("${kafka.topics.warehouse-transfer:warehouse-transfer}")
     private String warehouseTransferTopic;
 
     public KafkaEventProducer(KafkaTemplate<String, Object> kafkaTemplate) {
@@ -27,7 +27,7 @@ public class KafkaEventProducer {
     public void publishStockUpdateEvent(StockUpdateEvent event) {
         String key = event.getTenantId() + ":" + event.getProductId();
 
-        CompletableFuture<SendResult<String, Object>> future = kafkaTemplate.send(stockUpdatedTopic, key, event);
+        CompletableFuture<SendResult<String, Object>> future = kafkaTemplate.send(stockMovedTopic, key, event);
 
         future.whenComplete((result, ex) -> {
             if (ex == null) {

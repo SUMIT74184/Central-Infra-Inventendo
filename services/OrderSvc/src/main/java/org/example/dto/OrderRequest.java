@@ -35,4 +35,6 @@ public class OrderRequest {
     private String shippingAddress;
 
     private String billingAddress;
+
+    private String tenantId;
 }

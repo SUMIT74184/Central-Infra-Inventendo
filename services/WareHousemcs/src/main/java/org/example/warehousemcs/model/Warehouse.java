@@ -66,6 +66,7 @@ public class Warehouse implements Serializable {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    @Builder.Default
     @Column(nullable = false)
     private Boolean active = true;
 

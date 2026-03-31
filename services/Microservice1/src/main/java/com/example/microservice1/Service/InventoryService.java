@@ -1,6 +1,8 @@
 package com.example.microservice1.Service;
 
+import com.example.microservice1.Dto.InventoryReleasedEvent;
 import com.example.microservice1.Dto.InventoryRequest;
+import com.example.microservice1.Dto.InventoryReservedEvent;
 import com.example.microservice1.Dto.InventoryResponse;
 import com.example.microservice1.Exception.InsufficientStockException;
 import com.example.microservice1.Exception.InventoryNotFoundException;
@@ -11,9 +13,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-// import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 
 import java.util.List;
@@ -104,23 +107,39 @@ public class InventoryService {
 
     @Transactional
     @CacheEvict(value = "inventory", key = "#sku")
-    public void reserveStock(String sku, Integer quantity){
+    public void reserveStock(String sku, Integer quantity) {
         Inventory inventory = inventoryRepository.findBySkuWithLock(sku)
-                .orElseThrow(()->new InventoryNotFoundException("Inventory not found for SKU: "+ sku));
+                .orElseThrow(() -> new InventoryNotFoundException("Inventory not found for SKU: " + sku));
 
-        if(inventory.getAvailableQuantity() < quantity){
+        if (inventory.getAvailableQuantity() < quantity) {
             throw new InsufficientStockException("Insufficient stock for sku" + sku);
-
         }
+
         inventory.setReservedQuantity(inventory.getReservedQuantity() + quantity);
         inventoryRepository.save(inventory);
 
-        log.info("Reserved {} units for SKU: {}",quantity,sku);
-        kafkaTemplate.send("inventory-reserved",sku,quantity);
+        log.info("Reserved {} units for SKU: {}", quantity, sku);
+
+        InventoryReservedEvent event = InventoryReservedEvent.builder()
+                .productId(inventory.getId())
+                .sku(sku)
+                .warehouseId(inventory.getWarehouseId())
+                .quantity(quantity)
+                .reservedAt(LocalDateTime.now())
+                .performedBy("SYSTEM")
+                .build();
+        kafkaTemplate.send("inventory-reserved", sku, event);
+
+        // Check low stock and publish alert
+        if (inventory.getAvailableQuantity() <= inventory.getReorderLevel()) {
+            log.warn("Low stock alert for SKU: {} — available: {}, reorder level: {}",
+                    sku, inventory.getAvailableQuantity(), inventory.getReorderLevel());
+            kafkaTemplate.send("low-stock-alert", sku, event);
+        }
     }
 
     @Transactional
-    @CacheEvict(value = "inventory", key = "#sku") // Added cache eviction
+    @CacheEvict(value = "inventory", key = "#sku")
     public void releaseReservedStock(String sku, Integer quantity) {
         Inventory inventory = inventoryRepository.findBySkuWithLock(sku)
                 .orElseThrow(() -> new InventoryNotFoundException("Inventory not found sku : " + sku));
@@ -131,8 +150,16 @@ public class InventoryService {
         inventoryRepository.save(inventory);
         log.info("Released {} units for SKU: {}", quantity, sku);
 
-        // Fix the call and handle the result
-        kafkaTemplate.send("inventory-released", sku, quantity)
+        InventoryReleasedEvent event = InventoryReleasedEvent.builder()
+                .productId(inventory.getId())
+                .sku(sku)
+                .warehouseId(inventory.getWarehouseId())
+                .quantity(quantity)
+                .reason("MANUAL_RELEASE")
+                .releasedAt(LocalDateTime.now())
+                .performedBy("SYSTEM")
+                .build();
+        kafkaTemplate.send("inventory-released", sku, event)
                 .whenComplete((result, ex) -> {
                     if (ex != null) log.error("Failed to send Kafka message", ex);
                 });

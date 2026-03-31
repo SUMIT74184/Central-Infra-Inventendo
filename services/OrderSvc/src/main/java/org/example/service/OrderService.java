@@ -13,7 +13,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -27,18 +26,16 @@ public class OrderService {
     private final InventoryClient inventoryClient;
     private final OrderEventProducer eventProducer;
 
-    public OrderResponse createOrder(OrderRequest request){
-        log.info("Creating order for customer: {}",request.getCustomerId());
-
-
+    public OrderResponse createOrder(OrderRequest request) {
+        log.info("Creating order for customer: {}", request.getCustomerId());
 
         List<OrderItem> orderItems = request.getItems().stream()
-                .map(item->processOrderItem(item))
+                .map(item -> processOrderItem(item))
                 .collect(Collectors.toList());
 
         BigDecimal totalAmount = orderItems.stream()
                 .map(OrderItem::getTotalPrice)
-                .reduce(BigDecimal.ZERO,BigDecimal::add);
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         Order order = Order.builder()
                 .orderNumber(generateOrderNumber())
@@ -51,20 +48,24 @@ public class OrderService {
                 .billingAddress(request.getBillingAddress())
                 .build();
 
-
-        orderItems.forEach((item->{
+        orderItems.forEach((item -> {
             item.setOrder(order);
             order.getOrderItems().add(item);
         }));
 
         Order savedOrder = orderRepository.save(order);
 
-        try{
+        try {
             reservedInventory(savedOrder);
             savedOrder.setStatus(Order.OrderStatus.CONFIRMED);
             orderRepository.save(savedOrder);
-            eventProducer.publishOrderCreatedEvent(savedOrder.getId(),savedOrder.getOrderNumber());
-        }catch (InsufficientInventoryException e){
+            eventProducer.publishOrderCreatedEvent(
+                    savedOrder.getId(),
+                    savedOrder.getOrderNumber(),
+                    request.getTenantId(),
+                    request.getCustomerId() != null ? request.getCustomerId().toString() : null,
+                    totalAmount);
+        } catch (InsufficientInventoryException e) {
             savedOrder.setStatus(Order.OrderStatus.FAILED);
             orderRepository.save(savedOrder);
             throw e;
@@ -72,13 +73,12 @@ public class OrderService {
         return mapToResponse(savedOrder);
     }
 
-    private OrderItem processOrderItem(OrderItemRequest itemRequest){
+    private OrderItem processOrderItem(OrderItemRequest itemRequest) {
         InventoryResponse inventory = inventoryClient.getInventory(itemRequest.getProductId());
 
-        if(!inventory.isInStock()  || inventory.getAvailableQuantity() < itemRequest.getQuantity()){
+        if (!inventory.isInStock() || inventory.getAvailableQuantity() < itemRequest.getQuantity()) {
             throw new InsufficientInventoryException(
-            "Insufficient inventory for product: " + inventory.getProductName()
-            );
+                    "Insufficient inventory for product: " + inventory.getProductName());
         }
 
         BigDecimal totalPrice = inventory.getPrice()
@@ -93,17 +93,15 @@ public class OrderService {
                 .totalPrice(totalPrice)
                 .build();
 
-
     }
 
-    private void reservedInventory(Order order){
-        for(OrderItem item : order.getOrderItems()){
+    private void reservedInventory(Order order) {
+        for (OrderItem item : order.getOrderItems()) {
             boolean reserved = inventoryClient.reserveInventory(
                     item.getProductId(),
-                    item.getQuantity()
-            );
+                    item.getQuantity());
 
-            if(!reserved){
+            if (!reserved) {
                 releaseReservedInventory(order);
                 throw new InsufficientInventoryException(
                         "Failed to reserve inventory for product: " + item.getProductName());
@@ -112,34 +110,31 @@ public class OrderService {
         }
     }
 
-
-    private void releaseReservedInventory(Order order){
-        order.getOrderItems().forEach(item->{
-            try{
-                inventoryClient.releaseInventory(item.getProductId(),item.getQuantity());
-            }catch (Exception e){
-                log.error("Error releasing inventory for product:{}",item.getProductId(),e);
+    private void releaseReservedInventory(Order order) {
+        order.getOrderItems().forEach(item -> {
+            try {
+                inventoryClient.releaseInventory(item.getProductId(), item.getQuantity());
+            } catch (Exception e) {
+                log.error("Error releasing inventory for product:{}", item.getProductId(), e);
             }
         });
     }
 
-
-
     @Cacheable(value = "orders", key = "#id")
-    public OrderResponse getOrderById(Long id){
+    public OrderResponse getOrderById(Long id) {
         Order order = orderRepository.findById(id)
-                .orElseThrow(()-> new OrderNotFoundException("Order not found with id: " + id));
+                .orElseThrow(() -> new OrderNotFoundException("Order not found with id: " + id));
         return mapToResponse(order);
     }
 
     @Cacheable(value = "orders", key = "#orderNumber")
-    public OrderResponse getOrderByNumber(String orderNumber){
+    public OrderResponse getOrderByNumber(String orderNumber) {
         Order order = orderRepository.findByOrderNumber(orderNumber)
-                .orElseThrow(()-> new OrderNotFoundException("Order not found:" + orderNumber));
+                .orElseThrow(() -> new OrderNotFoundException("Order not found:" + orderNumber));
         return mapToResponse(order);
     }
 
-    public List<OrderResponse> getOrdersByCustomerId(Long customerId){
+    public List<OrderResponse> getOrdersByCustomerId(Long customerId) {
         return orderRepository.findByCustomerId(customerId).stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
@@ -147,9 +142,9 @@ public class OrderService {
 
     @Transactional
     @Cacheable(value = "order", key = "#id")
-    public OrderResponse updateOrderStatus(Long id, String status){
+    public OrderResponse updateOrderStatus(Long id, String status) {
         Order order = orderRepository.findById(id)
-                .orElseThrow(()-> new OrderNotFoundException("Order not found with id: " + id));
+                .orElseThrow(() -> new OrderNotFoundException("Order not found with id: " + id));
 
         Order.OrderStatus newStatus = Order.OrderStatus.valueOf(status.toUpperCase());
         order.setStatus(newStatus);
@@ -158,8 +153,7 @@ public class OrderService {
         eventProducer.publishOrderStatusChangedEvent(
                 updatedOrder.getId(),
                 updatedOrder.getOrderNumber(),
-                status
-        );
+                status);
 
         return mapToResponse(updatedOrder);
     }
@@ -168,10 +162,10 @@ public class OrderService {
     @CacheEvict(value = "orders", key = "#id")
     public void cancelOrder(Long id) throws IllegalAccessException {
         Order order = orderRepository.findById(id)
-                .orElseThrow(()-> new OrderNotFoundException("Order not found with id: " + id));
+                .orElseThrow(() -> new OrderNotFoundException("Order not found with id: " + id));
 
-        if(order.getStatus() == Order.OrderStatus.SHIPPED ||
-        order.getStatus() == Order.OrderStatus.DELIVERED){
+        if (order.getStatus() == Order.OrderStatus.SHIPPED ||
+                order.getStatus() == Order.OrderStatus.DELIVERED) {
             throw new IllegalAccessException("Cannot cancel order in status: " + order.getStatus());
 
         }
@@ -179,20 +173,20 @@ public class OrderService {
         order.setStatus(Order.OrderStatus.CANCELLED);
         orderRepository.save(order);
 
-        eventProducer.publishOrderStatusChangedEvent(
+        eventProducer.publishOrderCancelledEvent(
                 order.getId(),
                 order.getOrderNumber(),
-                "CANCELLED"
-        );
+                null,
+                "Customer cancelled");
 
     }
 
     private String generateOrderNumber() {
-        return "ORD-" + UUID.randomUUID().toString().substring(0,8).toUpperCase();
+        return "ORD-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
 
     }
 
-    private OrderResponse mapToResponse(Order order){
+    private OrderResponse mapToResponse(Order order) {
         return OrderResponse.builder()
                 .id(order.getId())
                 .orderNumber(order.getOrderNumber())
@@ -206,12 +200,11 @@ public class OrderService {
                 .updatedAt(order.getUpdatedAt())
                 .items(order.getOrderItems().stream()
                         .map(this::mapItemToResponse)
-                        .collect(Collectors.toList())
-                )
+                        .collect(Collectors.toList()))
                 .build();
     }
 
-    private OrderItemResponse mapItemToResponse(OrderItem item){
+    private OrderItemResponse mapItemToResponse(OrderItem item) {
         return OrderItemResponse.builder()
                 .id(item.getId())
                 .productId(item.getProductId())
@@ -222,8 +215,5 @@ public class OrderService {
                 .build();
 
     }
-
-
-
 
 }

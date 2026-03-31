@@ -2,6 +2,7 @@ package org.app.movementmcs.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 
@@ -15,7 +16,8 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
+
 public class StockMovement extends BaseEntity {
 
     @Column(name = "product_id", nullable = false)
@@ -23,6 +25,9 @@ public class StockMovement extends BaseEntity {
 
     @Column(name = "warehouse_id", nullable = false)
     private Long warehouseId;
+
+    // @Column(name = "tenant_id", nullable = false)
+    // private String tenantId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "movement_type", nullable = false)
@@ -62,7 +67,8 @@ public class StockMovement extends BaseEntity {
         TRANSFER,
         ADJUSTMENT,
         DAMAGED,
-        RETURNED
+        RETURNED,
+        RESERVED
     }
 
     public enum MovementStatus {
