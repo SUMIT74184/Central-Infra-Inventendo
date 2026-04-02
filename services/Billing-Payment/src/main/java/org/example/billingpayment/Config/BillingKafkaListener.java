@@ -23,10 +23,10 @@ import java.math.BigDecimal;
 
  * EVENT FLOW (from your architecture blueprint):
 
- *   Order Service ──[order.confirmed]──► Billing Service ──[payment.success]──► Order Service
+ *   Order Service ──[order-created]──► Billing Service ──[payment.success]──► Order Service
  *                                                       └──[invoice.generated]──► Email Service
 
- *   Order Service ──[order.cancelled]──► Billing Service ──[payment.refunded]──► Order Service
+ *   Order Service ──[order-cancelled]──► Billing Service ──[payment.refunded]──► Order Service
 
  * Each @KafkaListener is IDEMPOTENT — safe to process the same message twice.
  * (We check if invoice/payment already exists before creating a new one.)
@@ -44,12 +44,12 @@ public class BillingKafkaListener {
 
 
     @KafkaListener(
-            topics = "order.confirmed",
+            topics = "order-created",
             groupId = "billing-service-group",
             containerFactory = "kafkaListenerContainerFactory"
     )
     public void handleOrderConfirmed(ConsumerRecord<String, String> record, Acknowledgment ack) {
-        log.info("Received order.confirmed for orderId: {}", record.key());
+        log.info("Received order-created for orderId: {}", record.key());
 
         try {
             JsonNode payload = objectMapper.readTree(record.value());
@@ -87,13 +87,13 @@ public class BillingKafkaListener {
             ack.acknowledge();
 
         } catch (Exception e) {
-            log.error("Failed to handle order.confirmed for {}: {}", record.key(), e.getMessage());
+            log.error("Failed to handle order-created for {}: {}", record.key(), e.getMessage());
             // No ack = Kafka will retry. Add Dead Letter Topic in production for repeated failures.
         }
     }
 
     /**
-     * Listens to "order.cancelled" topic.
+     * Listens to "order-cancelled" topic.
      *
      * Expected JSON:
      * {
@@ -106,13 +106,13 @@ public class BillingKafkaListener {
      * If payment is INITIATED/PENDING → just cancel it (no money moved yet).
      */
     @KafkaListener(
-            topics = "order.cancelled",
+            topics = "order-cancelled",
             groupId = "billing-service-group",
             containerFactory = "kafkaListenerContainerFactory"
     )
     @CacheEvict(value = "tenant-payments", key = "#record.key()")
     public void handleOrderCancelled(ConsumerRecord<String, String> record, Acknowledgment ack) {
-        log.info("Received order.cancelled for orderId: {}", record.key());
+        log.info("Received order-cancelled for orderId: {}", record.key());
 
         try {
             JsonNode payload = objectMapper.readTree(record.value());
@@ -136,10 +136,10 @@ public class BillingKafkaListener {
                     });
 
             ack.acknowledge();
-            log.info("order.cancelled handled for: {}", orderId);
+            log.info("order-cancelled handled for: {}", orderId);
 
         } catch (Exception e) {
-            log.error("Failed to handle order.cancelled for {}: {}", record.key(), e.getMessage());
+            log.error("Failed to handle order-cancelled for {}: {}", record.key(), e.getMessage());
         }
     }
 

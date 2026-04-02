@@ -8,4 +8,5 @@ CREATE DATABASE movement_db;
 CREATE DATABASE tenant_db;
 CREATE DATABASE warehousedb;
 CREATE DATABASE billing_db;
+CREATE DATABASE alert_db;
 -- order-service uses MySQL (kept separate, see order-mysql service)

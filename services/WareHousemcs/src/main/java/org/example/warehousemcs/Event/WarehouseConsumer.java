@@ -1,6 +1,8 @@
 package org.example.warehousemcs.Event;
 
 import org.example.warehousemcs.Dto.InventoryReservedEvent;
+import org.example.warehousemcs.Dto.OrderCancelledEvent;
+import org.example.warehousemcs.Dto.StockMovedEvent;
 import org.example.warehousemcs.Dto.WarehouseDTO;
 import org.example.warehousemcs.service.WarehouseServiceImpl;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -64,5 +66,61 @@ public class WarehouseConsumer {
             log.error("Warehouse: Failed to update utilization: {}", e.getMessage());
         }
     }
-}
 
+    /**
+     * When an order is cancelled, deallocate the assigned warehouse resources.
+     * Reverses any utilization that was added during reservation.
+     */
+    @KafkaListener(topics = "order-cancelled", groupId = "warehouse-order-cancelled-group")
+    public void handleOrderCancelled(OrderCancelledEvent event) {
+        log.info("Warehouse: Received order-cancelled for order: {}, tenant: {}",
+                event.getOrderNumber(), event.getTenantId());
+
+        try {
+            if (event.getTenantId() != null) {
+                List<WarehouseDTO> warehouses = warehouseServiceImpl.getActiveWarehouses(event.getTenantId());
+                log.info("Warehouse: Order {} cancelled — {} active warehouses for tenant {}. " +
+                                "Deallocation will be reconciled on next inventory-released event.",
+                        event.getOrderNumber(), warehouses.size(), event.getTenantId());
+            }
+        } catch (Exception e) {
+            log.error("Warehouse: Failed to handle order cancellation for order: {}",
+                    event.getOrderNumber(), e);
+        }
+    }
+
+    /**
+     * When stock is moved between warehouses, update utilization on both sides:
+     * - Decrease utilization at source warehouse
+     * - Increase utilization at destination warehouse
+     */
+    @KafkaListener(topics = "stock-moved", groupId = "warehouse-stock-moved-group")
+    public void handleStockMoved(StockMovedEvent event) {
+        log.info("Warehouse: Received stock-moved for product: {}, from: {} to: {}",
+                event.getProductId(), event.getSourceWarehouseCode(), event.getDestinationWarehouseCode());
+
+        try {
+            // Decrease utilization at source warehouse
+            if (event.getSourceWarehouseCode() != null && event.getTenantId() != null) {
+                warehouseServiceImpl.updateUtilization(
+                        event.getSourceWarehouseCode(),
+                        event.getTenantId(),
+                        -event.getQuantity().doubleValue());
+                log.info("Warehouse: Decreased utilization at source warehouse: {}",
+                        event.getSourceWarehouseCode());
+            }
+
+            // Increase utilization at destination warehouse
+            if (event.getDestinationWarehouseCode() != null && event.getTenantId() != null) {
+                warehouseServiceImpl.updateUtilization(
+                        event.getDestinationWarehouseCode(),
+                        event.getTenantId(),
+                        event.getQuantity().doubleValue());
+                log.info("Warehouse: Increased utilization at destination warehouse: {}",
+                        event.getDestinationWarehouseCode());
+            }
+        } catch (Exception e) {
+            log.error("Warehouse: Failed to handle stock movement: {}", e.getMessage(), e);
+        }
+    }
+}

@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dto.*;
+import org.example.dto.TenantValidationResponse;
 import org.example.exception.InsufficientInventoryException;
 import org.example.exception.OrderNotFoundException;
 import org.example.model.Order;
@@ -24,10 +25,21 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final InventoryClient inventoryClient;
+    private final TenantClient tenantClient;
     private final OrderEventProducer eventProducer;
 
     public OrderResponse createOrder(OrderRequest request) {
         log.info("Creating order for customer: {}", request.getCustomerId());
+
+        // Validate tenant before proceeding
+        if (request.getTenantId() != null && !request.getTenantId().isBlank()) {
+            TenantValidationResponse tenant = tenantClient.validateTenant(request.getTenantId());
+            if (!tenant.isValid()) {
+                throw new RuntimeException(
+                        "Tenant '" + request.getTenantId() + "' is not active. Status: " + tenant.getStatus());
+            }
+            log.info("Tenant validated: {} ({})", tenant.getTenantCode(), tenant.getSubscriptionTier());
+        }
 
         List<OrderItem> orderItems = request.getItems().stream()
                 .map(item -> processOrderItem(item))

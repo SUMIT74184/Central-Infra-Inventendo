@@ -53,6 +53,7 @@ public class KafkaConfig {
         return new DefaultKafkaConsumerFactory<>(config);
     }
 
+    @Bean
     public ConcurrentKafkaListenerContainerFactory<String,String>kafkaListenerContainerFactory(){
         ConcurrentKafkaListenerContainerFactory<String,String>factory =
                 new ConcurrentKafkaListenerContainerFactory<>();

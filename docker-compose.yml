@@ -255,6 +255,7 @@ services:
       SPRING_CLOUD_OPENFEIGN_CIRCUITBREAKER_ENABLED: "true"
       # For calling other services inside Docker network use their container names
       INVENTORY_SERVICE_URL: http://inventory-service:8081
+      TENANT_SERVICE_URL: http://tenant-service:8084
     depends_on:
       mysql:
         condition: service_healthy
@@ -348,6 +349,37 @@ services:
       - inventory-network
     restart: on-failure
 
+  alert-service:
+    build:
+      context: ./services/AlertSvc
+      dockerfile: Dockerfile
+    container_name: alert-service
+    ports:
+      - "8087:8087"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/alert_db
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: ${POSTGRES_USER:-postgres}
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    networks:
+      - inventory-network
+    restart: on-failure
+
   api-gateway:
     build:
       context: ./api-gateway
@@ -364,6 +396,7 @@ services:
       WAREHOUSE_SERVICE_URL: http://warehouse-service:8080
       BILLING_SERVICE_URL: http://billing-service:8086
       MOVEMENT_SERVICE_URL: http://movement-service:8082
+      ALERT_SERVICE_URL: http://alert-service:8087
       JWT_SECRET: ${JWT_SECRET:-changeme_use_a_real_secret_in_production}
     depends_on:
       auth-service:

@@ -19,3 +19,8 @@ spring:
           uri: http://inventory-service:8082
           predicates:
             - Path=/inventory/**
+
+        - id: alerts
+          uri: http://alert-service:8087
+          predicates:
+            - Path=/api/v1/alerts/**
