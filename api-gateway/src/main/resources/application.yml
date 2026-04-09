@@ -6,21 +6,36 @@ spring:
     gateway:
       routes:
         - id: auth
-          uri: http://auth-service:8081
+          uri: ${AUTH_SERVICE_URL:http://auth-service:8081}
           predicates:
-            - Path=/auth/**
+            - Path=/api/auth/**
 
         - id: order
-          uri: http://order-service:8083
+          uri: ${ORDER_SERVICE_URL:http://order-service:8082}
           predicates:
-            - Path=/order/**
+            - Path=/api/orders/**
 
         - id: inventory
-          uri: http://inventory-service:8082
+          uri: ${INVENTORY_SERVICE_URL:http://inventory-service:8081}
           predicates:
-            - Path=/inventory/**
+            - Path=/api/v1/inventory/**
+
+        - id: tenant
+          uri: ${TENANT_SERVICE_URL:http://tenant-service:8084}
+          predicates:
+            - Path=/api/v1/tenants/**
+
+        - id: warehouse
+          uri: ${WAREHOUSE_SERVICE_URL:http://warehouse-service:8080}
+          predicates:
+            - Path=/api/v1/warehouses/**
+
+        - id: movement
+          uri: ${MOVEMENT_SERVICE_URL:http://movement-service:8082}
+          predicates:
+            - Path=/api/v1/movements/**
 
         - id: alerts
-          uri: http://alert-service:8087
+          uri: ${ALERT_SERVICE_URL:http://alert-service:8087}
           predicates:
             - Path=/api/v1/alerts/**
