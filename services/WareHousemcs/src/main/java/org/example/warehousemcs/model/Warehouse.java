@@ -56,6 +56,13 @@ public class Warehouse implements Serializable {
     @Column(nullable = false)
     private Double CurrentUtilization;
 
+    @Column(length = 50)
+    private String type; // distribution, fulfillment, cold-storage, cross-dock
+
+    private Integer zones;
+
+    private Integer staffCount;
+
     @Column(nullable = false)
     private String tenantId;
 

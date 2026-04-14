@@ -23,6 +23,8 @@ public class InventoryResponse {
     private Integer maxStockLevel;
     private BigDecimal unitPrice;
     private String warehouseId;
+    private String warehouseName;
+    private String category;
     private String location;
     private String status;
     private boolean Lowstock;
@@ -41,6 +43,9 @@ public class InventoryResponse {
         response.setReorderLevel(inventory.getReorderLevel());
         response.setMaxStockLevel(inventory.getMaxStockLevel());
         response.setUnitPrice(inventory.getUnitPrice());
+        response.setWarehouseId(inventory.getWarehouseId());
+        response.setWarehouseName(inventory.getWarehouseName());
+        response.setCategory(inventory.getCategory());
         response.setLocation(inventory.getLocation());
         response.setLowstock(inventory.isLowStock());
         response.setCreatedAt(inventory.getCreatedAt());

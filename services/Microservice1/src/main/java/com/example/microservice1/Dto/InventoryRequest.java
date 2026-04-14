@@ -46,8 +46,10 @@ public class InventoryRequest{
     @NotBlank(message = "Warehouse Id is required")
     private String warehouseId;
 
+    private String warehouseName;
+
+    private String category;
+
     private String location;
-
-
 
 }

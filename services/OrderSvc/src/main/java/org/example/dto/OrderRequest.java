@@ -37,4 +37,10 @@ public class OrderRequest {
     private String billingAddress;
 
     private String tenantId;
+
+    private String warehouseId;
+
+    private String priority; // LOW, NORMAL, HIGH, URGENT
+
+    private String notes;
 }

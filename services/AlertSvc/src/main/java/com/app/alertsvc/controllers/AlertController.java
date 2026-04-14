@@ -3,12 +3,13 @@ package com.app.alertsvc.controllers;
 import com.app.alertsvc.dto.AlertDTO;
 import com.app.alertsvc.dto.CreateAlertRequest;
 import com.app.alertsvc.entity.Alert;
+import com.app.alertsvc.entity.AlertRule;
+import com.app.alertsvc.repositories.AlertRuleRepository;
 import com.app.alertsvc.services.AlertService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ import java.util.Map;
 public class AlertController {
 
     private final AlertService alertService;
+    private final AlertRuleRepository alertRuleRepository;
 
     @PostMapping
     public ResponseEntity<AlertDTO> createAlert(@Valid @RequestBody CreateAlertRequest request) {
@@ -99,6 +101,36 @@ public class AlertController {
     public ResponseEntity<Map<String, Long>> getPendingCount(@PathVariable String tenantId) {
         Long count = alertService.getPendingAlertCount(tenantId);
         return ResponseEntity.ok(Map.of("pendingAlerts", count));
+    }
+
+    // ── Alert Rules ──────────────────────────────────────────────────────────
+
+    @GetMapping("/rules")
+    public ResponseEntity<List<AlertRule>> getRules(
+            @RequestHeader("X-Tenant-Id") String tenantId) {
+        return ResponseEntity.ok(alertRuleRepository.findByTenantId(tenantId));
+    }
+
+    @PostMapping("/rules")
+    public ResponseEntity<AlertRule> createRule(
+            @RequestHeader("X-Tenant-Id") String tenantId,
+            @RequestBody AlertRule rule) {
+        rule.setTenantId(tenantId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(alertRuleRepository.save(rule));
+    }
+
+    @PutMapping("/rules/{id}/toggle")
+    public ResponseEntity<AlertRule> toggleRule(@PathVariable Long id) {
+        return alertRuleRepository.findById(id).map(rule -> {
+            rule.setEnabled(!rule.getEnabled());
+            return ResponseEntity.ok(alertRuleRepository.save(rule));
+        }).orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/rules/{id}")
+    public ResponseEntity<Void> deleteRule(@PathVariable Long id) {
+        alertRuleRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/health")

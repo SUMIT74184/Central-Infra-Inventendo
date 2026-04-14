@@ -22,9 +22,13 @@ public class OrderResponse {
     private String customerEmail;
     private String status;
     private List<OrderItemResponse> items;
+    private Integer itemCount;
     private BigDecimal totalAmount;
     private String shippingAddress;
     private String billingAddress;
+    private String warehouseId;
+    private String priority;
+    private String notes;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

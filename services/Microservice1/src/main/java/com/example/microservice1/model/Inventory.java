@@ -58,6 +58,12 @@ public class Inventory {
     @Column(nullable = false)
     private String warehouseId;
 
+    @Column(length = 100)
+    private String warehouseName;
+
+    @Column(length = 100)
+    private String category;
+
     @Column(length=50)
     private String Location;
 
