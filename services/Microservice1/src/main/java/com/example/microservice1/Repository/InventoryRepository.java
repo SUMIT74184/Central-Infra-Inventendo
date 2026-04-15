@@ -21,7 +21,7 @@ public interface InventoryRepository extends JpaRepository<Inventory,Long> {
 
     Optional<Inventory>findBySku(String sku);
 
-    List<Inventory> findByWarehouseId(String warehouseId);
+    org.springframework.data.domain.Page<Inventory> findByWarehouseId(String warehouseId, org.springframework.data.domain.Pageable pageable);
 
     @Query("SELECT i FROM Inventory i WHERE i.quantity <= i.reorderLevel And i.inventoryStatus='ACTIVE'")
     List<Inventory> findLowStocksItems();

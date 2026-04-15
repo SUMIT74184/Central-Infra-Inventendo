@@ -36,14 +36,21 @@ public class InventoryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<InventoryResponse>> getAllInventory(){
-        List<InventoryResponse> response = inventoryService.getAllInventory();
+    public ResponseEntity<org.springframework.data.domain.Page<InventoryResponse>> getAllInventory(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size
+    ){
+        org.springframework.data.domain.Page<InventoryResponse> response = inventoryService.getAllInventory(page, size);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/warehouse/{warehouseId}")
-    public ResponseEntity<List<InventoryResponse>> getInventoryByWareHouse(@PathVariable String warehouseId){
-        List<InventoryResponse>response = inventoryService.getInventoryByWarehouse(warehouseId);
+    public ResponseEntity<org.springframework.data.domain.Page<InventoryResponse>> getInventoryByWareHouse(
+            @PathVariable String warehouseId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size
+    ){
+        org.springframework.data.domain.Page<InventoryResponse> response = inventoryService.getInventoryByWarehouse(warehouseId, page, size);
         return  ResponseEntity.ok(response);
 
     }

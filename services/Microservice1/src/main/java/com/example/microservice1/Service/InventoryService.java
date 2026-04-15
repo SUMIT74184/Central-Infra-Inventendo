@@ -66,17 +66,15 @@ public class InventoryService {
         return InventoryResponse.fromEntity(inventory);
 
     }
-    public List<InventoryResponse>getAllInventory(){
-        return inventoryRepository.findAll().stream()
-                .map(InventoryResponse::fromEntity)
-                .collect(Collectors.toList());
+    public org.springframework.data.domain.Page<InventoryResponse> getAllInventory(int page, int size){
+        return inventoryRepository.findAll(org.springframework.data.domain.PageRequest.of(page, size))
+                .map(InventoryResponse::fromEntity);
     }
 
     //
-    public List<InventoryResponse> getInventoryByWarehouse(String warehouseId){
-        return inventoryRepository.findByWarehouseId(warehouseId).stream()
-                .map(InventoryResponse::fromEntity)
-                .collect(Collectors.toList());
+    public org.springframework.data.domain.Page<InventoryResponse> getInventoryByWarehouse(String warehouseId, int page, int size){
+        return inventoryRepository.findByWarehouseId(warehouseId, org.springframework.data.domain.PageRequest.of(page, size))
+                .map(InventoryResponse::fromEntity);
     }
 
     public List<InventoryResponse> getLowStockItems(){

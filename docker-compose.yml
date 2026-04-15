@@ -38,7 +38,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./init-databases.sql:/docker-entrypoint-initdb.d/init.sql:ro
@@ -58,7 +58,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
       MYSQL_DATABASE: order_db
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
@@ -89,6 +89,7 @@ services:
     image: confluentinc/cp-zookeeper:7.5.0
     container_name: shared-zookeeper
     environment:
+      KAFKA_HEAP_OPTS: "-Xmx256m -Xms128m"
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
       ZOOKEEPER_4LW_COMMANDS_WHITELIST: "*"
@@ -110,6 +111,7 @@ services:
       - "9092:9092" # host (IntelliJ / Postman) uses this
       # 29092 is the internal Docker-network listener (not exposed outside)
     environment:
+      KAFKA_HEAP_OPTS: "-Xmx512m -Xms256m"
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT_INTERNAL:PLAINTEXT,PLAINTEXT_EXTERNAL:PLAINTEXT
@@ -154,6 +156,7 @@ services:
     ports:
       - "8081:8081"
     environment:
+      JAVA_TOOL_OPTIONS: "-Xmx256m -Xms128m"
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/auth_db
       DB_USERNAME: ${POSTGRES_USER:-postgres}
@@ -188,6 +191,7 @@ services:
     ports:
       - "8080:8081"
     environment:
+      JAVA_TOOL_OPTIONS: "-Xmx256m -Xms128m"
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/inventory_db
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-postgres}
@@ -214,6 +218,7 @@ services:
     ports:
       - "8082:8082"
     environment:
+      JAVA_TOOL_OPTIONS: "-Xmx256m -Xms128m"
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/movement_db
       DB_USERNAME: ${POSTGRES_USER:-postgres}
@@ -245,6 +250,7 @@ services:
     ports:
       - "8083:8082"
     environment:
+      JAVA_TOOL_OPTIONS: "-Xmx256m -Xms128m"
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/order_db
       SPRING_DATASOURCE_USERNAME: root
@@ -275,6 +281,7 @@ services:
     ports:
       - "8084:8084"
     environment:
+      JAVA_TOOL_OPTIONS: "-Xmx256m -Xms128m"
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/tenant_db
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-postgres}
@@ -301,6 +308,7 @@ services:
     ports:
       - "8085:8080"
     environment:
+      JAVA_TOOL_OPTIONS: "-Xmx256m -Xms128m"
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/warehousedb
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-postgres}
@@ -328,6 +336,7 @@ services:
     ports:
       - "8086:8086"
     environment:
+      JAVA_TOOL_OPTIONS: "-Xmx256m -Xms128m"
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/billing_db
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-postgres}
@@ -357,6 +366,7 @@ services:
     ports:
       - "8087:8087"
     environment:
+      JAVA_TOOL_OPTIONS: "-Xmx256m -Xms128m"
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/alert_db
       DB_HOST: postgres
@@ -388,6 +398,7 @@ services:
     ports:
       - "8000:8080"
     environment:
+      JAVA_TOOL_OPTIONS: "-Xmx256m -Xms128m"
       SPRING_PROFILES_ACTIVE: docker
       AUTH_SERVICE_URL: http://auth-service:8081
       INVENTORY_SERVICE_URL: http://inventory-service:8081
