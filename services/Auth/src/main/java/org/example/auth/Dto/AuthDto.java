@@ -92,4 +92,16 @@ public class AuthDto {
         private String message; // Error message if token is invalid
     }
 
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class UpdateUserRequest {
+        private String firstName;
+        private String lastName;
+        /** Optional — if provided, password is updated */
+        @Size(min = 8, message = "Password must be at least 8 characters")
+        private String newPassword;
+    }
+
 }

@@ -205,11 +205,25 @@ public class AuthController {
         return null;
     }
 
+    /**
+     * Update user profile — used by Settings page.
+     * PUT /api/auth/users/{id}
+     */
+    @PutMapping("/users/{id}")
+    public ResponseEntity<Map<String, Object>> updateUser(
+            @PathVariable String id,
+            @Valid @RequestBody AuthDto.UpdateUserRequest request) {
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
+        String callerEmail = auth.getName();
+        User updated = authService.updateUser(id, request, callerEmail);
 
-
-
-
-
+        Map<String, Object> result = new HashMap<>();
+        result.put("id", updated.getId());
+        result.put("email", updated.getEmail());
+        result.put("firstName", updated.getFirstName());
+        result.put("lastName", updated.getLastName());
+        return ResponseEntity.ok(result);
+    }
 }

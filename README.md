@@ -238,12 +238,17 @@ Six automation agents are designed and documented in `agent.md`. They are implem
 
 | Item | Status |
 |------|--------|
-| Wire React Query hooks into page components | 🔜 Next session |
-| Refactor AddOrderDialog to use SKU selector | 🔜 Next session |
-| `PUT /api/auth/users/{id}` for Settings | 🔜 Next session |
-| Billing-Payment integration | 🔒 Deferred (no API keys) |
-| Agent implementation | 🔬 Research phase |
-| Pagination on list endpoints | 🔜 Future |
+| Refactor `AddOrderDialog.tsx` to use dynamic SKU selector | - Next session |
+| Pagination on list endpoints (Spring Data Pageable) | - Next session |
+| AI Agent implementation (Reorder, Optimizer) | - Research phase |
+| Billing-Payment integration | - Deferred (no API keys) |
+
+## ✅ Recently Completed
+
+- **API & Hooks**: Wired live `React Query` hooks into all Page components, stripping out static mock data arrays.
+- **Export Utility**: Added native browser exporting for CSV/Excel/PDF/JSON using `xlsx` and `jspdf`.
+- **Auth Endpoint Improvements**: Created `PUT /api/auth/users/{id}` strictly typed endpoint to allow profile saves from the frontend Settings page.
+- **Bugfixes**: Resolved backend UUID parsing conflict (Long -> String) & frontend typescript errors.
 
 ---
 

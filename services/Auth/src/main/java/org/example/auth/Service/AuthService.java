@@ -19,7 +19,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
 import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -73,8 +72,7 @@ public class AuthService {
     public AuthDto.AuthResponse login(AuthDto.LoginRequest request) {
         try {
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
-            );
+                    new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
         } catch (AuthenticationException e) {
             throw new IllegalArgumentException("Invalid credentials");
         }
@@ -132,8 +130,7 @@ public class AuthService {
                     "blacklisted_token:" + token,
                     "true",
                     expirationTime,
-                    TimeUnit.MILLISECONDS
-            );
+                    TimeUnit.MILLISECONDS);
         }
 
         redisTemplate.delete("refresh_token:" + userId);
@@ -144,7 +141,8 @@ public class AuthService {
         log.info("User logged out, cache evicted for: {}", userEmail);
     }
 
-    /* *
+    /*
+     * *
      * validateToken: Called by other services to verify a JWT.
      *
      * @Cacheable("token-validation"): Cache the validation result for 5 minutes.
@@ -196,14 +194,16 @@ public class AuthService {
         redisTemplate.opsForValue().set(
                 "refresh_token:" + userId,
                 refreshToken,
-                Duration.ofDays(7)
-        );
+                Duration.ofDays(7));
     }
-    /* *
+
+    /*
+     * *
      * Get all users for a specific tenant.
      * Used by TENANT_ADMIN to manage their team.
      *
-     * @Cacheable("tenant-users"): Cached for 15 min to avoid DB load on repeated admin page visits.
+     * @Cacheable("tenant-users"): Cached for 15 min to avoid DB load on repeated
+     * admin page visits.
      * Cache is evicted when any user in the tenant is updated/deleted.
      */
     @Cacheable(value = "tenant-users", key = "#tenantId")
@@ -220,6 +220,7 @@ public class AuthService {
     public void evictTenantUsersCache(String tenantId) {
         log.debug("Evicting tenant-users cache for: {}", tenantId);
     }
+
     /**
      * publishEvent: Sends a structured JSON payload to a Kafka topic.
      *
@@ -239,8 +240,7 @@ public class AuthService {
     private String buildUserEventPayload(User user) {
         return String.format(
                 "{\"userId\":\"%s\",\"email\":\"%s\",\"tenantId\":\"%s\",\"roles\":\"%s\"}",
-                user.getId(), user.getEmail(), user.getTenantId(), user.getRoles()
-        );
+                user.getId(), user.getEmail(), user.getTenantId(), user.getRoles());
     }
 
     private AuthDto.AuthResponse buildAuthResponse(User user, String accessToken, String refreshToken) {
@@ -254,5 +254,41 @@ public class AuthService {
                 .tenantId(user.getTenantId())
                 .roles(user.getRoles())
                 .build();
+    }
+
+    /**
+     * Update user profile — called from PUT /api/auth/users/{id}.
+     * Only the user themselves or a SUPER_ADMIN may update a profile.
+     */
+    @Transactional
+    public User updateUser(String id, AuthDto.UpdateUserRequest request, String callerEmail) {
+        User caller = userRepository.findByEmail(callerEmail)
+                .orElseThrow(() -> new IllegalArgumentException("Caller not found"));
+
+        boolean isSuperAdmin = caller.getRoles().stream()
+                .anyMatch(r -> r == Role.SUPER_ADMIN);
+
+        if (!caller.getId().equals(id) && !isSuperAdmin) {
+            throw new SecurityException("You can only update your own profile");
+        }
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        if (request.getFirstName() != null && !request.getFirstName().isBlank()) {
+            user.setFirstName(request.getFirstName());
+        }
+        if (request.getLastName() != null && !request.getLastName().isBlank()) {
+            user.setLastName(request.getLastName());
+        }
+        if (request.getNewPassword() != null && !request.getNewPassword().isBlank()) {
+            user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        }
+
+        User saved = userRepository.save(user);
+        evictTenantUsersCache(saved.getTenantId());
+        log.info("User {} profile updated by {}", id, callerEmail);
+        publishEvent("user.updated", buildUserEventPayload(saved));
+        return saved;
     }
 }
