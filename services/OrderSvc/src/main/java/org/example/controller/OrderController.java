@@ -26,21 +26,36 @@ public class OrderController {
 
     }
 
+    @GetMapping
+    public ResponseEntity<List<OrderResponse>> getAllOrders(@RequestHeader("X-Tenant-Id") String tenantId){
+        return ResponseEntity.ok(orderService.getAllOrders(tenantId));
+    }
+
+
     @GetMapping("/{id}")
-    public ResponseEntity<OrderResponse> getOrderById(@PathVariable Long id){
-        OrderResponse response = orderService.getOrderById(id);
+    public ResponseEntity<OrderResponse> getOrderById(
+            @PathVariable Long id,
+            @RequestHeader("X-Tenant-Id") String tenantId
+    ){
+        OrderResponse response = orderService.getOrderById(id, tenantId);
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/number{orderNumber}")
-    public ResponseEntity<OrderResponse> getOrderByNumber(@PathVariable String orderNumber){
-        OrderResponse response = orderService.getOrderByNumber(orderNumber);
+    @GetMapping("/number/{orderNumber}")
+    public ResponseEntity<OrderResponse> getOrderByNumber(
+            @PathVariable String orderNumber,
+            @RequestHeader("X-Tenant-Id") String tenantId
+    ){
+        OrderResponse response = orderService.getOrderByNumber(orderNumber, tenantId);
         return  ResponseEntity.ok(response);
     }
 
     @GetMapping("/customer/{customerId}")
-    public ResponseEntity<List<OrderResponse>> getOrdersByCustomerId(@PathVariable Long customerId){
-      List<OrderResponse> responses = orderService.getOrdersByCustomerId(customerId);
+    public ResponseEntity<List<OrderResponse>> getOrdersByCustomerId(
+            @PathVariable Long customerId,
+            @RequestHeader("X-Tenant-Id") String tenantId
+    ){
+      List<OrderResponse> responses = orderService.getOrdersByCustomerId(customerId, tenantId);
         return ResponseEntity.ok(responses);
     }
 

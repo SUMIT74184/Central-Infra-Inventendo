@@ -67,6 +67,9 @@ public class Inventory {
     @Column(length=50)
     private String Location;
 
+    @Column(nullable = false)
+    private String tenantId;
+
 
     @CreatedDate
     @Column(nullable = false)

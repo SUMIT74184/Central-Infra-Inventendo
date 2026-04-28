@@ -45,6 +45,7 @@ public class InventoryService {
         inventory.setUnitPrice(request.getUnitPrice());
         inventory.setWarehouseId(request.getWarehouseId());
         inventory.setLocation(request.getLocation());
+        inventory.setTenantId(request.getTenantId());
 
         inventory.setReservedQuantity(0); 
         inventory.setInventoryStatus("ACTIVE");
@@ -59,36 +60,34 @@ public class InventoryService {
     }
 
 
-    @Cacheable(value = "inventory", key = "#sku")
-    public InventoryResponse getInventoryBySku(String sku){
-        Inventory inventory = inventoryRepository.findBySku(sku)
-                .orElseThrow(()-> new InventoryNotFoundException("Inventory is not found for SKU:" + sku + "in warehouse"));
+    @Cacheable(value = "inventory", key = "#sku + '-' + #tenantId")
+    public InventoryResponse getInventoryBySku(String sku, String tenantId){
+        Inventory inventory = inventoryRepository.findBySkuAndTenantId(sku, tenantId)
+                .orElseThrow(()-> new InventoryNotFoundException("Inventory is not found for SKU:" + sku + " for tenant: " + tenantId));
         return InventoryResponse.fromEntity(inventory);
 
     }
-    public org.springframework.data.domain.Page<InventoryResponse> getAllInventory(int page, int size){
-        return inventoryRepository.findAll(org.springframework.data.domain.PageRequest.of(page, size))
+    public org.springframework.data.domain.Page<InventoryResponse> getAllInventory(int page, int size, String tenantId){
+        return inventoryRepository.findByTenantId(tenantId, org.springframework.data.domain.PageRequest.of(page, size))
                 .map(InventoryResponse::fromEntity);
     }
 
     //
-    public org.springframework.data.domain.Page<InventoryResponse> getInventoryByWarehouse(String warehouseId, int page, int size){
-        return inventoryRepository.findByWarehouseId(warehouseId, org.springframework.data.domain.PageRequest.of(page, size))
+    public org.springframework.data.domain.Page<InventoryResponse> getInventoryByWarehouse(String warehouseId, int page, int size, String tenantId){
+        return inventoryRepository.findByWarehouseIdAndTenantId(warehouseId, tenantId, org.springframework.data.domain.PageRequest.of(page, size))
                 .map(InventoryResponse::fromEntity);
     }
 
-    public List<InventoryResponse> getLowStockItems(){
-        return inventoryRepository.findLowStocksItems().stream()
+    public List<InventoryResponse> getLowStockItems(String tenantId){
+        return inventoryRepository.findLowStocksItemsByTenantId(tenantId).stream()
                 .map(InventoryResponse::fromEntity)
                 .collect(Collectors.toList());
     }
     @Transactional
-    @CacheEvict(value = "inventory" ,key = "#sku")
-    public InventoryResponse updateQuantity(String sku, Integer quantity){
-        Inventory inventory = inventoryRepository.findBySkuWithLock(sku)
-                .orElseThrow(()-> new InventoryNotFoundException("Inventory not found for SKU: " + sku));
-
-
+    @CacheEvict(value = "inventory", key = "#sku + '-' + #tenantId")
+    public InventoryResponse updateQuantity(String sku, Integer quantity, String tenantId){
+        Inventory inventory = inventoryRepository.findBySkuAndTenantId(sku, tenantId)
+                .orElseThrow(()-> new InventoryNotFoundException("Inventory not found for sku "+sku + " and tenant " + tenantId));
         inventory.setQuantity(quantity);
         Inventory updated = inventoryRepository.save(inventory);
         log.info("Updated quantity for SKU: {} to {}",updated.getSku(),quantity);
@@ -97,17 +96,17 @@ public class InventoryService {
         return InventoryResponse.fromEntity(updated);
     }
     @Transactional
-    public boolean checkAvailability(String sku,Integer quantity){
-        Inventory inventory = inventoryRepository.findBySku(sku)
-                .orElseThrow(()-> new InventoryNotFoundException("Inventory not found for sku "+sku));
+    public boolean checkAvailability(String sku,Integer quantity, String tenantId){
+        Inventory inventory = inventoryRepository.findBySkuAndTenantId(sku, tenantId)
+                .orElseThrow(()-> new InventoryNotFoundException("Inventory not found for sku "+sku + " and tenant " + tenantId));
         return inventory.getAvailableQuantity()>=quantity;
     }
 
     @Transactional
-    @CacheEvict(value = "inventory", key = "#sku")
-    public void reserveStock(String sku, Integer quantity) {
-        Inventory inventory = inventoryRepository.findBySkuWithLock(sku)
-                .orElseThrow(() -> new InventoryNotFoundException("Inventory not found for SKU: " + sku));
+    @CacheEvict(value = "inventory", key = "#sku + '-' + #tenantId")
+    public void reserveStock(String sku, Integer quantity, String tenantId) {
+        Inventory inventory = inventoryRepository.findBySkuWithLockAndTenantId(sku, tenantId)
+                .orElseThrow(() -> new InventoryNotFoundException("Inventory not found for SKU: " + sku + " and tenant " + tenantId));
 
         if (inventory.getAvailableQuantity() < quantity) {
             throw new InsufficientStockException("Insufficient stock for sku" + sku);
@@ -121,6 +120,7 @@ public class InventoryService {
         InventoryReservedEvent event = InventoryReservedEvent.builder()
                 .productId(inventory.getId())
                 .sku(sku)
+                .tenantId(tenantId)
                 .warehouseId(inventory.getWarehouseId())
                 .quantity(quantity)
                 .reservedAt(LocalDateTime.now())
@@ -137,10 +137,10 @@ public class InventoryService {
     }
 
     @Transactional
-    @CacheEvict(value = "inventory", key = "#sku")
-    public void releaseReservedStock(String sku, Integer quantity) {
-        Inventory inventory = inventoryRepository.findBySkuWithLock(sku)
-                .orElseThrow(() -> new InventoryNotFoundException("Inventory not found sku : " + sku));
+    @CacheEvict(value = "inventory", key = "#sku + '-' + #tenantId")
+    public void releaseReservedStock(String sku, Integer quantity, String tenantId) {
+        Inventory inventory = inventoryRepository.findBySkuWithLockAndTenantId(sku, tenantId)
+                .orElseThrow(() -> new InventoryNotFoundException("Inventory not found sku : " + sku + " and tenant " + tenantId));
 
         inventory.setReservedQuantity(Math.max(0, inventory.getReservedQuantity() - quantity));
         inventory.setQuantity(Math.max(0, inventory.getQuantity() - quantity));
@@ -163,10 +163,10 @@ public class InventoryService {
                 });
     }
     @Transactional
-    @CacheEvict(value = "inventory", key = "#sku")
-    public void cancelReservation(String sku, Integer quantity) {
-        Inventory inventory = inventoryRepository.findBySkuWithLock(sku)
-                .orElseThrow(() -> new InventoryNotFoundException("SKU not found: " + sku));
+    @CacheEvict(value = "inventory", key = "#sku + '-' + #tenantId")
+    public void cancelReservation(String sku, Integer quantity, String tenantId) {
+        Inventory inventory = inventoryRepository.findBySkuWithLockAndTenantId(sku, tenantId)
+                .orElseThrow(() -> new InventoryNotFoundException("SKU not found: " + sku + " and tenant " + tenantId));
 
         inventory.setReservedQuantity(inventory.getReservedQuantity() - quantity);
 

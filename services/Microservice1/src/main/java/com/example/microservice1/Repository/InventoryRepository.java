@@ -16,15 +16,17 @@ import java.util.Optional;
 @Repository
 public interface InventoryRepository extends JpaRepository<Inventory,Long> {
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @Query("SELECT i FROM Inventory i WHERE i.sku = :sku")
-    Optional<Inventory>findBySkuWithLock(@Param("sku")String sku);
+    @Query("SELECT i FROM Inventory i WHERE i.sku = :sku AND i.tenantId = :tenantId")
+    Optional<Inventory>findBySkuWithLockAndTenantId(@Param("sku")String sku, @Param("tenantId") String tenantId);
 
-    Optional<Inventory>findBySku(String sku);
+    Optional<Inventory>findBySkuAndTenantId(String sku, String tenantId);
 
-    org.springframework.data.domain.Page<Inventory> findByWarehouseId(String warehouseId, org.springframework.data.domain.Pageable pageable);
+    org.springframework.data.domain.Page<Inventory> findByTenantId(String tenantId, org.springframework.data.domain.Pageable pageable);
 
-    @Query("SELECT i FROM Inventory i WHERE i.quantity <= i.reorderLevel And i.inventoryStatus='ACTIVE'")
-    List<Inventory> findLowStocksItems();
+    org.springframework.data.domain.Page<Inventory> findByWarehouseIdAndTenantId(String warehouseId, String tenantId, org.springframework.data.domain.Pageable pageable);
+
+    @Query("SELECT i FROM Inventory i WHERE i.tenantId = :tenantId AND i.quantity <= i.reorderLevel And i.inventoryStatus='ACTIVE'")
+    List<Inventory> findLowStocksItemsByTenantId(@Param("tenantId") String tenantId);
 
     @Query("SELECT i FROM Inventory i WHERE i.warehouseId = :warehouseId AND i.inventoryStatus = 'ACTIVE'")
     List<Inventory> findActiveByWarehouse(@Param("warehouseId") String warehouseId);

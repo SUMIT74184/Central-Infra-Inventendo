@@ -58,6 +58,7 @@ public class OrderService {
                 .totalAmount(totalAmount)
                 .shippingAddress(request.getShippingAddress())
                 .billingAddress(request.getBillingAddress())
+                .tenantId(request.getTenantId())
                 .build();
 
         orderItems.forEach((item -> {
@@ -132,22 +133,30 @@ public class OrderService {
         });
     }
 
-    @Cacheable(value = "orders", key = "#id")
-    public OrderResponse getOrderById(Long id) {
+    public OrderResponse getOrderById(Long id, String tenantId) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new OrderNotFoundException("Order not found with id: " + id));
+        
+        if (!order.getTenantId().equals(tenantId)) {
+            throw new OrderNotFoundException("Order not found with id: " + id + " for tenant: " + tenantId);
+        }
         return mapToResponse(order);
     }
 
-    @Cacheable(value = "orders", key = "#orderNumber")
-    public OrderResponse getOrderByNumber(String orderNumber) {
-        Order order = orderRepository.findByOrderNumber(orderNumber)
-                .orElseThrow(() -> new OrderNotFoundException("Order not found:" + orderNumber));
+    public List<OrderResponse> getAllOrders(String tenantId) {
+        return orderRepository.findByTenantId(tenantId).stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+    }
+
+    public OrderResponse getOrderByNumber(String orderNumber, String tenantId) {
+        Order order = orderRepository.findByOrderNumberAndTenantId(orderNumber, tenantId)
+                .orElseThrow(() -> new OrderNotFoundException("Order not found:" + orderNumber + " for tenant: " + tenantId));
         return mapToResponse(order);
     }
 
-    public List<OrderResponse> getOrdersByCustomerId(Long customerId) {
-        return orderRepository.findByCustomerId(customerId).stream()
+    public List<OrderResponse> getOrdersByCustomerId(Long customerId, String tenantId) {
+        return orderRepository.findByCustomerIdAndTenantId(customerId, tenantId).stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
     }

@@ -57,6 +57,9 @@ public class Order {
     @Builder.Default
     private String priority = "NORMAL"; // LOW, NORMAL, HIGH, URGENT
 
+    @Column(name = "tenant_id", nullable = false)
+    private String tenantId;
+
     @Column(columnDefinition = "TEXT")
     private String notes;
 

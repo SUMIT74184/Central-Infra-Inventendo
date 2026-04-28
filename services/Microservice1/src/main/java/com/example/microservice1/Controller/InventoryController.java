@@ -30,17 +30,21 @@ public class InventoryController {
     }
 
     @GetMapping("/{sku}")
-    public ResponseEntity<InventoryResponse> getInventoryBySku(@PathVariable String sku){
-        InventoryResponse response = inventoryService.getInventoryBySku(sku);
+    public ResponseEntity<InventoryResponse> getInventoryBySku(
+            @PathVariable String sku,
+            @RequestHeader("X-Tenant-Id") String tenantId
+    ){
+        InventoryResponse response = inventoryService.getInventoryBySku(sku, tenantId);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping
     public ResponseEntity<org.springframework.data.domain.Page<InventoryResponse>> getAllInventory(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size
+            @RequestParam(defaultValue = "20") int size,
+            @RequestHeader("X-Tenant-Id") String tenantId
     ){
-        org.springframework.data.domain.Page<InventoryResponse> response = inventoryService.getAllInventory(page, size);
+        org.springframework.data.domain.Page<InventoryResponse> response = inventoryService.getAllInventory(page, size, tenantId);
         return ResponseEntity.ok(response);
     }
 
@@ -48,64 +52,69 @@ public class InventoryController {
     public ResponseEntity<org.springframework.data.domain.Page<InventoryResponse>> getInventoryByWareHouse(
             @PathVariable String warehouseId,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size
+            @RequestParam(defaultValue = "20") int size,
+            @RequestHeader("X-Tenant-Id") String tenantId
     ){
-        org.springframework.data.domain.Page<InventoryResponse> response = inventoryService.getInventoryByWarehouse(warehouseId, page, size);
+        org.springframework.data.domain.Page<InventoryResponse> response = inventoryService.getInventoryByWarehouse(warehouseId, page, size, tenantId);
         return  ResponseEntity.ok(response);
 
     }
     @GetMapping("/low-stock")
-    public ResponseEntity<List<InventoryResponse>> getLowStocksItems(){
-        List<InventoryResponse>response = inventoryService.getLowStockItems();
+    public ResponseEntity<List<InventoryResponse>> getLowStocksItems(
+            @RequestHeader("X-Tenant-Id") String tenantId
+    ){
+        List<InventoryResponse>response = inventoryService.getLowStockItems(tenantId);
         return ResponseEntity.ok(response);
     }
 
     @PutMapping("/{sku}/quantity")
     public ResponseEntity<InventoryResponse> updateQuantity(
             @PathVariable String sku,
-            @RequestBody Map<String,Integer> request
+            @RequestBody Map<String,Integer> request,
+            @RequestHeader("X-Tenant-Id") String tenantId
     ){
-        InventoryResponse response = inventoryService.updateQuantity(sku,request.get("quantity"));
+        InventoryResponse response = inventoryService.updateQuantity(sku,request.get("quantity"), tenantId);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/{sku}/check")
     public ResponseEntity<Map<String,Boolean>> checkAvailability(
             @PathVariable String sku,
-            @RequestParam Integer quantity
+            @RequestParam Integer quantity,
+            @RequestHeader("X-Tenant-Id") String tenantId
     ){
-        boolean available = inventoryService.checkAvailability(sku,quantity);
+        boolean available = inventoryService.checkAvailability(sku,quantity, tenantId);
         return ResponseEntity.ok(Map.of("available",available));
     }
 
     @PostMapping("/{sku}/reserve")
     public ResponseEntity<Void> reserveStock(
             @PathVariable String sku,
-            @RequestBody Map<String,Integer> request
+            @RequestBody Map<String,Integer> request,
+            @RequestHeader("X-Tenant-Id") String tenantId
     ){
-        inventoryService.reserveStock(sku,request.get("quantity"));
+        inventoryService.reserveStock(sku,request.get("quantity"), tenantId);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/{sku}/release")
     public ResponseEntity<Void> releaseStock(
             @PathVariable String sku,
-            @RequestBody Map<String,Integer> request
+            @RequestBody Map<String,Integer> request,
+            @RequestHeader("X-Tenant-Id") String tenantId
     ){
-        inventoryService.releaseReservedStock(sku,request.get("quantity"));
+        inventoryService.releaseReservedStock(sku,request.get("quantity"), tenantId);
         return ResponseEntity.ok().build();
     }
     @PostMapping("/{sku}/cancel-reservation")
     public ResponseEntity<Void>cancelReservation(
             @PathVariable String sku,
-         @RequestParam Integer quantity
+            @RequestParam Integer quantity,
+            @RequestHeader("X-Tenant-Id") String tenantId
     ){
-        inventoryService.cancelReservation(sku,quantity);
+        inventoryService.cancelReservation(sku,quantity, tenantId);
         return ResponseEntity.ok().build();
     }
-
-
-
 
 
 }
