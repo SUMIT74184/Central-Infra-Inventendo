@@ -32,6 +32,12 @@ public class MovementController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @GetMapping
+    public ResponseEntity<List<MovementResponse>> getAllMovements() {
+        log.info("Fetching all movements");
+        return ResponseEntity.ok(movementService.getAllMovements());
+    }
+
     @GetMapping("/product/{productId}")
     public ResponseEntity<List<MovementResponse>> getMovementsByProduct(
             @PathVariable Long productId

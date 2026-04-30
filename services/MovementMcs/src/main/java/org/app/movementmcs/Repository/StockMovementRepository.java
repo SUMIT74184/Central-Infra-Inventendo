@@ -13,6 +13,8 @@ import java.util.Optional;
 @Repository
 public interface StockMovementRepository extends JpaRepository<StockMovement, Long> {
         Optional<StockMovement> findByTenantIdAndIdempotencyKey(String tenantId, String idempotencyKey);
+        
+        List<StockMovement> findByTenantIdOrderByCreatedAtDesc(String tenantId);
 
         List<StockMovement> findByTenantIdAndProductIdOrderByCreatedAtDesc(String tenantId, Long productId);
 

@@ -94,6 +94,15 @@ public class MovementService {
     }
 
     @Transactional(readOnly = true)
+    public List<MovementResponse> getAllMovements() {
+        String tenantId = TenantContext.getTenantId();
+        List<StockMovement> movements = movementRepository.findByTenantIdOrderByCreatedAtDesc(tenantId);
+        return movements.stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
     public List<MovementResponse> getMovementsByProduct(Long productId) {
         String tenantId = TenantContext.getTenantId();
 

@@ -1,4 +1,5 @@
-Failed to load resource: net::ERR_CONNECTION_REFUSED
+{
+    Failed to load resource: net::ERR_CONNECTION_REFUSED
 :8000/api/v1/inventory?page=0&size=20:1  Failed to load resource: net::ERR_CONNECTION_REFUSED
 :8000/api/v1/inventory?page=0&size=20:1  Failed to load resource: net::ERR_CONNECTION_REFUSED
 :8000/api/orders:1  Failed to load resource: net::ERR_CONNECTION_REFUSED
@@ -292,3 +293,6 @@ performSyncWorkOnRoot @ react-dom.development.js:26156
 flushSyncCallbacks @ react-dom.development.js:12042
 (anonymous) @ react-dom.development.js:25690
 useAlerts.ts:59  GET http://localhost:8000/api/v1/alerts/rules net::ERR_CONNECTION_REFUSED
+
+}
+
