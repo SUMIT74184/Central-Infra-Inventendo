@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface WarehouseService {
 
-     WarehouseDTO createWarehouse(WarehouseRequest request);
+     WarehouseDTO createWarehouse(WarehouseRequest request, String tenantId);
 
-    WarehouseDTO updateWarehouse(Long id, WarehouseRequest request);
+    WarehouseDTO updateWarehouse(Long id, WarehouseRequest request, String tenantId);
 
     WarehouseDTO getWarehouseById(Long id, String tenantId);
 

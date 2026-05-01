@@ -21,8 +21,11 @@ public class WarehouseController {
 
 
     @PostMapping
-    public ResponseEntity<WarehouseDTO> createWarehouse(@Valid @RequestBody WarehouseRequest request){
-        return new ResponseEntity<>(warehouseService.createWarehouse(request), HttpStatus.CREATED);
+    public ResponseEntity<WarehouseDTO> createWarehouse(
+            @Valid @RequestBody WarehouseRequest request,
+            @RequestHeader("X-Tenant-Id") String tenantId
+    ){
+        return new ResponseEntity<>(warehouseService.createWarehouse(request, tenantId), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
@@ -86,9 +89,10 @@ public class WarehouseController {
     @PutMapping("/{id}")
     public ResponseEntity<WarehouseDTO> updateWarehouse(
             @PathVariable Long id,
-            @Valid @RequestBody WarehouseRequest request
+            @Valid @RequestBody WarehouseRequest request,
+            @RequestHeader("X-Tenant-Id") String tenantId
     ){
-        return ResponseEntity.ok(warehouseService.updateWarehouse(id, request));
+        return ResponseEntity.ok(warehouseService.updateWarehouse(id, request, tenantId));
     }
 
     @GetMapping("/available")

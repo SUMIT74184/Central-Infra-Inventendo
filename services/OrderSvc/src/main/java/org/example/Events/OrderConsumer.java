@@ -20,7 +20,7 @@ public class OrderConsumer {
     @KafkaListener(topics = "inventory-released", groupId = "order-release-group")
     public void handleInventoryReleased(InventoryReleasedEvent event) {
         log.info("Order: Stock released for order {}", event.getOrderId());
-        orderService.updateOrderStatus(event.getOrderId(), "RELEASED");
+        orderService.updateOrderStatus(event.getOrderId(), "RELEASED", event.getTenantId());
     }
 
     @KafkaListener(topics = "inventory-reserved", groupId = "order-reserved-group")

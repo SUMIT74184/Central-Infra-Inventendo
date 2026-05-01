@@ -45,7 +45,4 @@ public class WarehouseRequest {
     @NotBlank(message = "Status is required")
     private String status;
 
-    @NotBlank(message = "Tenant ID is required")
-    private String tenantId;
-
 }

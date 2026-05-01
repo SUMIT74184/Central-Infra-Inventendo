@@ -28,7 +28,7 @@ public class OrderService {
     private final TenantClient tenantClient;
     private final OrderEventProducer eventProducer;
 
-    public OrderResponse createOrder(OrderRequest request) {
+    public OrderResponse createOrder(OrderRequest request, String tenantId) {
         log.info("Creating order for customer: {}", request.getCustomerId());
 
         // Validate tenant before proceeding
@@ -58,7 +58,7 @@ public class OrderService {
                 .totalAmount(totalAmount)
                 .shippingAddress(request.getShippingAddress())
                 .billingAddress(request.getBillingAddress())
-                .tenantId(request.getTenantId())
+                .tenantId(tenantId)
                 .build();
 
         orderItems.forEach((item -> {
@@ -162,10 +162,14 @@ public class OrderService {
     }
 
     @Transactional
-    @Cacheable(value = "order", key = "#id")
-    public OrderResponse updateOrderStatus(Long id, String status) {
+    @Cacheable(value = "order", key = "#id + '-' + #tenantId")
+    public OrderResponse updateOrderStatus(Long id, String status, String tenantId) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new OrderNotFoundException("Order not found with id: " + id));
+
+        if (!order.getTenantId().equals(tenantId)) {
+            throw new OrderNotFoundException("Order not found with id: " + id + " for tenant: " + tenantId);
+        }
 
         Order.OrderStatus newStatus = Order.OrderStatus.valueOf(status.toUpperCase());
         order.setStatus(newStatus);
@@ -180,10 +184,14 @@ public class OrderService {
     }
 
     @Transactional
-    @CacheEvict(value = "orders", key = "#id")
-    public void cancelOrder(Long id) throws IllegalAccessException {
+    @CacheEvict(value = "orders", key = "#id + '-' + #tenantId")
+    public void cancelOrder(Long id, String tenantId) throws IllegalAccessException {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new OrderNotFoundException("Order not found with id: " + id));
+
+        if (!order.getTenantId().equals(tenantId)) {
+            throw new OrderNotFoundException("Order not found with id: " + id + " for tenant: " + tenantId);
+        }
 
         if (order.getStatus() == Order.OrderStatus.SHIPPED ||
                 order.getStatus() == Order.OrderStatus.DELIVERED) {

@@ -34,7 +34,7 @@ public class InventoryService {
 
     @Transactional
     @CacheEvict(value = "inventory", key = "#request.sku")
-    public InventoryResponse createInventory(InventoryRequest request){
+    public InventoryResponse createInventory(InventoryRequest request, String tenantId){
         Inventory inventory = new Inventory();
         inventory.setSku(request.getSku());
         inventory.setProductName(request.getProductName());
@@ -45,7 +45,7 @@ public class InventoryService {
         inventory.setUnitPrice(request.getUnitPrice());
         inventory.setWarehouseId(request.getWarehouseId());
         inventory.setLocation(request.getLocation());
-        inventory.setTenantId(request.getTenantId());
+        inventory.setTenantId(tenantId);
 
         inventory.setReservedQuantity(0); 
         inventory.setInventoryStatus("ACTIVE");

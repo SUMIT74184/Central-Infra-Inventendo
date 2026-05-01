@@ -24,8 +24,11 @@ public class InventoryController {
     private final InventoryService inventoryService;
 
     @PostMapping
-    public ResponseEntity<InventoryResponse> createInventory(@Valid @RequestBody InventoryRequest request){
-        InventoryResponse response = inventoryService.createInventory(request);
+    public ResponseEntity<InventoryResponse> createInventory(
+            @Valid @RequestBody InventoryRequest request,
+            @RequestHeader("X-Tenant-Id") String tenantId
+    ){
+        InventoryResponse response = inventoryService.createInventory(request, tenantId);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 

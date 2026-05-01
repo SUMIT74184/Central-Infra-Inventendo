@@ -20,8 +20,11 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping
-    public ResponseEntity<OrderResponse> createOrder(@Valid @RequestBody OrderRequest request){
-        OrderResponse response = orderService.createOrder(request);
+    public ResponseEntity<OrderResponse> createOrder(
+            @Valid @RequestBody OrderRequest request,
+            @RequestHeader("X-Tenant-Id") String tenantId
+    ){
+        OrderResponse response = orderService.createOrder(request, tenantId);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
 
     }
@@ -62,15 +65,19 @@ public class OrderController {
     @PutMapping("/{id}/status")
     public ResponseEntity<OrderResponse> updateOrderStatus(
             @PathVariable Long id,
-            @RequestParam String status
+            @RequestParam String status,
+            @RequestHeader("X-Tenant-Id") String tenantId
     ){
-        OrderResponse response = orderService.updateOrderStatus(id,status);
+        OrderResponse response = orderService.updateOrderStatus(id, status, tenantId);
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> cancelOrder(@PathVariable Long id) throws IllegalAccessException {
-        orderService.cancelOrder(id);
+    public ResponseEntity<Void> cancelOrder(
+            @PathVariable Long id,
+            @RequestHeader("X-Tenant-Id") String tenantId
+    ) throws IllegalAccessException {
+        orderService.cancelOrder(id, tenantId);
         return ResponseEntity.noContent().build();
     }
 

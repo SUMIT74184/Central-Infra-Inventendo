@@ -1,0 +1,1657 @@
+{
+  "communities": {
+    "0": [
+      "customoauth2user_customoauth2user_getname",
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_event_movementconsumer_java",
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_repository_stockmovementrepository_java",
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_service_kafkaeventproducer_java",
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_service_movementservice_java",
+      "home_sumit_desktop_project_root_services_warehousemcs_src_main_java_org_example_warehousemcs_controller_warehousecontroller_java",
+      "home_sumit_desktop_project_root_services_warehousemcs_src_main_java_org_example_warehousemcs_event_warehouseconsumer_java",
+      "home_sumit_desktop_project_root_services_warehousemcs_src_main_java_org_example_warehousemcs_repository_warehouserepository_java",
+      "home_sumit_desktop_project_root_services_warehousemcs_src_main_java_org_example_warehousemcs_service_warehouseserviceimpl_java",
+      "inventoryservice_inventoryservice_createinventory",
+      "kafkaeventproducer_kafkaeventproducer",
+      "kafkaeventproducer_kafkaeventproducer_kafkaeventproducer",
+      "kafkaeventproducer_kafkaeventproducer_publishstockupdateevent",
+      "kafkaeventproducer_kafkaeventproducer_publishwarehousetransferevent",
+      "movementconsumer_movementconsumer",
+      "movementconsumer_movementconsumer_handleinventoryreleased",
+      "movementconsumer_movementconsumer_handleinventoryreserved",
+      "movementconsumer_movementconsumer_handlewarehouseassigned",
+      "movementservice_movementservice",
+      "movementservice_movementservice_buildstockupdateevent",
+      "movementservice_movementservice_createmovement",
+      "movementservice_movementservice_getmovementsbydaterange",
+      "movementservice_movementservice_getmovementsbywarehouse",
+      "movementservice_movementservice_maptoresponse",
+      "movementservice_movementservice_movementservice",
+      "stockmovementrepository_stockmovementrepository",
+      "stockmovementrepository_stockmovementrepository_findbytenantidandidempotencykey",
+      "stockmovementrepository_stockmovementrepository_findbytenantidandwarehouseidorderbycreatedatdesc",
+      "stockmovementrepository_stockmovementrepository_findbytenantproductandwarehouse",
+      "stockmovementrepository_stockmovementrepository_findmovementsbydaterange",
+      "tenantcontext_tenantcontext_gettenantid",
+      "tenantcontext_tenantcontext_settenantid",
+      "warehouseconsumer_warehouseconsumer",
+      "warehouseconsumer_warehouseconsumer_handleinventoryreserved",
+      "warehouseconsumer_warehouseconsumer_handleordercancelled",
+      "warehouseconsumer_warehouseconsumer_handleordercreated",
+      "warehouseconsumer_warehouseconsumer_handlestockmoved",
+      "warehousecontroller_warehousecontroller",
+      "warehousecontroller_warehousecontroller_createwarehouse",
+      "warehousecontroller_warehousecontroller_deactivatewarehouse",
+      "warehousecontroller_warehousecontroller_deletewarehouse",
+      "warehousecontroller_warehousecontroller_getactivewarehouse",
+      "warehousecontroller_warehousecontroller_getallwarehouses",
+      "warehousecontroller_warehousecontroller_getavailablewarehouses",
+      "warehousecontroller_warehousecontroller_getwarehousebycode",
+      "warehousecontroller_warehousecontroller_getwarehousebyid",
+      "warehousecontroller_warehousecontroller_getwarehousebylocation",
+      "warehousecontroller_warehousecontroller_getwarehousebystatus",
+      "warehousecontroller_warehousecontroller_updateutilization",
+      "warehousecontroller_warehousecontroller_updatewarehouse",
+      "warehouserepository_warehouserepository",
+      "warehouserepository_warehouserepository_existsbywarehousecodeandtenantid",
+      "warehouserepository_warehouserepository_findavailablewarehouses",
+      "warehouserepository_warehouserepository_findbytenantid",
+      "warehouserepository_warehouserepository_findbytenantidandactive",
+      "warehouserepository_warehouserepository_findbytenantidandlocation",
+      "warehouserepository_warehouserepository_findbytenantidandstatus",
+      "warehouserepository_warehouserepository_findbywarehousecodeandtenantid",
+      "warehouseserviceimpl_warehouseserviceimpl",
+      "warehouseserviceimpl_warehouseserviceimpl_cachewarehouse",
+      "warehouseserviceimpl_warehouseserviceimpl_createwarehouse",
+      "warehouseserviceimpl_warehouseserviceimpl_deactivatewarehouse",
+      "warehouseserviceimpl_warehouseserviceimpl_deletewarehouse",
+      "warehouseserviceimpl_warehouseserviceimpl_evictcache",
+      "warehouseserviceimpl_warehouseserviceimpl_getactivewarehouses",
+      "warehouseserviceimpl_warehouseserviceimpl_getavailablewarehouses",
+      "warehouseserviceimpl_warehouseserviceimpl_getwarehousebycode",
+      "warehouseserviceimpl_warehouseserviceimpl_getwarehousebyid",
+      "warehouseserviceimpl_warehouseserviceimpl_getwarehousebystatus",
+      "warehouseserviceimpl_warehouseserviceimpl_getwarehousesbylocation",
+      "warehouseserviceimpl_warehouseserviceimpl_maptodto",
+      "warehouseserviceimpl_warehouseserviceimpl_maptoentity",
+      "warehouseserviceimpl_warehouseserviceimpl_publishwarehouseassignment",
+      "warehouseserviceimpl_warehouseserviceimpl_publishwarehouseevent",
+      "warehouseserviceimpl_warehouseserviceimpl_updateutilization",
+      "warehouseserviceimpl_warehouseserviceimpl_updatewarehouse",
+      "warehouseserviceimpl_warehouseserviceimpl_updatewarehousefields"
+    ],
+    "1": [
+      "authcontroller_authcontroller_getcurrentuser",
+      "authcontroller_authcontroller_getusers",
+      "authservice_authservice",
+      "authservice_authservice_buildauthresponse",
+      "authservice_authservice_buildusereventpayload",
+      "authservice_authservice_cacherefreshtoken",
+      "authservice_authservice_evicttenantuserscache",
+      "authservice_authservice_getusersbytenant",
+      "authservice_authservice_login",
+      "authservice_authservice_logout",
+      "authservice_authservice_publishevent",
+      "authservice_authservice_refreshtoken",
+      "authservice_authservice_register",
+      "authservice_authservice_updateuser",
+      "authservice_authservice_validatetoken",
+      "customoauth2user_customoauth2user",
+      "customoauth2user_customoauth2user_getattributes",
+      "customoauth2user_customoauth2user_getauthorities",
+      "customoauth2userservice_customoauth2userservice",
+      "customoauth2userservice_customoauth2userservice_createnewoauth2user",
+      "customoauth2userservice_customoauth2userservice_extractemail",
+      "customoauth2userservice_customoauth2userservice_extractfirstname",
+      "customoauth2userservice_customoauth2userservice_extractlastname",
+      "customoauth2userservice_customoauth2userservice_extractoauth2id",
+      "customoauth2userservice_customoauth2userservice_extractprofilepicture",
+      "customoauth2userservice_customoauth2userservice_linkoauth2toexistinguser",
+      "customoauth2userservice_customoauth2userservice_loaduser",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_pages_loginpage_tsx",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_pages_signuppage_tsx",
+      "home_sumit_desktop_project_root_services_auth_src_main_java_org_example_auth_config_oauth2loginsuccesshandler_java",
+      "home_sumit_desktop_project_root_services_auth_src_main_java_org_example_auth_service_authservice_java",
+      "home_sumit_desktop_project_root_services_auth_src_main_java_org_example_auth_service_customoauth2user_java",
+      "home_sumit_desktop_project_root_services_auth_src_main_java_org_example_auth_service_customoauth2userservice_java",
+      "home_sumit_desktop_project_root_services_auth_src_main_java_org_example_auth_service_userdetailsserviceimpl_java",
+      "home_sumit_desktop_project_root_services_auth_src_main_java_org_example_auth_util_jwtauthenticationfilter_java",
+      "home_sumit_desktop_project_root_services_auth_src_main_java_org_example_auth_util_jwtutil_java",
+      "jwtauthenticationfilter_jwtauthenticationfilter",
+      "jwtauthenticationfilter_jwtauthenticationfilter_dofilterinternal",
+      "jwtutil_jwtutil",
+      "jwtutil_jwtutil_buildtoken",
+      "jwtutil_jwtutil_extractallclaims",
+      "jwtutil_jwtutil_extractclaim",
+      "jwtutil_jwtutil_extractemail",
+      "jwtutil_jwtutil_extractexpiration",
+      "jwtutil_jwtutil_extracttenantid",
+      "jwtutil_jwtutil_extractuserid",
+      "jwtutil_jwtutil_generateaccesstoken",
+      "jwtutil_jwtutil_generaterefreshtoken",
+      "jwtutil_jwtutil_getsigningkey",
+      "jwtutil_jwtutil_istokenexpired",
+      "jwtutil_jwtutil_istokenvalid",
+      "loginpage_handleemailsubmit",
+      "loginpage_handlepasscodesubmit",
+      "oauth2loginsuccesshandler_oauth2loginsuccesshandler",
+      "oauth2loginsuccesshandler_oauth2loginsuccesshandler_onauthenticationsuccess",
+      "oauth2loginsuccesshandler_oauth2loginsuccesshandler_publishoauth2loginevent",
+      "signuppage_handlechange",
+      "signuppage_handlesubmit",
+      "user_user_getusername",
+      "userdetailsserviceimpl_userdetailsserviceimpl",
+      "userdetailsserviceimpl_userdetailsserviceimpl_evictalluserscache",
+      "userdetailsserviceimpl_userdetailsserviceimpl_evictusercache",
+      "userdetailsserviceimpl_userdetailsserviceimpl_loaduserbyusername",
+      "userrepository_userrepository_findbyemail"
+    ],
+    "2": [
+      "alertservice_alertservice_getalertsbytenant",
+      "billingkafkalistener_billingkafkalistener",
+      "billingkafkalistener_billingkafkalistener_handleordercancelled",
+      "billingkafkalistener_billingkafkalistener_handleorderconfirmed",
+      "billingkafkalistener_billingkafkalistener_handlestockmoved",
+      "billingkafkalistener_billingkafkalistener_handlestripewebhookevent",
+      "billingservice_billingservice",
+      "billingservice_billingservice_evictinvoicecache",
+      "billingservice_billingservice_evicttenantpaymentcache",
+      "billingservice_billingservice_generateinvoiceforpayment",
+      "billingservice_billingservice_getinvoicebyid",
+      "billingservice_billingservice_getinvoicesbytenant",
+      "billingservice_billingservice_getpaymentbyid",
+      "billingservice_billingservice_getpaymentsbytenant",
+      "billingservice_billingservice_infergateway",
+      "billingservice_billingservice_initiatepayment",
+      "billingservice_billingservice_processrefund",
+      "billingservice_billingservice_publishinvoiceevent",
+      "billingservice_billingservice_publishpaymentevent",
+      "billingservice_billingservice_verifyrazorpaypayment",
+      "home_sumit_desktop_project_root_services_billing_payment_src_main_java_org_example_billingpayment_config_billingkafkalistener_java",
+      "home_sumit_desktop_project_root_services_billing_payment_src_main_java_org_example_billingpayment_controller_paymentcontroller_java",
+      "home_sumit_desktop_project_root_services_billing_payment_src_main_java_org_example_billingpayment_repository_invoicerepository_java",
+      "home_sumit_desktop_project_root_services_billing_payment_src_main_java_org_example_billingpayment_repository_paymentrepository_java",
+      "home_sumit_desktop_project_root_services_billing_payment_src_main_java_org_example_billingpayment_service_billingservice_java",
+      "home_sumit_desktop_project_root_services_billing_payment_src_main_java_org_example_billingpayment_service_razorpaypaymentservice_java",
+      "home_sumit_desktop_project_root_services_billing_payment_src_main_java_org_example_billingpayment_service_stripepaymentservice_java",
+      "invoicerepository_invoicerepository",
+      "invoicerepository_invoicerepository_findbycustomeridorderbycreatedatdesc",
+      "invoicerepository_invoicerepository_findbyinvoicenumber",
+      "invoicerepository_invoicerepository_findbyorderid",
+      "invoicerepository_invoicerepository_findbypaymentid",
+      "invoicerepository_invoicerepository_findbytenantidorderbycreatedatdesc",
+      "movementservice_movementservice_getallmovements",
+      "paymentcontroller_paymentcontroller",
+      "paymentcontroller_paymentcontroller_getinvoices",
+      "paymentcontroller_paymentcontroller_getpayments",
+      "paymentcontroller_paymentcontroller_initiatepayment",
+      "paymentcontroller_paymentcontroller_refundpayment",
+      "paymentcontroller_paymentcontroller_stripewebhook",
+      "paymentrepository_paymentrepository",
+      "paymentrepository_paymentrepository_findbygatewayorderid",
+      "paymentrepository_paymentrepository_findbygatewaypaymentid",
+      "paymentrepository_paymentrepository_findbyorderid",
+      "paymentrepository_paymentrepository_findbyorderidandstatus",
+      "paymentrepository_paymentrepository_findbytenantidorderbycreatedatdesc",
+      "razorpaypaymentservice_razorpaypaymentservice",
+      "razorpaypaymentservice_razorpaypaymentservice_initiateresponse",
+      "razorpaypaymentservice_razorpaypaymentservice_maptopaymentresponse",
+      "razorpaypaymentservice_razorpaypaymentservice_processrefund",
+      "razorpaypaymentservice_razorpaypaymentservice_verifyandcapturepayment",
+      "razorpaypaymentservice_razorpaypaymentservice_verifyrazorpaysignature",
+      "stockmovementrepository_stockmovementrepository_findbytenantidorderbycreatedatdesc",
+      "stripepaymentservice_stripepaymentservice",
+      "stripepaymentservice_stripepaymentservice_handlepaymentfailure",
+      "stripepaymentservice_stripepaymentservice_handlepaymentsuccess",
+      "stripepaymentservice_stripepaymentservice_handlewebhook",
+      "stripepaymentservice_stripepaymentservice_initiateresponse",
+      "stripepaymentservice_stripepaymentservice_processrefund"
+    ],
+    "3": [
+      "home_sumit_desktop_project_root_services_microservice1_src_main_java_com_example_microservice1_controller_inventorycontroller_java",
+      "home_sumit_desktop_project_root_services_microservice1_src_main_java_com_example_microservice1_dto_inventoryresponse_java",
+      "home_sumit_desktop_project_root_services_microservice1_src_main_java_com_example_microservice1_model_inventory_java",
+      "home_sumit_desktop_project_root_services_microservice1_src_main_java_com_example_microservice1_repository_inventoryrepository_java",
+      "home_sumit_desktop_project_root_services_microservice1_src_main_java_com_example_microservice1_service_inventoryservice_java",
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_dto_inventoryresponse_java",
+      "inventory_inventory",
+      "inventory_inventory_getavailablequantity",
+      "inventory_inventory_islowstock",
+      "inventorycontroller_inventorycontroller",
+      "inventorycontroller_inventorycontroller_cancelreservation",
+      "inventorycontroller_inventorycontroller_checkavailability",
+      "inventorycontroller_inventorycontroller_createinventory",
+      "inventorycontroller_inventorycontroller_getallinventory",
+      "inventorycontroller_inventorycontroller_getinventorybysku",
+      "inventorycontroller_inventorycontroller_getinventorybywarehouse",
+      "inventorycontroller_inventorycontroller_getlowstocksitems",
+      "inventorycontroller_inventorycontroller_releasestock",
+      "inventorycontroller_inventorycontroller_reservestock",
+      "inventorycontroller_inventorycontroller_updatequantity",
+      "inventoryrepository_inventoryrepository",
+      "inventoryrepository_inventoryrepository_findactivebywarehouse",
+      "inventoryrepository_inventoryrepository_findbyskuandtenantid",
+      "inventoryrepository_inventoryrepository_findbyskuwithlockandtenantid",
+      "inventoryrepository_inventoryrepository_findbytenantid",
+      "inventoryrepository_inventoryrepository_findbywarehouseidandtenantid",
+      "inventoryrepository_inventoryrepository_findlowstocksitemsbytenantid",
+      "inventoryrepository_inventoryrepository_releasestock",
+      "inventoryrepository_inventoryrepository_reservestock",
+      "inventoryresponse_inventoryresponse",
+      "inventoryresponse_inventoryresponse_fromentity",
+      "inventoryservice_inventoryservice",
+      "inventoryservice_inventoryservice_cancelreservation",
+      "inventoryservice_inventoryservice_checkavailability",
+      "inventoryservice_inventoryservice_getallinventory",
+      "inventoryservice_inventoryservice_getinventorybysku",
+      "inventoryservice_inventoryservice_getinventorybywarehouse",
+      "inventoryservice_inventoryservice_getlowstockitems",
+      "inventoryservice_inventoryservice_releasereservedstock",
+      "inventoryservice_inventoryservice_reservestock",
+      "inventoryservice_inventoryservice_updatequantity"
+    ],
+    "4": [
+      "alertcontroller_alertcontroller_getrules",
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_repository_orderrepository_java",
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_service_inventoryclientfallback_java",
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_service_ordereventproducer_java",
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_service_orderservice_java",
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_service_tenantclient_java",
+      "inventoryclientfallback_inventoryclientfallback",
+      "inventoryclientfallback_inventoryclientfallback_getinventory",
+      "inventoryclientfallback_inventoryclientfallback_releaseinventory",
+      "inventoryclientfallback_inventoryclientfallback_reserveinventory",
+      "ordereventproducer_orderevent",
+      "ordereventproducer_ordereventproducer",
+      "ordereventproducer_ordereventproducer_publishordercancelledevent",
+      "ordereventproducer_ordereventproducer_publishordercreatedevent",
+      "ordereventproducer_ordereventproducer_publishorderstatuschangedevent",
+      "orderrepository_orderrepository",
+      "orderrepository_orderrepository_existsbyordernumber",
+      "orderrepository_orderrepository_findbycreatedatbetween",
+      "orderrepository_orderrepository_findbycustomeridandstatus",
+      "orderrepository_orderrepository_findbycustomeridandtenantid",
+      "orderrepository_orderrepository_findbyordernumberandtenantid",
+      "orderrepository_orderrepository_findbystatus",
+      "orderrepository_orderrepository_findbytenantid",
+      "orderservice_orderservice",
+      "orderservice_orderservice_cancelorder",
+      "orderservice_orderservice_createorder",
+      "orderservice_orderservice_generateordernumber",
+      "orderservice_orderservice_getallorders",
+      "orderservice_orderservice_getorderbyid",
+      "orderservice_orderservice_getorderbynumber",
+      "orderservice_orderservice_getordersbycustomerid",
+      "orderservice_orderservice_mapitemtoresponse",
+      "orderservice_orderservice_maptoresponse",
+      "orderservice_orderservice_processorderitem",
+      "orderservice_orderservice_releasereservedinventory",
+      "orderservice_orderservice_reservedinventory",
+      "orderservice_orderservice_updateorderstatus",
+      "tenantclient_tenantclient",
+      "tenantclient_tenantclient_validatetenant",
+      "tenantservice_tenantservice_gettenantsbystatus",
+      "warehouseserviceimpl_warehouseserviceimpl_getallwarehouses"
+    ],
+    "5": [
+      "alertcontroller_alertcontroller_getpendingcount",
+      "alerteventproducer_alerteventproducer",
+      "alerteventproducer_alerteventproducer_sendnotification",
+      "alertrepository_alertrepository",
+      "alertrepository_alertrepository_countbytenantidandseverity",
+      "alertrepository_alertrepository_countbytenantidandstatus",
+      "alertrepository_alertrepository_countpendingalerts",
+      "alertrepository_alertrepository_findbytenantidandalerttypeorderbycreatedatdesc",
+      "alertrepository_alertrepository_findbytenantidandseverityorderbycreatedatdesc",
+      "alertrepository_alertrepository_findbytenantidandstatusorderbycreatedatdesc",
+      "alertrepository_alertrepository_findbytenantidorderbycreatedatdesc",
+      "alertrepository_alertrepository_findcriticalpendingalerts",
+      "alertrepository_alertrepository_findrecentalerts",
+      "alertservice_alertservice",
+      "alertservice_alertservice_acknowledgealert",
+      "alertservice_alertservice_cachealert",
+      "alertservice_alertservice_converttodto",
+      "alertservice_alertservice_createalert",
+      "alertservice_alertservice_getalertbyid",
+      "alertservice_alertservice_getalertsbystatus",
+      "alertservice_alertservice_getcriticalalerts",
+      "alertservice_alertservice_getpendingalertcount",
+      "alertservice_alertservice_getrecentalerts",
+      "alertservice_alertservice_incrementtenantalertcount",
+      "alertservice_alertservice_resolvealert",
+      "alertservice_alertservice_shouldsendnotification",
+      "home_sumit_desktop_project_root_services_alertsvc_src_main_java_com_app_alertsvc_event_alerteventproducer_java",
+      "home_sumit_desktop_project_root_services_alertsvc_src_main_java_com_app_alertsvc_repositories_alertrepository_java",
+      "home_sumit_desktop_project_root_services_alertsvc_src_main_java_com_app_alertsvc_services_alertservice_java"
+    ],
+    "6": [
+      "home_sumit_desktop_project_root_services_alertsvc_src_main_java_com_app_alertsvc_config_kafkaconfig_java",
+      "home_sumit_desktop_project_root_services_auth_src_main_java_org_example_auth_config_kafkaconfig_java",
+      "home_sumit_desktop_project_root_services_billing_payment_src_main_java_org_example_billingpayment_config_kafkaconfig_java",
+      "home_sumit_desktop_project_root_services_microservice1_src_main_java_com_example_microservice1_config_kafkaconfig_java",
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_config_kafkaconfig_java",
+      "home_sumit_desktop_project_root_services_tenantmvc_src_main_java_org_example_tenantmvc_config_kafkaconfig_java",
+      "home_sumit_desktop_project_root_services_warehousemcs_src_main_java_org_example_warehousemcs_config_kafkaconfig_java",
+      "kafkaconfig_kafkaconfig",
+      "kafkaconfig_kafkaconfig_alertnotificationtopic",
+      "kafkaconfig_kafkaconfig_consumerfactory",
+      "kafkaconfig_kafkaconfig_inventorycancelledtopic",
+      "kafkaconfig_kafkaconfig_inventorycreatedtopic",
+      "kafkaconfig_kafkaconfig_inventoryreleasedtopic",
+      "kafkaconfig_kafkaconfig_inventoryreservedtopic",
+      "kafkaconfig_kafkaconfig_inventoryupdatedtopic",
+      "kafkaconfig_kafkaconfig_kafkalistenercontainerfactory",
+      "kafkaconfig_kafkaconfig_kafkatemplate",
+      "kafkaconfig_kafkaconfig_lowstockalerttopic",
+      "kafkaconfig_kafkaconfig_objectmapper",
+      "kafkaconfig_kafkaconfig_ordercancelledtopic",
+      "kafkaconfig_kafkaconfig_ordercreatedtopic",
+      "kafkaconfig_kafkaconfig_paymentfailedtopic",
+      "kafkaconfig_kafkaconfig_paymentrefundedtopic",
+      "kafkaconfig_kafkaconfig_producerfactory",
+      "kafkaconfig_kafkaconfig_warehouseassignedtopic",
+      "kafkaconfig_kafkaconfig_warehouseeventstopic"
+    ],
+    "7": [
+      "alertcontroller_alertcontroller",
+      "alertcontroller_alertcontroller_acknowledgealert",
+      "alertcontroller_alertcontroller_createalert",
+      "alertcontroller_alertcontroller_createrule",
+      "alertcontroller_alertcontroller_deleterule",
+      "alertcontroller_alertcontroller_getalert",
+      "alertcontroller_alertcontroller_getalertsbystatus",
+      "alertcontroller_alertcontroller_getalertsbytenant",
+      "alertcontroller_alertcontroller_getcriticalalerts",
+      "alertcontroller_alertcontroller_getrecentalerts",
+      "alertcontroller_alertcontroller_health",
+      "alertcontroller_alertcontroller_resolvealert",
+      "alertcontroller_alertcontroller_togglerule",
+      "alerteventconsumer_alerteventconsumer",
+      "alerteventconsumer_alerteventconsumer_consumeinventoryreleased",
+      "alerteventconsumer_alerteventconsumer_consumelowstockalert",
+      "alerteventconsumer_alerteventconsumer_consumeordercancelled",
+      "alerteventconsumer_alerteventconsumer_consumepaymentfailed",
+      "alerteventconsumer_alerteventconsumer_consumepaymentrefunded",
+      "alerteventconsumer_alerteventconsumer_getstringvalue",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_pages_notfound_tsx",
+      "home_sumit_desktop_project_root_services_alertsvc_src_main_java_com_app_alertsvc_controllers_alertcontroller_java",
+      "home_sumit_desktop_project_root_services_alertsvc_src_main_java_com_app_alertsvc_event_alerteventconsumer_java",
+      "notfound_notfound"
+    ],
+    "8": [
+      "authcontroller_authcontroller",
+      "authcontroller_authcontroller_extracttokenfromcontext",
+      "authcontroller_authcontroller_health",
+      "authcontroller_authcontroller_login",
+      "authcontroller_authcontroller_logout",
+      "authcontroller_authcontroller_oauth2error",
+      "authcontroller_authcontroller_refresh",
+      "authcontroller_authcontroller_register",
+      "authcontroller_authcontroller_tousersummary",
+      "authcontroller_authcontroller_updateuser",
+      "authcontroller_authcontroller_validate",
+      "home_sumit_desktop_project_root_services_auth_src_main_java_org_example_auth_controller_authcontroller_java",
+      "home_sumit_desktop_project_root_services_auth_src_main_java_org_example_auth_entity_user_java",
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_dto_tenantvalidationresponse_java",
+      "tenantvalidationresponse_tenantvalidationresponse",
+      "tenantvalidationresponse_tenantvalidationresponse_isvalid",
+      "user_user",
+      "user_user_getauthorities",
+      "user_user_isaccountnonexpired",
+      "user_user_iscredentialsnonexpired",
+      "user_user_isenabled",
+      "user_user_oncreate",
+      "user_user_onupdate"
+    ],
+    "9": [
+      "home_sumit_desktop_project_root_services_tenantmvc_src_main_java_org_example_tenantmvc_repository_tenantrepository_java",
+      "home_sumit_desktop_project_root_services_tenantmvc_src_main_java_org_example_tenantmvc_service_tenantservice_java",
+      "tenantrepository_tenantrepository",
+      "tenantrepository_tenantrepository_existsbycontactemail",
+      "tenantrepository_tenantrepository_existsbytenantcode",
+      "tenantrepository_tenantrepository_findbystatus",
+      "tenantrepository_tenantrepository_findbysubscriptiontier",
+      "tenantrepository_tenantrepository_findbytenantcode",
+      "tenantrepository_tenantrepository_findexpiredsubscriptions",
+      "tenantrepository_tenantrepository_findexpiredtrials",
+      "tenantservice_tenantservice",
+      "tenantservice_tenantservice_createtenant",
+      "tenantservice_tenantservice_deletetenant",
+      "tenantservice_tenantservice_getalltenants",
+      "tenantservice_tenantservice_gettenantbycode",
+      "tenantservice_tenantservice_gettenantbyid",
+      "tenantservice_tenantservice_maptodto",
+      "tenantservice_tenantservice_maptoentity",
+      "tenantservice_tenantservice_publishtenantevent",
+      "tenantservice_tenantservice_updatetenant",
+      "tenantservice_tenantservice_updatetenantstatus",
+      "tenantservice_tenantservice_upgradetenantsubscription"
+    ],
+    "10": [
+      "home_sumit_desktop_project_root_api_gateway_src_main_java_com_app_apigateways_filter_jwtfilter_java",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_toaster_tsx",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_hooks_use_toast_ts",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_hooks_useinventory_ts",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_pages_dashboard_inventorypage_tsx",
+      "inventorypage_inventorypage",
+      "jwtfilter_jwtfilter",
+      "jwtfilter_jwtfilter_filter",
+      "toaster_toaster",
+      "use_toast_addtoremovequeue",
+      "use_toast_dispatch",
+      "use_toast_genid",
+      "use_toast_reducer",
+      "use_toast_toast",
+      "use_toast_usetoast",
+      "useinventory_usecreateinventory",
+      "useinventory_useinventory",
+      "useinventory_useinventorybysku",
+      "useinventory_uselowstockinventory",
+      "useinventory_useupdateinventoryquantity"
+    ],
+    "11": [
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_controller_ordercontroller_java",
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_events_orderconsumer_java",
+      "orderconsumer_orderconsumer",
+      "orderconsumer_orderconsumer_handleinventoryreleased",
+      "orderconsumer_orderconsumer_handleinventoryreserved",
+      "orderconsumer_orderconsumer_handlepaymentcompleted",
+      "orderconsumer_orderconsumer_handlepaymentfailed",
+      "orderconsumer_orderconsumer_handlewarehouseassigned",
+      "ordercontroller_ordercontroller",
+      "ordercontroller_ordercontroller_cancelorder",
+      "ordercontroller_ordercontroller_createorder",
+      "ordercontroller_ordercontroller_getallorders",
+      "ordercontroller_ordercontroller_getorderbyid",
+      "ordercontroller_ordercontroller_getorderbynumber",
+      "ordercontroller_ordercontroller_getordersbycustomerid",
+      "ordercontroller_ordercontroller_updateorderstatus"
+    ],
+    "12": [
+      "home_sumit_desktop_project_root_services_warehousemcs_src_main_java_org_example_warehousemcs_service_warehouseservice_java",
+      "warehouseservice_warehouseservice",
+      "warehouseservice_warehouseservice_createwarehouse",
+      "warehouseservice_warehouseservice_deactivatewarehouse",
+      "warehouseservice_warehouseservice_deletewarehouse",
+      "warehouseservice_warehouseservice_getactivewarehouses",
+      "warehouseservice_warehouseservice_getallwarehouses",
+      "warehouseservice_warehouseservice_getavailablewarehouses",
+      "warehouseservice_warehouseservice_getwarehousebycode",
+      "warehouseservice_warehouseservice_getwarehousebyid",
+      "warehouseservice_warehouseservice_getwarehousebystatus",
+      "warehouseservice_warehouseservice_getwarehousesbylocation",
+      "warehouseservice_warehouseservice_updateutilization",
+      "warehouseservice_warehouseservice_updatewarehouse"
+    ],
+    "13": [
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_context_tenantcontext_java",
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_interceptor_tenantinterceptor_java",
+      "home_sumit_desktop_project_root_services_tenantmvc_src_main_java_org_example_tenantmvc_security_tenantcontext_java",
+      "home_sumit_desktop_project_root_services_tenantmvc_src_main_java_org_example_tenantmvc_security_tenantfilter_java",
+      "tenantcontext_tenantcontext",
+      "tenantcontext_tenantcontext_clear",
+      "tenantcontext_tenantcontext_getcurrenttenant",
+      "tenantcontext_tenantcontext_setcurrenttenant",
+      "tenantfilter_tenantfilter",
+      "tenantfilter_tenantfilter_dofilter",
+      "tenantinterceptor_tenantinterceptor",
+      "tenantinterceptor_tenantinterceptor_aftercompletion",
+      "tenantinterceptor_tenantinterceptor_prehandle"
+    ],
+    "14": [
+      "cacheservice_cacheservice",
+      "cacheservice_cacheservice_buildmovementkey",
+      "cacheservice_cacheservice_buildproductmovementskey",
+      "cacheservice_cacheservice_cachemovement",
+      "cacheservice_cacheservice_cacheproductmovements",
+      "cacheservice_cacheservice_cacheservice",
+      "cacheservice_cacheservice_getmovementfromcache",
+      "cacheservice_cacheservice_getproductmovementsfromcache",
+      "cacheservice_cacheservice_invalidatemovementcache",
+      "cacheservice_cacheservice_invalidateproductmovementscache",
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_service_cacheservice_java",
+      "movementservice_movementservice_getmovementsbyproduct",
+      "stockmovementrepository_stockmovementrepository_findbytenantidandproductidorderbycreatedatdesc"
+    ],
+    "15": [
+      "home_sumit_desktop_project_root_services_alertsvc_src_main_java_com_app_alertsvc_config_redisconfig_java",
+      "home_sumit_desktop_project_root_services_auth_src_main_java_org_example_auth_config_redisconfig_java",
+      "home_sumit_desktop_project_root_services_billing_payment_src_main_java_org_example_billingpayment_config_redisconfig_java",
+      "home_sumit_desktop_project_root_services_microservice1_src_main_java_com_example_microservice1_config_redisconfig_java",
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_config_redisconfig_java",
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_config_redisconfig_java",
+      "home_sumit_desktop_project_root_services_tenantmvc_src_main_java_org_example_tenantmvc_config_redisconfig_java",
+      "home_sumit_desktop_project_root_services_warehousemcs_src_main_java_org_example_warehousemcs_config_redisconfig_java",
+      "redisconfig_redisconfig",
+      "redisconfig_redisconfig_cachemanager",
+      "redisconfig_redisconfig_redisconnectionfactory",
+      "redisconfig_redisconfig_redistemplate"
+    ],
+    "16": [
+      "authkafkalistener_authkafkalistener",
+      "authkafkalistener_authkafkalistener_handlepasswordresetrequest",
+      "authkafkalistener_authkafkalistener_handletenantcreated",
+      "home_sumit_desktop_project_root_services_auth_src_main_java_org_example_auth_config_authkafkalistener_java",
+      "home_sumit_desktop_project_root_services_auth_src_main_java_org_example_auth_repository_userrepository_java",
+      "userrepository_userrepository",
+      "userrepository_userrepository_countbytenantid",
+      "userrepository_userrepository_existsbyemail",
+      "userrepository_userrepository_findactiveusersbytenant",
+      "userrepository_userrepository_findbyemailandtenantid",
+      "userrepository_userrepository_findbyoauth2idandprovider",
+      "userrepository_userrepository_findbytenantid"
+    ],
+    "17": [
+      "globalexceptionhandler_globalexceptionhandler",
+      "globalexceptionhandler_globalexceptionhandler_handleduplicaterequestexception",
+      "globalexceptionhandler_globalexceptionhandler_handleduplicatetenantexception",
+      "globalexceptionhandler_globalexceptionhandler_handlegeneralexception",
+      "globalexceptionhandler_globalexceptionhandler_handleglobalexception",
+      "globalexceptionhandler_globalexceptionhandler_handletenantnotfoundexception",
+      "globalexceptionhandler_globalexceptionhandler_handlevalidationexception",
+      "globalexceptionhandler_globalexceptionhandler_handlevalidationexceptions",
+      "home_sumit_desktop_project_root_services_microservice1_src_main_java_com_example_microservice1_exception_globalexceptionhandler_java",
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_exception_globalexceptionhandler_java",
+      "home_sumit_desktop_project_root_services_tenantmvc_src_main_java_org_example_tenantmvc_exception_globalexceptionhandler_java"
+    ],
+    "18": [
+      "home_sumit_desktop_project_root_services_tenantmvc_src_main_java_org_example_tenantmvc_controller_tenantcontroller_java",
+      "tenantcontroller_tenantcontroller",
+      "tenantcontroller_tenantcontroller_createtenant",
+      "tenantcontroller_tenantcontroller_deletetenant",
+      "tenantcontroller_tenantcontroller_gettenantbycode",
+      "tenantcontroller_tenantcontroller_gettenantbyid",
+      "tenantcontroller_tenantcontroller_gettenantsbystatus",
+      "tenantcontroller_tenantcontroller_updatetenant",
+      "tenantcontroller_tenantcontroller_updatetenantstatus",
+      "tenantcontroller_tenantcontroller_upgradetenantsubscription"
+    ],
+    "19": [
+      "authdto_authdto",
+      "authdto_authresponse",
+      "authdto_loginrequest",
+      "authdto_refreshtokenrequest",
+      "authdto_register",
+      "authdto_tokenvalidationresponse",
+      "authdto_updateuserrequest",
+      "home_sumit_desktop_project_root_services_auth_src_main_java_org_example_auth_dto_authdto_java"
+    ],
+    "20": [
+      "home_sumit_desktop_project_root_services_auth_src_main_java_org_example_auth_config_securityconfig_java",
+      "home_sumit_desktop_project_root_services_tenantmvc_src_main_java_org_example_tenantmvc_config_securityconfig_java",
+      "securityconfig_securityconfig",
+      "securityconfig_securityconfig_authenticationmanager",
+      "securityconfig_securityconfig_authenticationprovider",
+      "securityconfig_securityconfig_corsconfigurationsource",
+      "securityconfig_securityconfig_filterchain",
+      "securityconfig_securityconfig_securityfilterchain"
+    ],
+    "21": [
+      "authcontext_authprovider",
+      "authcontext_useauth",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_protectedroute_tsx",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_contexts_authcontext_tsx",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_pages_index_tsx",
+      "index_getdefaultroute",
+      "index_index",
+      "protectedroute_protectedroute"
+    ],
+    "22": [
+      "home_sumit_desktop_project_root_services_billing_payment_src_main_java_org_example_billingpayment_dto_paymentdto_java",
+      "paymentdto_initiatepaymentrequest",
+      "paymentdto_paymentdto",
+      "paymentdto_paymentinitiateresponse",
+      "paymentdto_paymentresponse",
+      "paymentdto_razorpayverificationrequest",
+      "paymentdto_refundrequest"
+    ],
+    "23": [
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_controller_movementcontroller_java",
+      "movementcontroller_movementcontroller",
+      "movementcontroller_movementcontroller_createmovement",
+      "movementcontroller_movementcontroller_getallmovements",
+      "movementcontroller_movementcontroller_getmovementsbydaterange",
+      "movementcontroller_movementcontroller_getmovementsbyproduct",
+      "movementcontroller_movementcontroller_getmovementsbywarehouse"
+    ],
+    "24": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_hooks_usealerts_ts",
+      "usealerts_gettenantheader",
+      "usealerts_useacknowledgealert",
+      "usealerts_usealertrules",
+      "usealerts_usealerts",
+      "usealerts_usecreatealertrule",
+      "usealerts_usetogglealertrule"
+    ],
+    "25": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_pagination_tsx",
+      "pagination_pagination",
+      "pagination_paginationellipsis",
+      "pagination_paginationlink",
+      "pagination_paginationnext",
+      "pagination_paginationprevious"
+    ],
+    "26": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_hooks_useorders_ts",
+      "useorders_usecancelorder",
+      "useorders_usecreateorder",
+      "useorders_useorderbyid",
+      "useorders_useorders",
+      "useorders_useupdateorderstatus"
+    ],
+    "27": [
+      "home_sumit_desktop_project_root_services_microservice1_src_main_java_com_example_microservice1_event_inventoryconsumer_java",
+      "inventoryconsumer_inventoryconsumer",
+      "inventoryconsumer_inventoryconsumer_handleordercancelled",
+      "inventoryconsumer_inventoryconsumer_handlepaymentfailed",
+      "inventoryconsumer_inventoryconsumer_handlestockmoved"
+    ],
+    "28": [
+      "home_sumit_desktop_project_root_services_billing_payment_src_main_java_org_example_billingpayment_model_invoice_java",
+      "invoice_invoice",
+      "invoice_invoice_oncreate",
+      "invoice_invoice_onupdate",
+      "invoice_invoiceitem"
+    ],
+    "29": [
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_service_inventoryclient_java",
+      "inventoryclient_inventoryclient",
+      "inventoryclient_inventoryclient_getinventory",
+      "inventoryclient_inventoryclient_releaseinventory",
+      "inventoryclient_inventoryclient_reserveinventory"
+    ],
+    "30": [
+      "exportdialog_handleexport",
+      "exportutils_exportdata",
+      "exportutils_filtercolumns",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_dialogs_exportdialog_tsx",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_utils_exportutils_ts"
+    ],
+    "31": [
+      "home_sumit_desktop_project_root_services_microservice1_src_main_java_com_example_microservice1_dto_inventoryreservedevent_java",
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_dto_inventoryreservedevent_java",
+      "home_sumit_desktop_project_root_services_warehousemcs_src_main_java_org_example_warehousemcs_dto_inventoryreservedevent_java",
+      "inventoryreservedevent_inventoryreservedevent"
+    ],
+    "32": [
+      "home_sumit_desktop_project_root_services_microservice1_src_main_java_com_example_microservice1_dto_inventoryreleasedevent_java",
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_dto_inventoryreleasedevent_java",
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_dto_inventoryreleasedevent_java",
+      "inventoryreleasedevent_inventoryreleasedevent"
+    ],
+    "33": [
+      "alert_alert",
+      "alert_alert_oncreate",
+      "alert_alert_onupdate",
+      "home_sumit_desktop_project_root_services_alertsvc_src_main_java_com_app_alertsvc_entity_alert_java"
+    ],
+    "34": [
+      "alertrule_alertrule",
+      "alertrule_alertrule_oncreate",
+      "alertrule_alertrule_onupdate",
+      "home_sumit_desktop_project_root_services_alertsvc_src_main_java_com_app_alertsvc_entity_alertrule_java"
+    ],
+    "35": [
+      "alertrulerepository_alertrulerepository",
+      "alertrulerepository_alertrulerepository_findbytenantid",
+      "alertrulerepository_alertrulerepository_findbytenantidandenabled",
+      "home_sumit_desktop_project_root_services_alertsvc_src_main_java_com_app_alertsvc_repositories_alertrulerepository_java"
+    ],
+    "36": [
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_exception_tenantnotfoundexception_java",
+      "home_sumit_desktop_project_root_services_tenantmvc_src_main_java_org_example_tenantmvc_exception_tenantnotfoundexception_java",
+      "tenantnotfoundexception_tenantnotfoundexception",
+      "tenantnotfoundexception_tenantnotfoundexception_tenantnotfoundexception"
+    ],
+    "37": [
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_config_kafkaproducerconfig_java",
+      "kafkaproducerconfig_kafkaproducerconfig",
+      "kafkaproducerconfig_kafkaproducerconfig_kafkatemplate",
+      "kafkaproducerconfig_kafkaproducerconfig_producerfactory"
+    ],
+    "38": [
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_config_webconfig_java",
+      "webconfig_webconfig",
+      "webconfig_webconfig_addinterceptors",
+      "webconfig_webconfig_webconfig"
+    ],
+    "39": [
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_model_order_java",
+      "order_order",
+      "order_order_oncreate",
+      "order_order_onupdate"
+    ],
+    "40": [
+      "aichatwidget_getbotresponse",
+      "aichatwidget_handlesubmit",
+      "aichatwidget_sendmessage",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_aichatwidget_tsx"
+    ],
+    "41": [
+      "drawer_drawer",
+      "drawer_drawerfooter",
+      "drawer_drawerheader",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_drawer_tsx"
+    ],
+    "42": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_sidebar_tsx",
+      "sidebar_cn",
+      "sidebar_handlekeydown",
+      "sidebar_usesidebar"
+    ],
+    "43": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_hooks_usewarehouses_ts",
+      "usewarehouses_usecreatewarehouse",
+      "usewarehouses_usewarehousebyid",
+      "usewarehouses_usewarehouses"
+    ],
+    "44": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_hooks_usemovements_ts",
+      "usemovements_enrichmovementswithproductinfo",
+      "usemovements_usecreatemovement",
+      "usemovements_usemovements"
+    ],
+    "45": [
+      "apigatewayapplication_apigatewayapplication",
+      "apigatewayapplication_apigatewayapplication_main",
+      "home_sumit_desktop_project_root_api_gateway_src_main_java_com_app_apigateways_apigatewayapplication_java"
+    ],
+    "46": [
+      "apigatewayapplicationtests_apigatewayapplicationtests",
+      "apigatewayapplicationtests_apigatewayapplicationtests_contextloads",
+      "home_sumit_desktop_project_root_api_gateway_src_test_java_com_app_apigateways_apigateway_apigatewayapplicationtests_java"
+    ],
+    "47": [
+      "home_sumit_desktop_project_root_services_microservice1_src_main_java_com_example_microservice1_inventorysvc_java",
+      "inventorysvc_inventorysvc",
+      "inventorysvc_inventorysvc_main"
+    ],
+    "48": [
+      "home_sumit_desktop_project_root_services_microservice1_src_main_java_com_example_microservice1_exception_insufficientstockexception_java",
+      "insufficientstockexception_insufficientstockexception",
+      "insufficientstockexception_insufficientstockexception_insufficientstockexception"
+    ],
+    "49": [
+      "home_sumit_desktop_project_root_services_microservice1_src_main_java_com_example_microservice1_exception_inventorynotfoundexception_java",
+      "inventorynotfoundexception_inventorynotfoundexception",
+      "inventorynotfoundexception_inventorynotfoundexception_inventorynotfoundexception"
+    ],
+    "50": [
+      "home_sumit_desktop_project_root_services_microservice1_src_test_java_com_example_microservice1_microservice1applicationtests_java",
+      "microservice1applicationtests_microservice1applicationtests",
+      "microservice1applicationtests_microservice1applicationtests_contextloads"
+    ],
+    "51": [
+      "billingpaymentapplication_billingpaymentapplication",
+      "billingpaymentapplication_billingpaymentapplication_main",
+      "home_sumit_desktop_project_root_services_billing_payment_src_main_java_org_example_billingpayment_billingpaymentapplication_java"
+    ],
+    "52": [
+      "billingpaymentapplicationtests_billingpaymentapplicationtests",
+      "billingpaymentapplicationtests_billingpaymentapplicationtests_contextloads",
+      "home_sumit_desktop_project_root_services_billing_payment_src_test_java_org_example_billingpayment_billingpaymentapplicationtests_java"
+    ],
+    "53": [
+      "alertsvcapplication_alertsvcapplication",
+      "alertsvcapplication_alertsvcapplication_main",
+      "home_sumit_desktop_project_root_services_alertsvc_src_main_java_com_app_alertsvc_alertsvcapplication_java"
+    ],
+    "54": [
+      "alertsvcapplicationtests_alertsvcapplicationtests",
+      "alertsvcapplicationtests_alertsvcapplicationtests_contextloads",
+      "home_sumit_desktop_project_root_services_alertsvc_src_test_java_com_app_alertsvc_alertsvcapplicationtests_java"
+    ],
+    "55": [
+      "authapplication_authapplication",
+      "authapplication_authapplication_main",
+      "home_sumit_desktop_project_root_services_auth_src_main_java_org_example_auth_authapplication_java"
+    ],
+    "56": [
+      "authapplicationtests_authapplicationtests",
+      "authapplicationtests_authapplicationtests_contextloads",
+      "home_sumit_desktop_project_root_services_auth_src_test_java_org_example_auth_authapplicationtests_java"
+    ],
+    "57": [
+      "home_sumit_desktop_project_root_services_warehousemcs_src_main_java_org_example_warehousemcs_warehousemcsapplication_java",
+      "warehousemcsapplication_warehousemcsapplication",
+      "warehousemcsapplication_warehousemcsapplication_main"
+    ],
+    "58": [
+      "home_sumit_desktop_project_root_services_warehousemcs_src_test_java_org_example_warehousemcs_warehousemcsapplicationtests_java",
+      "warehousemcsapplicationtests_warehousemcsapplicationtests",
+      "warehousemcsapplicationtests_warehousemcsapplicationtests_contextloads"
+    ],
+    "59": [
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_movementmcsapplication_java",
+      "movementmcsapplication_movementmcsapplication",
+      "movementmcsapplication_movementmcsapplication_main"
+    ],
+    "60": [
+      "duplicaterequestexception_duplicaterequestexception",
+      "duplicaterequestexception_duplicaterequestexception_duplicaterequestexception",
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_exception_duplicaterequestexception_java"
+    ],
+    "61": [
+      "home_sumit_desktop_project_root_services_movementmcs_src_test_java_org_app_movementmcs_movementmcsapplicationtests_java",
+      "movementmcsapplicationtests_movementmcsapplicationtests",
+      "movementmcsapplicationtests_movementmcsapplicationtests_contextloads"
+    ],
+    "62": [
+      "home_sumit_desktop_project_root_services_tenantmvc_src_main_java_org_example_tenantmvc_tenantmvcapplication_java",
+      "tenantmvcapplication_tenantmvcapplication",
+      "tenantmvcapplication_tenantmvcapplication_main"
+    ],
+    "63": [
+      "duplicatetenantexception_duplicatetenantexception",
+      "duplicatetenantexception_duplicatetenantexception_duplicatetenantexception",
+      "home_sumit_desktop_project_root_services_tenantmvc_src_main_java_org_example_tenantmvc_exception_duplicatetenantexception_java"
+    ],
+    "64": [
+      "home_sumit_desktop_project_root_services_tenantmvc_src_test_java_org_example_tenantmvc_tenantmvcapplicationtests_java",
+      "tenantmvcapplicationtests_tenantmvcapplicationtests",
+      "tenantmvcapplicationtests_tenantmvcapplicationtests_contextloads"
+    ],
+    "65": [
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_orderserviceapplication_java",
+      "orderserviceapplication_orderserviceapplication",
+      "orderserviceapplication_orderserviceapplication_main"
+    ],
+    "66": [
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_service_tenantclientfallback_java",
+      "tenantclientfallback_tenantclientfallback",
+      "tenantclientfallback_tenantclientfallback_validatetenant"
+    ],
+    "67": [
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_exception_ordernotfoundexception_java",
+      "ordernotfoundexception_ordernotfoundexception",
+      "ordernotfoundexception_ordernotfoundexception_ordernotfoundexception"
+    ],
+    "68": [
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_exception_insufficientinventoryexception_java",
+      "insufficientinventoryexception_insufficientinventoryexception",
+      "insufficientinventoryexception_insufficientinventoryexception_insufficientinventoryexception"
+    ],
+    "69": [
+      "breadcrumb_breadcrumbellipsis",
+      "breadcrumb_breadcrumbseparator",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_breadcrumb_tsx"
+    ],
+    "70": [
+      "home_sumit_desktop_project_root_services_microservice1_src_main_java_com_example_microservice1_dto_ordercreatedevent_java",
+      "ordercreatedevent_ordercreatedevent"
+    ],
+    "71": [
+      "home_sumit_desktop_project_root_services_microservice1_src_main_java_com_example_microservice1_dto_inventoryrequest_java",
+      "inventoryrequest_inventoryrequest"
+    ],
+    "72": [
+      "home_sumit_desktop_project_root_services_billing_payment_src_main_java_org_example_billingpayment_model_payment_java",
+      "payment_payment"
+    ],
+    "73": [
+      "createalertrequest_createalertrequest",
+      "home_sumit_desktop_project_root_services_alertsvc_src_main_java_com_app_alertsvc_dto_createalertrequest_java"
+    ],
+    "74": [
+      "alertdto_alertdto",
+      "home_sumit_desktop_project_root_services_alertsvc_src_main_java_com_app_alertsvc_dto_alertdto_java"
+    ],
+    "75": [
+      "alerteventdto_alerteventdto",
+      "home_sumit_desktop_project_root_services_alertsvc_src_main_java_com_app_alertsvc_dto_alerteventdto_java"
+    ],
+    "76": [
+      "home_sumit_desktop_project_root_services_warehousemcs_src_main_java_org_example_warehousemcs_dto_stockmovedevent_java",
+      "stockmovedevent_stockmovedevent"
+    ],
+    "77": [
+      "home_sumit_desktop_project_root_services_warehousemcs_src_main_java_org_example_warehousemcs_dto_ordercancelledevent_java",
+      "ordercancelledevent_ordercancelledevent"
+    ],
+    "78": [
+      "home_sumit_desktop_project_root_services_warehousemcs_src_main_java_org_example_warehousemcs_dto_warehouseassignedevent_java",
+      "warehouseassignedevent_warehouseassignedevent"
+    ],
+    "79": [
+      "home_sumit_desktop_project_root_services_warehousemcs_src_main_java_org_example_warehousemcs_dto_warehouserequest_java",
+      "warehouserequest_warehouserequest"
+    ],
+    "80": [
+      "home_sumit_desktop_project_root_services_warehousemcs_src_main_java_org_example_warehousemcs_dto_warehousedto_java",
+      "warehousedto_warehousedto"
+    ],
+    "81": [
+      "home_sumit_desktop_project_root_services_warehousemcs_src_main_java_org_example_warehousemcs_model_warehouse_java",
+      "warehouse_warehouse"
+    ],
+    "82": [
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_dto_movementresponse_java",
+      "movementresponse_movementresponse"
+    ],
+    "83": [
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_dto_movementrequest_java",
+      "movementrequest_movementrequest"
+    ],
+    "84": [
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_dto_stockupdateevent_java",
+      "stockupdateevent_stockupdateevent"
+    ],
+    "85": [
+      "baseentity_baseentity",
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_entity_baseentity_java"
+    ],
+    "86": [
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_entity_stockmovement_java",
+      "stockmovement_stockmovement"
+    ],
+    "87": [
+      "errorresponse_errorresponse",
+      "home_sumit_desktop_project_root_services_movementmcs_src_main_java_org_app_movementmcs_exception_errorresponse_java"
+    ],
+    "88": [
+      "home_sumit_desktop_project_root_services_tenantmvc_src_main_java_org_example_tenantmvc_dto_tenantdto_java",
+      "tenantdto_tenantdto"
+    ],
+    "89": [
+      "home_sumit_desktop_project_root_services_tenantmvc_src_main_java_org_example_tenantmvc_entity_tenant_java",
+      "tenant_tenant"
+    ],
+    "90": [
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_dto_orderitemrequest_java",
+      "orderitemrequest_orderitemrequest"
+    ],
+    "91": [
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_dto_orderitemresponse_java",
+      "orderitemresponse_orderitemresponse"
+    ],
+    "92": [
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_dto_orderrequest_java",
+      "orderrequest_orderrequest"
+    ],
+    "93": [
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_dto_orderresponse_java",
+      "orderresponse_orderresponse"
+    ],
+    "94": [
+      "home_sumit_desktop_project_root_services_ordersvc_src_main_java_org_example_model_orderitem_java",
+      "orderitem_orderitem"
+    ],
+    "95": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_app_tsx",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_main_tsx"
+    ],
+    "96": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_resizable_tsx",
+      "resizable_resizablepanelgroup"
+    ],
+    "97": [
+      "chart_usechart",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_chart_tsx"
+    ],
+    "98": [
+      "form_useformfield",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_form_tsx"
+    ],
+    "99": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_sonner_tsx",
+      "sonner_toaster"
+    ],
+    "100": [
+      "calendar_calendar",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_calendar_tsx"
+    ],
+    "101": [
+      "carousel_usecarousel",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_carousel_tsx"
+    ],
+    "102": [
+      "deleteconfirmdialog_handleconfirm",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_dialogs_deleteconfirmdialog_tsx"
+    ],
+    "103": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_lib_utils_ts",
+      "utils_cn"
+    ],
+    "104": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_pages_landingpage_tsx",
+      "landingpage_formatprice"
+    ],
+    "105": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_pages_dashboard_warehousespage_tsx",
+      "warehousespage_getcapacitystatus"
+    ],
+    "106": [
+      "dashboardhome_refetchall",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_pages_dashboard_dashboardhome_tsx"
+    ],
+    "107": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_pages_dashboard_orderspage_tsx",
+      "orderspage_handlecancel"
+    ],
+    "108": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_hooks_use_mobile_tsx",
+      "use_mobile_useismobile"
+    ],
+    "109": [
+      "authstore_maprole",
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_stores_authstore_ts"
+    ],
+    "110": [
+      "home_sumit_desktop_project_root_services_auth_src_main_java_org_example_auth_entity_oauth2provider_java"
+    ],
+    "111": [
+      "home_sumit_desktop_project_root_services_auth_src_main_java_org_example_auth_entity_role_java"
+    ],
+    "112": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_postcss_config_js"
+    ],
+    "113": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_vitest_config_ts"
+    ],
+    "114": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_playwright_fixture_ts"
+    ],
+    "115": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_tailwind_config_ts"
+    ],
+    "116": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_vite_config_ts"
+    ],
+    "117": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_playwright_config_ts"
+    ],
+    "118": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_eslint_config_js"
+    ],
+    "119": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_vite_env_d_ts"
+    ],
+    "120": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_dashboardlayout_tsx"
+    ],
+    "121": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_navlink_tsx"
+    ],
+    "122": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_toast_tsx"
+    ],
+    "123": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_use_toast_ts"
+    ],
+    "124": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_scroll_area_tsx"
+    ],
+    "125": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_input_tsx"
+    ],
+    "126": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_dialog_tsx"
+    ],
+    "127": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_sheet_tsx"
+    ],
+    "128": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_badge_tsx"
+    ],
+    "129": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_radio_group_tsx"
+    ],
+    "130": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_checkbox_tsx"
+    ],
+    "131": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_collapsible_tsx"
+    ],
+    "132": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_switch_tsx"
+    ],
+    "133": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_context_menu_tsx"
+    ],
+    "134": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_card_tsx"
+    ],
+    "135": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_dropdown_menu_tsx"
+    ],
+    "136": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_avatar_tsx"
+    ],
+    "137": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_aspect_ratio_tsx"
+    ],
+    "138": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_alert_dialog_tsx"
+    ],
+    "139": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_toggle_tsx"
+    ],
+    "140": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_button_variants_ts"
+    ],
+    "141": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_label_tsx"
+    ],
+    "142": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_skeleton_tsx"
+    ],
+    "143": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_tooltip_tsx"
+    ],
+    "144": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_toggle_group_tsx"
+    ],
+    "145": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_popover_tsx"
+    ],
+    "146": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_tabs_tsx"
+    ],
+    "147": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_command_tsx"
+    ],
+    "148": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_hover_card_tsx"
+    ],
+    "149": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_menubar_tsx"
+    ],
+    "150": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_alert_tsx"
+    ],
+    "151": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_button_tsx"
+    ],
+    "152": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_slider_tsx"
+    ],
+    "153": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_table_tsx"
+    ],
+    "154": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_accordion_tsx"
+    ],
+    "155": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_progress_tsx"
+    ],
+    "156": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_navigation_menu_tsx"
+    ],
+    "157": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_textarea_tsx"
+    ],
+    "158": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_select_tsx"
+    ],
+    "159": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_input_otp_tsx"
+    ],
+    "160": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_ui_separator_tsx"
+    ],
+    "161": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_dialogs_filterdropdown_tsx"
+    ],
+    "162": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_dialogs_addorderdialog_tsx"
+    ],
+    "163": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_dialogs_addmovementdialog_tsx"
+    ],
+    "164": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_dialogs_addinventorydialog_tsx"
+    ],
+    "165": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_components_dialogs_addwarehousedialog_tsx"
+    ],
+    "166": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_pages_admin_adminagentspage_tsx"
+    ],
+    "167": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_pages_admin_adminanalyticspage_tsx"
+    ],
+    "168": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_pages_admin_admindashboard_tsx"
+    ],
+    "169": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_pages_admin_adminuserspage_tsx"
+    ],
+    "170": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_pages_admin_admintenantspage_tsx"
+    ],
+    "171": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_pages_dashboard_billingpage_tsx"
+    ],
+    "172": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_pages_dashboard_settingspage_tsx"
+    ],
+    "173": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_pages_dashboard_movementspage_tsx"
+    ],
+    "174": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_pages_dashboard_alertspage_tsx"
+    ],
+    "175": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_pages_super_admin_superadmindashboard_tsx"
+    ],
+    "176": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_api_client_ts"
+    ],
+    "177": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_test_setup_ts"
+    ],
+    "178": [
+      "home_sumit_desktop_project_root_cloudspan_inventory_src_test_example_test_ts"
+    ],
+    "179": [
+      "project_root_analysis_inv"
+    ],
+    "180": [
+      "project_root_readme"
+    ],
+    "181": [
+      "api_gateway_help"
+    ],
+    "182": [
+      "graphify_out_graph_report"
+    ],
+    "183": [
+      "microservice1_projectstructure"
+    ],
+    "184": [
+      "microservice1_readme"
+    ],
+    "185": [
+      "microservice1_help"
+    ],
+    "186": [
+      "billing_payment_help"
+    ],
+    "187": [
+      "alertsvc_readme"
+    ],
+    "188": [
+      "alertsvc_help"
+    ],
+    "189": [
+      "auth_readme"
+    ],
+    "190": [
+      "auth_help"
+    ],
+    "191": [
+      "warehousemcs_readme"
+    ],
+    "192": [
+      "warehousemcs_help"
+    ],
+    "193": [
+      "movementmcs_readme"
+    ],
+    "194": [
+      "movementmcs_help"
+    ],
+    "195": [
+      "tenantmvc_readme"
+    ],
+    "196": [
+      "tenantmvc_help"
+    ],
+    "197": [
+      "ordersvc_readme"
+    ],
+    "198": [
+      "cloudspan_inventory_readme"
+    ],
+    "199": [
+      "cloudspan_inventory_index"
+    ]
+  },
+  "cohesion": {
+    "0": 0.05,
+    "1": 0.06,
+    "2": 0.05,
+    "3": 0.06,
+    "4": 0.07,
+    "5": 0.1,
+    "6": 0.08,
+    "7": 0.12,
+    "8": 0.09,
+    "9": 0.15,
+    "10": 0.12,
+    "11": 0.12,
+    "12": 0.14,
+    "13": 0.17,
+    "14": 0.24,
+    "15": 0.17,
+    "16": 0.17,
+    "17": 0.18,
+    "18": 0.2,
+    "19": 0.25,
+    "20": 0.32,
+    "21": 0.25,
+    "22": 0.29,
+    "23": 0.29,
+    "24": 0.29,
+    "25": 0.33,
+    "26": 0.33,
+    "27": 0.4,
+    "28": 0.4,
+    "29": 0.4,
+    "30": 0.5,
+    "31": 0.5,
+    "32": 0.5,
+    "33": 0.5,
+    "34": 0.5,
+    "35": 0.5,
+    "36": 0.5,
+    "37": 0.67,
+    "38": 0.5,
+    "39": 0.5,
+    "40": 0.67,
+    "41": 0.5,
+    "42": 0.5,
+    "43": 0.5,
+    "44": 0.5,
+    "45": 0.67,
+    "46": 0.67,
+    "47": 0.67,
+    "48": 0.67,
+    "49": 0.67,
+    "50": 0.67,
+    "51": 0.67,
+    "52": 0.67,
+    "53": 0.67,
+    "54": 0.67,
+    "55": 0.67,
+    "56": 0.67,
+    "57": 0.67,
+    "58": 0.67,
+    "59": 0.67,
+    "60": 0.67,
+    "61": 0.67,
+    "62": 0.67,
+    "63": 0.67,
+    "64": 0.67,
+    "65": 0.67,
+    "66": 0.67,
+    "67": 0.67,
+    "68": 0.67,
+    "69": 0.67,
+    "70": 1.0,
+    "71": 1.0,
+    "72": 1.0,
+    "73": 1.0,
+    "74": 1.0,
+    "75": 1.0,
+    "76": 1.0,
+    "77": 1.0,
+    "78": 1.0,
+    "79": 1.0,
+    "80": 1.0,
+    "81": 1.0,
+    "82": 1.0,
+    "83": 1.0,
+    "84": 1.0,
+    "85": 1.0,
+    "86": 1.0,
+    "87": 1.0,
+    "88": 1.0,
+    "89": 1.0,
+    "90": 1.0,
+    "91": 1.0,
+    "92": 1.0,
+    "93": 1.0,
+    "94": 1.0,
+    "95": 1.0,
+    "96": 1.0,
+    "97": 1.0,
+    "98": 1.0,
+    "99": 1.0,
+    "100": 1.0,
+    "101": 1.0,
+    "102": 1.0,
+    "103": 1.0,
+    "104": 1.0,
+    "105": 1.0,
+    "106": 1.0,
+    "107": 1.0,
+    "108": 1.0,
+    "109": 1.0,
+    "110": 1.0,
+    "111": 1.0,
+    "112": 1.0,
+    "113": 1.0,
+    "114": 1.0,
+    "115": 1.0,
+    "116": 1.0,
+    "117": 1.0,
+    "118": 1.0,
+    "119": 1.0,
+    "120": 1.0,
+    "121": 1.0,
+    "122": 1.0,
+    "123": 1.0,
+    "124": 1.0,
+    "125": 1.0,
+    "126": 1.0,
+    "127": 1.0,
+    "128": 1.0,
+    "129": 1.0,
+    "130": 1.0,
+    "131": 1.0,
+    "132": 1.0,
+    "133": 1.0,
+    "134": 1.0,
+    "135": 1.0,
+    "136": 1.0,
+    "137": 1.0,
+    "138": 1.0,
+    "139": 1.0,
+    "140": 1.0,
+    "141": 1.0,
+    "142": 1.0,
+    "143": 1.0,
+    "144": 1.0,
+    "145": 1.0,
+    "146": 1.0,
+    "147": 1.0,
+    "148": 1.0,
+    "149": 1.0,
+    "150": 1.0,
+    "151": 1.0,
+    "152": 1.0,
+    "153": 1.0,
+    "154": 1.0,
+    "155": 1.0,
+    "156": 1.0,
+    "157": 1.0,
+    "158": 1.0,
+    "159": 1.0,
+    "160": 1.0,
+    "161": 1.0,
+    "162": 1.0,
+    "163": 1.0,
+    "164": 1.0,
+    "165": 1.0,
+    "166": 1.0,
+    "167": 1.0,
+    "168": 1.0,
+    "169": 1.0,
+    "170": 1.0,
+    "171": 1.0,
+    "172": 1.0,
+    "173": 1.0,
+    "174": 1.0,
+    "175": 1.0,
+    "176": 1.0,
+    "177": 1.0,
+    "178": 1.0,
+    "179": 1.0,
+    "180": 1.0,
+    "181": 1.0,
+    "182": 1.0,
+    "183": 1.0,
+    "184": 1.0,
+    "185": 1.0,
+    "186": 1.0,
+    "187": 1.0,
+    "188": 1.0,
+    "189": 1.0,
+    "190": 1.0,
+    "191": 1.0,
+    "192": 1.0,
+    "193": 1.0,
+    "194": 1.0,
+    "195": 1.0,
+    "196": 1.0,
+    "197": 1.0,
+    "198": 1.0,
+    "199": 1.0
+  },
+  "gods": [
+    {
+      "id": "kafkaconfig_kafkaconfig",
+      "label": "KafkaConfig",
+      "degree": 25
+    },
+    {
+      "id": "warehouseserviceimpl_warehouseserviceimpl",
+      "label": "WarehouseServiceImpl",
+      "degree": 20
+    },
+    {
+      "id": "alertcontroller_alertcontroller",
+      "label": "AlertController",
+      "degree": 15
+    },
+    {
+      "id": "billingservice_billingservice",
+      "label": "BillingService",
+      "degree": 14
+    },
+    {
+      "id": "alertservice_alertservice",
+      "label": "AlertService",
+      "degree": 14
+    },
+    {
+      "id": "orderservice_orderservice",
+      "label": "OrderService",
+      "degree": 14
+    },
+    {
+      "id": "authcontroller_authcontroller",
+      "label": "AuthController",
+      "degree": 13
+    },
+    {
+      "id": "jwtutil_jwtutil",
+      "label": "JwtUtil",
+      "degree": 13
+    },
+    {
+      "id": "authservice_authservice",
+      "label": "AuthService",
+      "degree": 13
+    },
+    {
+      "id": "warehouseservice_warehouseservice",
+      "label": "WarehouseService",
+      "degree": 13
+    }
+  ],
+  "surprises": [
+    {
+      "source": "ProtectedRoute()",
+      "target": "useAuth()",
+      "source_files": [
+        "/home/sumit/Desktop/Project-root/cloudspan-inventory/src/components/ProtectedRoute.tsx",
+        "/home/sumit/Desktop/Project-root/cloudspan-inventory/src/contexts/AuthContext.tsx"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source"
+    },
+    {
+      "source": "Toaster()",
+      "target": "useToast()",
+      "source_files": [
+        "/home/sumit/Desktop/Project-root/cloudspan-inventory/src/components/ui/toaster.tsx",
+        "/home/sumit/Desktop/Project-root/cloudspan-inventory/src/hooks/use-toast.ts"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source"
+    },
+    {
+      "source": "handleExport()",
+      "target": "exportData()",
+      "source_files": [
+        "/home/sumit/Desktop/Project-root/cloudspan-inventory/src/components/dialogs/ExportDialog.tsx",
+        "/home/sumit/Desktop/Project-root/cloudspan-inventory/src/utils/exportUtils.ts"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source"
+    },
+    {
+      "source": "Index()",
+      "target": "useAuth()",
+      "source_files": [
+        "/home/sumit/Desktop/Project-root/cloudspan-inventory/src/pages/Index.tsx",
+        "/home/sumit/Desktop/Project-root/cloudspan-inventory/src/contexts/AuthContext.tsx"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source"
+    },
+    {
+      "source": "InventoryPage()",
+      "target": "useInventory()",
+      "source_files": [
+        "/home/sumit/Desktop/Project-root/cloudspan-inventory/src/pages/dashboard/InventoryPage.tsx",
+        "/home/sumit/Desktop/Project-root/cloudspan-inventory/src/hooks/useInventory.ts"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `InventoryService` connect `Community 3` to `Community 0`?",
+      "why": "High betweenness centrality (0.029) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `TenantService` connect `Community 9` to `Community 4`?",
+      "why": "High betweenness centrality (0.021) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `OrderCreatedEvent`, `InventoryRequest`, `PaymentDto` to the rest of the system?",
+      "why": "61 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 0` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.05 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 1` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.06 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 2` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.05 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 3` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.06 - nodes in this community are weakly interconnected."
+    }
+  ]
+}

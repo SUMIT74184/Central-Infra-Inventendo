@@ -37,16 +37,17 @@ public class WarehouseServiceImpl implements WarehouseService {
     @Override
     @Transactional
     @CacheEvict(value = "warehouses", allEntries = true)
-    public WarehouseDTO createWarehouse(WarehouseRequest req) {
+    public WarehouseDTO createWarehouse(WarehouseRequest req, String tenantId) {
         log.info("Creating warehouse:{}", req.getWarehouseCode());
 
         if (warehouseRepository.existsByWarehouseCodeAndTenantId(
-                req.getWarehouseCode(), req.getTenantId())) {
+                req.getWarehouseCode(), tenantId)) {
             throw new RuntimeException("Warehouse with code " + req.getWarehouseCode() + "already exists");
 
         }
 
         Warehouse warehouse = mapToEntity(req);
+        warehouse.setTenantId(tenantId);
         warehouse.setActive(true);
         Warehouse savedWarehouse = warehouseRepository.save(warehouse);
 
@@ -60,13 +61,13 @@ public class WarehouseServiceImpl implements WarehouseService {
     @Override
     @Transactional
     @CacheEvict(value = "warehouses", allEntries = true)
-    public WarehouseDTO updateWarehouse(Long id, WarehouseRequest request) {
+    public WarehouseDTO updateWarehouse(Long id, WarehouseRequest request, String tenantId) {
         log.info("Updating warehouse: {}", id);
 
         Warehouse warehouse = warehouseRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Warehouse not found"));
 
-        if (!warehouse.getTenantId().equals(request.getTenantId())) {
+        if (!warehouse.getTenantId().equals(tenantId)) {
             throw new RuntimeException("Unauthorized access to warehouse");
         }
 
@@ -295,7 +296,6 @@ public class WarehouseServiceImpl implements WarehouseService {
         warehouse.setCapacity(request.getCapacity());
         warehouse.setCurrentUtilization(request.getCurrentUtilization());
         warehouse.setStatus(request.getStatus());
-        warehouse.setTenantId(request.getTenantId());
         warehouse.setContactNumber(request.getContactNumber());
 
         return warehouse;
