@@ -50,6 +50,18 @@ public class InventoryResponse {
         response.setLowstock(inventory.isLowStock());
         response.setCreatedAt(inventory.getCreatedAt());
         response.setUpdatedAt(inventory.getUpdatedAt());
+
+        // Calculate and set status
+        if (inventory.getQuantity() == 0) {
+            response.setStatus("OUT_OF_STOCK");
+        } else if (inventory.getQuantity() <= inventory.getReorderLevel()) {
+            response.setStatus("LOW_STOCK");
+        } else if (inventory.getQuantity() > inventory.getMaxStockLevel()) {
+            response.setStatus("OVERSTOCK");
+        } else {
+            response.setStatus("NORMAL");
+        }
+
         return response;
 
     }

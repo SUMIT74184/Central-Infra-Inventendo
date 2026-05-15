@@ -52,7 +52,6 @@ public class InventoryRequest{
 
     private String location;
 
-    @NotBlank(message = "Tenant Id is required")
     private String tenantId;
 
 }
