@@ -9,50 +9,49 @@
 ```mermaid
 graph TD
     %% Client Layer
-    User([User / Browser])
-    subgraph ClientLayer ["Client Layer"]
-        React["cloudspan-inventory (React)"]
-        Zustand["Zustand (State)"]
-        ReactQuery["TanStack Query (Hooks)"]
+    User[User / Browser]
+    subgraph ClientLayer [Client Layer]
+        React[cloudspan-inventory React]
+        Zustand[Zustand State]
+        ReactQuery[TanStack Query Hooks]
     end
 
     %% Gateway Layer
-    subgraph GatewayLayer ["Gateway Layer"]
-        Gateway["Spring Cloud Gateway (:8080)"]
+    subgraph GatewayLayer [Gateway Layer]
+        Gateway[Spring Cloud Gateway :8080]
     end
 
     %% Microservices Layer
-    subgraph Microservices ["Microservices Layer (Hybrid Communication)"]
-        direction TB
-        AuthService["Auth Service (:8081)"]
-        InventoryService["Inventory Service (:8082)"]
-        OrderService["Order Service (:8083)"]
-        WarehouseService["Warehouse Service (:8084)"]
-        MovementService["Movement Service (:8085)"]
-        TenantService["Tenant Service (:8086)"]
-        AlertService["Alert Service (:8087)"]
+    subgraph Microservices [Microservices Layer - Hybrid]
+        AuthService[Auth Service :8081]
+        InventoryService[Inventory Service :8082]
+        OrderService[Order Service :8083]
+        WarehouseService[Warehouse Service :8084]
+        MovementService[Movement Service :8085]
+        TenantService[Tenant Service :8086]
+        AlertService[Alert Service :8087]
         
-        %% Synchronous Dependencies (Feign)
+        %% Synchronous Dependencies
         OrderService -- "Feign: validate" --> TenantService
         OrderService -- "Feign: reserve/check" --> InventoryService
     end
 
     %% Event Layer
-    subgraph EventLayer ["Event Streaming (Asynchronous)"]
-        Kafka["Apache Kafka (29092)"]
+    subgraph EventLayer [Event Streaming - Asynchronous]
+        Kafka[Apache Kafka 29092]
         
         %% Event Flow
-        OrderService -- "Topic: order-created" --> Kafka
-        InventoryService -- "Topic: inventory-reserved" --> Kafka
-        InventoryService -- "Topic: low-stock-alert" --> Kafka
-        MovementService -- "Topic: stock-moved" --> Kafka
+        OrderService -- "order-created" --> Kafka
+        InventoryService -- "inventory-reserved" --> Kafka
+        InventoryService -- "low-stock-alert" --> Kafka
+        MovementService -- "stock-moved" --> Kafka
         
-        Kafka -- "Consume: alerts" --> AlertService
-        Kafka -- "Consume: reservation" --> InventoryService
+        Kafka -- "Consume alerts" --> AlertService
+        Kafka -- "Consume reservation" --> InventoryService
     end
 
     %% Infrastructure Layer
-    subgraph InfraLayer ["Infrastructure & Shared Services"]
+    subgraph InfraLayer [Infrastructure Shared Services]
         Postgres[(PostgreSQL)]
         Redis[(Redis)]
         
@@ -66,10 +65,10 @@ graph TD
     ClientLayer -- "REST + JWT" --> Gateway
     Gateway -- "Routing" --> Microservices
 
-    %% Agentic Automation (Internal)
-    subgraph Automation ["Agentic Automation (@Scheduled)"]
-        ReorderAgent["Reorder Agent"]
-        StockOptimizer["Stock Optimizer"]
+    %% Agentic Automation
+    subgraph Automation [Agentic Automation - Scheduled]
+        ReorderAgent[Reorder Agent]
+        StockOptimizer[Stock Optimizer]
     end
     
     ReorderAgent -.-> InventoryService
