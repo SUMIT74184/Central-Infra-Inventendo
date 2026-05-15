@@ -6,41 +6,74 @@
 
 ## Architecture Overview
 
-```
-                         ┌──────────────────────────────────┐
-                         │    cloudspan-inventory (React)    │
-                         │  React + Vite + Zustand + TanStack│
-                         └─────────────┬────────────────────┘
-                                       │ HTTP (Axios)
-                                       ▼
-                         ┌──────────────────────────────────┐
-                         │     API Gateway  :8080           │
-                         │   Spring Cloud Gateway           │
-                         └──┬──────┬───────┬───────┬───────┘
-                            │      │       │       │
-              ┌─────────────┘      │       │       └──────────────┐
-              ▼                    ▼       ▼                       ▼
-      ┌──────────────┐   ┌──────────────┐ ┌──────────────┐  ┌──────────────┐
-      │  Auth :8081  │   │ Inventory    │ │ OrderSvc     │  │  AlertSvc    │
-      │ Spring Boot  │   │ Micro1 :8082 │ │ :8083        │  │  :8087       │
-      └──────────────┘   └──────────────┘ └──────────────┘  └──────────────┘
-              │                    │             │                   │
-              └────────────────────┴─────────────┴───────────────────┘
-                                       │
-                          ┌────────────┴────────────┐
-                          │         Kafka            │
-                          │   (kafka:29092)          │
-                          └────────────┬────────────┘
-                                       │
-              ┌──────────────┐ ┌──────────────┐ ┌──────────────┐
-              │ WareHousemcs │ │ MovementMcs  │ │ TenantMvc    │
-              │   :8084      │ │   :8085      │ │   :8086      │
-              └──────────────┘ └──────────────┘ └──────────────┘
-                                       │
-                     ┌─────────────────┴───────────────┐
-                     │    Shared Infrastructure          │
-                     │  PostgreSQL | Redis | Zookeeper  │
-                     └──────────────────────────────────┘
+```mermaid
+graph TD
+    %% Client Layer
+    User([User / Browser])
+    subgraph ClientLayer ["Client Layer"]
+        React["cloudspan-inventory (React)"]
+        Zustand["Zustand (State)"]
+        ReactQuery["TanStack Query (Hooks)"]
+    end
+
+    %% Gateway Layer
+    subgraph GatewayLayer ["Gateway Layer"]
+        Gateway["Spring Cloud Gateway (:8080)"]
+    end
+
+    %% Microservices Layer
+    subgraph Microservices ["Microservices Layer (Hybrid Communication)"]
+        direction TB
+        AuthService["Auth Service (:8081)"]
+        InventoryService["Inventory Service (:8082)"]
+        OrderService["Order Service (:8083)"]
+        WarehouseService["Warehouse Service (:8084)"]
+        MovementService["Movement Service (:8085)"]
+        TenantService["Tenant Service (:8086)"]
+        AlertService["Alert Service (:8087)"]
+        
+        %% Synchronous Dependencies (Feign)
+        OrderService -- "Feign: validate" --> TenantService
+        OrderService -- "Feign: reserve/check" --> InventoryService
+    end
+
+    %% Event Layer
+    subgraph EventLayer ["Event Streaming (Asynchronous)"]
+        Kafka["Apache Kafka (29092)"]
+        
+        %% Event Flow
+        OrderService -- "Topic: order-created" --> Kafka
+        InventoryService -- "Topic: inventory-reserved" --> Kafka
+        InventoryService -- "Topic: low-stock-alert" --> Kafka
+        MovementService -- "Topic: stock-moved" --> Kafka
+        
+        Kafka -- "Consume: alerts" --> AlertService
+        Kafka -- "Consume: reservation" --> InventoryService
+    end
+
+    %% Infrastructure Layer
+    subgraph InfraLayer ["Infrastructure & Shared Services"]
+        Postgres[(PostgreSQL)]
+        Redis[(Redis)]
+        
+        AuthService -- "JWT Blacklist" --> Redis
+        AlertService -- "Alert Cache" --> Redis
+        Microservices --- Postgres
+    end
+
+    %% Main Request Flow
+    User --> ClientLayer
+    ClientLayer -- "REST + JWT" --> Gateway
+    Gateway -- "Routing" --> Microservices
+
+    %% Agentic Automation (Internal)
+    subgraph Automation ["Agentic Automation (@Scheduled)"]
+        ReorderAgent["Reorder Agent"]
+        StockOptimizer["Stock Optimizer"]
+    end
+    
+    ReorderAgent -.-> InventoryService
+    StockOptimizer -.-> MovementService
 ```
 
 ---
