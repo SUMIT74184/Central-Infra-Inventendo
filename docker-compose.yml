@@ -1,4 +1,12 @@
 version: '3.8'
+ 
+# Global logging configuration to prevent disk growth
+x-logging: &default-logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
+
 
 # =============================================================================
 #  CENTRAL INFRA — Single docker-compose for all microservices
@@ -42,6 +50,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./init-databases.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    logging: *default-logging
     networks:
       - inventory-network
     healthcheck:
@@ -61,6 +70,7 @@ services:
       - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+    logging: *default-logging
     networks:
       - inventory-network
     healthcheck:
@@ -77,6 +87,7 @@ services:
       - "6379:6379"
     volumes:
       - redis_data:/data
+    logging: *default-logging
     networks:
       - inventory-network
     healthcheck:
@@ -93,6 +104,7 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
       ZOOKEEPER_4LW_COMMANDS_WHITELIST: "*"
+    logging: *default-logging
     networks:
       - inventory-network
     healthcheck:
@@ -121,6 +133,7 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
       KAFKA_LOG_RETENTION_HOURS: 168
+    logging: *default-logging
     networks:
       - inventory-network
     healthcheck:
@@ -141,6 +154,7 @@ services:
     environment:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+    logging: *default-logging
     networks:
       - inventory-network
 
@@ -173,6 +187,7 @@ services:
         condition: service_healthy
       kafka:
         condition: service_healthy
+    logging: *default-logging
     networks:
       - inventory-network
     restart: on-failure
@@ -206,6 +221,7 @@ services:
         condition: service_healthy
       kafka:
         condition: service_healthy
+    logging: *default-logging
     networks:
       - inventory-network
     restart: on-failure
@@ -238,6 +254,7 @@ services:
         condition: service_healthy
       kafka:
         condition: service_healthy
+    logging: *default-logging
     networks:
       - inventory-network
     restart: on-failure
@@ -269,6 +286,7 @@ services:
         condition: service_healthy
       kafka:
         condition: service_healthy
+    logging: *default-logging
     networks:
       - inventory-network
     restart: on-failure
@@ -296,6 +314,7 @@ services:
         condition: service_healthy
       kafka:
         condition: service_healthy
+    logging: *default-logging
     networks:
       - inventory-network
     restart: on-failure
@@ -324,6 +343,7 @@ services:
         condition: service_healthy
       kafka:
         condition: service_healthy
+    logging: *default-logging
     networks:
       - inventory-network
     restart: on-failure
@@ -354,6 +374,7 @@ services:
         condition: service_healthy
       kafka:
         condition: service_healthy
+    logging: *default-logging
     networks:
       - inventory-network
     restart: on-failure
@@ -386,6 +407,7 @@ services:
         condition: service_healthy
       kafka:
         condition: service_healthy
+    logging: *default-logging
     networks:
       - inventory-network
     restart: on-failure
@@ -412,6 +434,7 @@ services:
     depends_on:
       auth-service:
         condition: service_healthy
+    logging: *default-logging
     networks:
       - inventory-network
     restart: on-failure
