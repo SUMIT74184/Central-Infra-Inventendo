@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import useAuthStore from "@/stores/authStore";
 import { useAlerts } from "@/hooks/useAlerts";
@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import GlobalSearch from "@/components/GlobalSearch";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -81,9 +82,22 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const tenantId = useAuthStore((s) => s.tenantId) ?? "";
   const { data: alertsData = [] } = useAlerts(tenantId);
   const unacknowledgedCount = alertsData.filter((a) => a.status === "PENDING").length;
+
+  // Ctrl+K / Cmd+K keyboard shortcut
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setSearchOpen((prev) => !prev);
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   const navItems =
     user?.role === "super_admin"
@@ -195,12 +209,17 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
             >
               <Menu className="h-5 w-5" />
             </Button>
-            <div className="relative hidden sm:block">
+            <div
+              className="relative hidden sm:block cursor-pointer"
+              onClick={() => setSearchOpen(true)}
+            >
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Search inventory, orders, warehouses..."
-                className="w-80 pl-9 h-9 bg-secondary border-0"
-              />
+              <div className="w-80 pl-9 h-9 bg-secondary border-0 rounded-md flex items-center text-sm text-muted-foreground select-none">
+                Search inventory, orders, warehouses...
+                <kbd className="ml-auto mr-2 pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
+                  <span className="text-xs">⌘</span>K
+                </kbd>
+              </div>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -262,6 +281,9 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
           {children}
         </main>
       </div>
+
+      {/* Global Search Command Palette */}
+      <GlobalSearch open={searchOpen} onOpenChange={setSearchOpen} />
     </div>
   );
 };

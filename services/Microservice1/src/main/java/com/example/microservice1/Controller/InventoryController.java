@@ -119,5 +119,24 @@ public class InventoryController {
         return ResponseEntity.ok().build();
     }
 
+    @PutMapping("/{sku}")
+    public ResponseEntity<InventoryResponse> updateInventory(
+            @PathVariable String sku,
+            @RequestBody InventoryRequest request,
+            @RequestHeader("X-Tenant-Id") String tenantId
+    ) {
+        InventoryResponse response = inventoryService.updateInventory(sku, request, tenantId);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{sku}")
+    public ResponseEntity<Void> deleteInventory(
+            @PathVariable String sku,
+            @RequestHeader("X-Tenant-Id") String tenantId
+    ) {
+        inventoryService.deleteInventory(sku, tenantId);
+        return ResponseEntity.noContent().build();
+    }
+
 
 }

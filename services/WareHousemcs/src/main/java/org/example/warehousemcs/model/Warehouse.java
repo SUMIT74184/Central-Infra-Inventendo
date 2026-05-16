@@ -59,7 +59,11 @@ public class Warehouse implements Serializable {
     @Column(length = 50)
     private String type; // distribution, fulfillment, cold-storage, cross-dock
 
-    private Integer zones;
+    private Integer zonesCount;
+
+    @OneToMany(mappedBy = "warehouse", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private java.util.List<Zone> zoneList = new java.util.ArrayList<>();
 
     private Integer staffCount;
 

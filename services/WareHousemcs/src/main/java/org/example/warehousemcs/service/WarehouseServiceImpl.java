@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 public class WarehouseServiceImpl implements WarehouseService {
 
     private final WarehouseRepository warehouseRepository;
+    private final org.example.warehousemcs.repository.ZoneRepository zoneRepository;
     private final KafkaTemplate<String, Object> kafkaTemplate;
     private final RedisTemplate<String, Object> redisTemplate;
     // private final ObjectMapper objectMapper;
@@ -279,6 +280,7 @@ public class WarehouseServiceImpl implements WarehouseService {
         warehouse.setCapacity(request.getCapacity());
         warehouse.setCurrentUtilization(request.getCurrentUtilization());
         warehouse.setEmail(request.getEmail());
+        warehouse.setZonesCount(request.getZonesCount());
     }
 
     private Warehouse mapToEntity(WarehouseRequest request) {
@@ -297,6 +299,7 @@ public class WarehouseServiceImpl implements WarehouseService {
         warehouse.setCurrentUtilization(request.getCurrentUtilization());
         warehouse.setStatus(request.getStatus());
         warehouse.setContactNumber(request.getContactNumber());
+        warehouse.setZonesCount(request.getZonesCount());
 
         return warehouse;
     }
@@ -318,13 +321,83 @@ public class WarehouseServiceImpl implements WarehouseService {
                 warehouse.getCapacity(),
                 warehouse.getCurrentUtilization(),
                 warehouse.getStatus(),
+                warehouse.getZonesCount(),
                 warehouse.getTenantId(),
                 warehouse.getCreatedAt(),
                 warehouse.getUpdatedAt(),
                 warehouse.getActive());
     }
 
-    private record WarehouseEvent(String eventType, WarehouseDTO warehouse) {
+    @Override
+    @Transactional
+    public org.example.warehousemcs.Dto.ZoneDTO addZone(Long warehouseId, org.example.warehousemcs.Dto.ZoneDTO dto, String tenantId) {
+        Warehouse warehouse = warehouseRepository.findById(warehouseId)
+                .orElseThrow(() -> new RuntimeException("Warehouse not found"));
+
+        if (!warehouse.getTenantId().equals(tenantId)) {
+            throw new RuntimeException("Unauthorized access");
+        }
+
+        org.example.warehousemcs.model.Zone zone = org.example.warehousemcs.model.Zone.builder()
+                .zoneCode(dto.getZoneCode())
+                .name(dto.getName())
+                .description(dto.getDescription())
+                .type(dto.getType())
+                .capacity(dto.getCapacity())
+                .active(true)
+                .warehouse(warehouse)
+                .tenantId(tenantId)
+                .build();
+
+        org.example.warehousemcs.model.Zone saved = zoneRepository.save(zone);
+        
+        // Update zonesCount
+        warehouse.setZonesCount((warehouse.getZonesCount() == null ? 0 : warehouse.getZonesCount()) + 1);
+        warehouseRepository.save(warehouse);
+
+        return mapToZoneDTO(saved);
     }
 
+    @Override
+    public List<org.example.warehousemcs.Dto.ZoneDTO> getZones(Long warehouseId, String tenantId) {
+        return zoneRepository.findByWarehouseIdAndTenantId(warehouseId, tenantId)
+                .stream()
+                .map(this::mapToZoneDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public void deleteZone(Long zoneId, String tenantId) {
+        org.example.warehousemcs.model.Zone zone = zoneRepository.findById(zoneId)
+                .orElseThrow(() -> new RuntimeException("Zone not found"));
+
+        if (!zone.getTenantId().equals(tenantId)) {
+            throw new RuntimeException("Unauthorized access");
+        }
+
+        Warehouse warehouse = zone.getWarehouse();
+        zoneRepository.delete(zone);
+        
+        // Update zonesCount
+        if (warehouse.getZonesCount() != null && warehouse.getZonesCount() > 0) {
+            warehouse.setZonesCount(warehouse.getZonesCount() - 1);
+            warehouseRepository.save(warehouse);
+        }
+    }
+
+    private org.example.warehousemcs.Dto.ZoneDTO mapToZoneDTO(org.example.warehousemcs.model.Zone zone) {
+        return org.example.warehousemcs.Dto.ZoneDTO.builder()
+                .id(zone.getId())
+                .zoneCode(zone.getZoneCode())
+                .name(zone.getName())
+                .description(zone.getDescription())
+                .type(zone.getType())
+                .capacity(zone.getCapacity())
+                .active(zone.getActive())
+                .build();
+    }
+
+    private record WarehouseEvent(String eventType, WarehouseDTO warehouse) {
+    }
 }

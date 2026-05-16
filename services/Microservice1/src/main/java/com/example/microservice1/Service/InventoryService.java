@@ -176,5 +176,34 @@ public class InventoryService {
         kafkaTemplate.send("inventory-cancelled", sku, quantity);
     }
 
+    @Transactional
+    @CacheEvict(value = "inventory", key = "#sku + '-' + #tenantId")
+    public InventoryResponse updateInventory(String sku, InventoryRequest request, String tenantId) {
+        Inventory inventory = inventoryRepository.findBySkuAndTenantId(sku, tenantId)
+                .orElseThrow(() -> new InventoryNotFoundException("Inventory not found for SKU: " + sku));
+
+        if (request.getProductName() != null) inventory.setProductName(request.getProductName());
+        if (request.getDescription() != null) inventory.setDescription(request.getDescription());
+        if (request.getQuantity() != null) inventory.setQuantity(request.getQuantity());
+        if (request.getReorderLevel() != null) inventory.setReorderLevel(request.getReorderLevel());
+        if (request.getMaxStockLevel() != null) inventory.setMaxStockLevel(request.getMaxStockLevel());
+        if (request.getUnitPrice() != null) inventory.setUnitPrice(request.getUnitPrice());
+        if (request.getWarehouseId() != null) inventory.setWarehouseId(request.getWarehouseId());
+        if (request.getLocation() != null) inventory.setLocation(request.getLocation());
+
+        Inventory saved = inventoryRepository.save(inventory);
+        log.info("Updated inventory for SKU: {}", sku);
+        return InventoryResponse.fromEntity(saved);
+    }
+
+    @Transactional
+    @CacheEvict(value = "inventory", key = "#sku + '-' + #tenantId")
+    public void deleteInventory(String sku, String tenantId) {
+        Inventory inventory = inventoryRepository.findBySkuAndTenantId(sku, tenantId)
+                .orElseThrow(() -> new InventoryNotFoundException("Inventory not found for SKU: " + sku));
+        inventoryRepository.delete(inventory);
+        log.info("Deleted inventory for SKU: {}", sku);
+    }
+
 
 }

@@ -41,6 +41,21 @@ public class AlertController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdAlert);
     }
 
+    @PostMapping("/test")
+    public ResponseEntity<AlertDTO> triggerTestAlert(@RequestBody Map<String, String> payload) {
+        String tenantId = payload.get("tenantId");
+        Alert alert = new Alert();
+        alert.setTenantId(tenantId);
+        alert.setAlertType(Alert.AlertType.THRESHOLD_BREACH);
+        alert.setSeverity(Alert.Severity.LOW);
+        alert.setSourceService("TEST_CLIENT");
+        alert.setSourceId("TC-001");
+        alert.setTitle("System Connection Test");
+        alert.setMessage("This is a manually triggered test alert to verify connectivity.");
+        alert.setStatus(Alert.AlertStatus.PENDING);
+        return ResponseEntity.status(HttpStatus.CREATED).body(alertService.createAlert(alert));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<AlertDTO> getAlert(
             @PathVariable Long id,

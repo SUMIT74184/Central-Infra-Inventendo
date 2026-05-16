@@ -45,4 +45,5 @@ public class WarehouseRequest {
     @NotBlank(message = "Status is required")
     private String status;
 
+    private Integer zonesCount;
 }

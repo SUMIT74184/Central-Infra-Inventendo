@@ -33,4 +33,10 @@ public interface WarehouseService {
     WarehouseDTO updateUtilization(String warehouseCode,String tenantId,Double utilizationChange);
 
     void deactivateWarehouse(Long id, String tenantId);
+
+    org.example.warehousemcs.Dto.ZoneDTO addZone(Long warehouseId, org.example.warehousemcs.Dto.ZoneDTO zoneDTO, String tenantId);
+
+    List<org.example.warehousemcs.Dto.ZoneDTO> getZones(Long warehouseId, String tenantId);
+
+    void deleteZone(Long zoneId, String tenantId);
 }

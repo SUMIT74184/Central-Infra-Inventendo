@@ -122,5 +122,29 @@ public class WarehouseController {
     }
 
 
+    @GetMapping("/{id}/zones")
+    public ResponseEntity<List<org.example.warehousemcs.Dto.ZoneDTO>> getZones(
+            @PathVariable Long id,
+            @RequestHeader("X-Tenant-Id") String tenantId
+    ) {
+        return ResponseEntity.ok(warehouseService.getZones(id, tenantId));
+    }
 
+    @PostMapping("/{id}/zones")
+    public ResponseEntity<org.example.warehousemcs.Dto.ZoneDTO> addZone(
+            @PathVariable Long id,
+            @RequestBody org.example.warehousemcs.Dto.ZoneDTO zoneDTO,
+            @RequestHeader("X-Tenant-Id") String tenantId
+    ) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(warehouseService.addZone(id, zoneDTO, tenantId));
+    }
+
+    @DeleteMapping("/zones/{zoneId}")
+    public ResponseEntity<Void> deleteZone(
+            @PathVariable Long zoneId,
+            @RequestHeader("X-Tenant-Id") String tenantId
+    ) {
+        warehouseService.deleteZone(zoneId, tenantId);
+        return ResponseEntity.noContent().build();
+    }
 }

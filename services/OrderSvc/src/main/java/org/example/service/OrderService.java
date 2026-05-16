@@ -58,6 +58,9 @@ public class OrderService {
                 .totalAmount(totalAmount)
                 .shippingAddress(request.getShippingAddress())
                 .billingAddress(request.getBillingAddress())
+                .warehouseId(request.getWarehouseId())
+                .priority(request.getPriority() != null ? request.getPriority() : "NORMAL")
+                .notes(request.getNotes())
                 .tenantId(tenantId)
                 .build();
 

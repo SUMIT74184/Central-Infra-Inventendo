@@ -26,6 +26,7 @@ public class WarehouseDTO {
     private Double capacity; // Changed from int to Double to match warehouse.getCapacity()
     private Double currentUtilization;
     private String status;
+    private Integer zonesCount;
     private String tenantId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
