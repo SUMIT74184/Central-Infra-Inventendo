@@ -65,6 +65,26 @@ sequenceDiagram
     B-->>API: 201 Created (with PDF URL)
 ```
 
+### Workflow C: SaaS Platform Usage Billing (Pay-As-You-Go)
+Used internally by InventoryOS to bill the **Tenants** for their monthly usage of the platform (e.g., number of active SKUs, warehouse capacity used, automated agent executions).
+
+```mermaid
+sequenceDiagram
+    participant CRON as Billing Cron
+    participant B as BillingService
+    participant T as TenantSvc / Metrics
+    participant DB as DB (PostgreSQL)
+    participant PDF as PDF Generator
+    
+    CRON->>B: Trigger Monthly Tenant Billing
+    B->>T: Fetch Tenant Usage (SKUs, Agents, Storage)
+    T-->>B: Usage Metrics (e.g., 500 SKUs, 1M API calls)
+    B->>B: Calculate Usage Costs
+    B->>DB: Save Tenant Invoice & InvoiceItems
+    B->>PDF: Generate Platform Invoice PDF
+    B->>Kafka: Publish `tenant-invoice-generated`
+```
+
 ---
 
 ## 3. Implementation Steps
@@ -87,6 +107,11 @@ sequenceDiagram
 ### Phase 4: Customer Notification
 1. **Kafka Event**: Publish an `invoice-generated` event containing the `invoiceId` and `pdfUrl`.
 2. **Notification Service**: Extend `AlertSvc` to dispatch an email with the PDF attached.
+
+### Phase 5: SaaS Platform Usage Billing (Pay-As-You-Go)
+1. **Usage Metrics Gathering**: Implement a scheduled cron job (e.g., end-of-month) to query `TenantSvc` for platform usage metrics (SKU count, warehouse utilization, agent invocations).
+2. **Dynamic Pricing Engine**: Apply a tiered pricing model (e.g., $0.05 per SKU over 1,000; $5 per active agent) to compute total charges.
+3. **Internal Invoice Generation**: Use the core `BillingService` logic to generate the tenant's monthly subscription invoice and deduct from their payment method on file.
 
 ---
 

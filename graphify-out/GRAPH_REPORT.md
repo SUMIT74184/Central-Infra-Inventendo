@@ -1,12 +1,12 @@
-# Graph Report - Project-root  (2026-05-15)
+# Graph Report - Project-root  (2026-05-16)
 
 ## Corpus Check
-- 256 files · ~150,702 words
+- 260 files · ~157,044 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 918 nodes · 988 edges · 108 communities detected
-- Extraction: 79% EXTRACTED · 21% INFERRED · 0% AMBIGUOUS · INFERRED: 207 edges (avg confidence: 0.8)
+- 943 nodes · 1022 edges · 108 communities detected
+- Extraction: 79% EXTRACTED · 21% INFERRED · 0% AMBIGUOUS · INFERRED: 218 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
@@ -33,7 +33,7 @@
 - [[_COMMUNITY_Community 20|Community 20]]
 - [[_COMMUNITY_Community 22|Community 22]]
 - [[_COMMUNITY_Community 23|Community 23]]
-- [[_COMMUNITY_Community 24|Community 24]]
+- [[_COMMUNITY_Community 27|Community 27]]
 - [[_COMMUNITY_Community 28|Community 28]]
 - [[_COMMUNITY_Community 29|Community 29]]
 - [[_COMMUNITY_Community 30|Community 30]]
@@ -47,7 +47,7 @@
 - [[_COMMUNITY_Community 38|Community 38]]
 - [[_COMMUNITY_Community 39|Community 39]]
 - [[_COMMUNITY_Community 40|Community 40]]
-- [[_COMMUNITY_Community 41|Community 41]]
+- [[_COMMUNITY_Community 44|Community 44]]
 - [[_COMMUNITY_Community 45|Community 45]]
 - [[_COMMUNITY_Community 46|Community 46]]
 - [[_COMMUNITY_Community 47|Community 47]]
@@ -71,7 +71,7 @@
 - [[_COMMUNITY_Community 65|Community 65]]
 - [[_COMMUNITY_Community 66|Community 66]]
 - [[_COMMUNITY_Community 67|Community 67]]
-- [[_COMMUNITY_Community 68|Community 68]]
+- [[_COMMUNITY_Community 71|Community 71]]
 - [[_COMMUNITY_Community 72|Community 72]]
 - [[_COMMUNITY_Community 73|Community 73]]
 - [[_COMMUNITY_Community 74|Community 74]]
@@ -97,7 +97,6 @@
 - [[_COMMUNITY_Community 94|Community 94]]
 - [[_COMMUNITY_Community 95|Community 95]]
 - [[_COMMUNITY_Community 96|Community 96]]
-- [[_COMMUNITY_Community 185|Community 185]]
 - [[_COMMUNITY_Community 186|Community 186]]
 - [[_COMMUNITY_Community 187|Community 187]]
 - [[_COMMUNITY_Community 188|Community 188]]
@@ -118,18 +117,19 @@
 - [[_COMMUNITY_Community 203|Community 203]]
 - [[_COMMUNITY_Community 204|Community 204]]
 - [[_COMMUNITY_Community 205|Community 205]]
+- [[_COMMUNITY_Community 206|Community 206]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `KafkaConfig` - 25 edges
-2. `WarehouseServiceImpl` - 20 edges
-3. `AlertController` - 15 edges
-4. `BillingService` - 14 edges
-5. `AlertService` - 14 edges
-6. `OrderService` - 14 edges
-7. `AuthController` - 13 edges
-8. `JwtUtil` - 13 edges
-9. `AuthService` - 13 edges
-10. `WarehouseService` - 13 edges
+2. `WarehouseServiceImpl` - 24 edges
+3. `AlertController` - 16 edges
+4. `WarehouseService` - 16 edges
+5. `WarehouseController` - 16 edges
+6. `BillingService` - 14 edges
+7. `AlertService` - 14 edges
+8. `OrderService` - 14 edges
+9. `InventoryController` - 13 edges
+10. `InventoryService` - 13 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `ProtectedRoute()` --calls--> `useAuth()`  [INFERRED]
@@ -146,8 +146,8 @@
 ## Communities
 
 ### Community 0 - "Community 0"
-Cohesion: 0.05
-Nodes (8): KafkaEventProducer, MovementConsumer, MovementService, StockMovementRepository, WarehouseConsumer, WarehouseController, WarehouseRepository, WarehouseServiceImpl
+Cohesion: 0.06
+Nodes (6): MovementConsumer, Warehouse, WarehouseConsumer, WarehouseController, WarehouseRepository, WarehouseServiceImpl
 
 ### Community 1 - "Community 1"
 Cohesion: 0.05
@@ -158,272 +158,272 @@ Cohesion: 0.07
 Nodes (7): AuthController, AuthService, JwtUtil, handlePasscodeSubmit(), OAuth2LoginSuccessHandler, handleSubmit(), TenantValidationResponse
 
 ### Community 3 - "Community 3"
-Cohesion: 0.06
-Nodes (5): Inventory, InventoryController, InventoryRepository, InventoryResponse, InventoryService
+Cohesion: 0.05
+Nodes (6): Inventory, InventoryController, InventoryRepository, InventoryResponse, InventoryService, ZoneRepository
 
 ### Community 4 - "Community 4"
 Cohesion: 0.07
 Nodes (6): InventoryClientFallback, OrderEvent, OrderEventProducer, OrderRepository, OrderService, TenantClient
 
 ### Community 5 - "Community 5"
+Cohesion: 0.07
+Nodes (6): AlertController, AlertEventConsumer, NotFound(), TenantContext, TenantFilter, TenantInterceptor
+
+### Community 6 - "Community 6"
 Cohesion: 0.08
 Nodes (5): CustomOAuth2User, CustomOAuth2UserService, JwtAuthenticationFilter, User, UserDetailsServiceImpl
 
-### Community 6 - "Community 6"
+### Community 7 - "Community 7"
+Cohesion: 0.09
+Nodes (4): CacheService, KafkaEventProducer, MovementService, StockMovementRepository
+
+### Community 8 - "Community 8"
 Cohesion: 0.1
 Nodes (3): AlertEventProducer, AlertRepository, AlertService
 
-### Community 7 - "Community 7"
+### Community 9 - "Community 9"
 Cohesion: 0.08
 Nodes (1): KafkaConfig
 
-### Community 8 - "Community 8"
-Cohesion: 0.12
-Nodes (3): AlertController, AlertEventConsumer, NotFound()
-
-### Community 9 - "Community 9"
+### Community 10 - "Community 10"
 Cohesion: 0.15
 Nodes (2): TenantRepository, TenantService
 
-### Community 10 - "Community 10"
+### Community 11 - "Community 11"
 Cohesion: 0.11
 Nodes (11): InventoryPage(), JwtFilter, Toaster(), addToRemoveQueue(), dispatch(), genId(), reducer(), toast() (+3 more)
 
-### Community 11 - "Community 11"
-Cohesion: 0.12
-Nodes (2): OrderConsumer, OrderController
-
 ### Community 12 - "Community 12"
-Cohesion: 0.14
+Cohesion: 0.12
 Nodes (1): WarehouseService
 
 ### Community 13 - "Community 13"
-Cohesion: 0.24
-Nodes (1): CacheService
+Cohesion: 0.12
+Nodes (2): OrderConsumer, OrderController
 
 ### Community 14 - "Community 14"
 Cohesion: 0.17
-Nodes (3): TenantContext, TenantFilter, TenantInterceptor
+Nodes (1): RedisConfig
 
 ### Community 15 - "Community 15"
 Cohesion: 0.17
-Nodes (1): RedisConfig
-
-### Community 16 - "Community 16"
-Cohesion: 0.17
 Nodes (2): AuthKafkaListener, UserRepository
 
-### Community 17 - "Community 17"
+### Community 16 - "Community 16"
 Cohesion: 0.18
 Nodes (1): GlobalExceptionHandler
 
-### Community 18 - "Community 18"
+### Community 17 - "Community 17"
 Cohesion: 0.2
 Nodes (1): TenantController
 
-### Community 19 - "Community 19"
+### Community 18 - "Community 18"
 Cohesion: 0.25
 Nodes (7): AuthDto, AuthResponse, LoginRequest, RefreshTokenRequest, Register, TokenValidationResponse, UpdateUserRequest
 
-### Community 20 - "Community 20"
+### Community 19 - "Community 19"
 Cohesion: 0.32
 Nodes (1): SecurityConfig
 
-### Community 22 - "Community 22"
+### Community 20 - "Community 20"
 Cohesion: 0.25
 Nodes (3): useAuth(), Index(), ProtectedRoute()
 
-### Community 23 - "Community 23"
+### Community 22 - "Community 22"
 Cohesion: 0.29
 Nodes (6): InitiatePaymentRequest, PaymentDto, PaymentInitiateResponse, PaymentResponse, RazorpayVerificationRequest, RefundRequest
 
-### Community 24 - "Community 24"
+### Community 23 - "Community 23"
 Cohesion: 0.29
 Nodes (1): MovementController
 
-### Community 28 - "Community 28"
+### Community 27 - "Community 27"
 Cohesion: 0.4
 Nodes (1): InventoryConsumer
 
-### Community 29 - "Community 29"
+### Community 28 - "Community 28"
 Cohesion: 0.4
 Nodes (2): Invoice, InvoiceItem
 
-### Community 30 - "Community 30"
+### Community 29 - "Community 29"
 Cohesion: 0.4
 Nodes (1): InventoryClient
 
-### Community 31 - "Community 31"
+### Community 30 - "Community 30"
 Cohesion: 0.5
 Nodes (3): handleExport(), exportData(), filterColumns()
 
-### Community 32 - "Community 32"
+### Community 31 - "Community 31"
 Cohesion: 0.5
 Nodes (1): InventoryReservedEvent
 
-### Community 33 - "Community 33"
+### Community 32 - "Community 32"
 Cohesion: 0.5
 Nodes (1): InventoryReleasedEvent
 
-### Community 34 - "Community 34"
+### Community 33 - "Community 33"
 Cohesion: 0.5
 Nodes (1): Alert
 
-### Community 35 - "Community 35"
+### Community 34 - "Community 34"
 Cohesion: 0.5
 Nodes (1): AlertRule
 
-### Community 36 - "Community 36"
+### Community 35 - "Community 35"
 Cohesion: 0.5
 Nodes (1): AlertRuleRepository
 
-### Community 37 - "Community 37"
+### Community 36 - "Community 36"
 Cohesion: 0.5
 Nodes (1): TenantNotFoundException
 
-### Community 38 - "Community 38"
+### Community 37 - "Community 37"
 Cohesion: 0.67
 Nodes (1): KafkaProducerConfig
 
-### Community 39 - "Community 39"
+### Community 38 - "Community 38"
 Cohesion: 0.5
 Nodes (1): WebConfig
 
-### Community 40 - "Community 40"
+### Community 39 - "Community 39"
 Cohesion: 0.5
 Nodes (1): Order
 
-### Community 41 - "Community 41"
+### Community 40 - "Community 40"
 Cohesion: 0.67
 Nodes (2): handleSubmit(), sendMessage()
 
-### Community 45 - "Community 45"
+### Community 44 - "Community 44"
 Cohesion: 0.67
 Nodes (1): ApiGatewayApplication
 
-### Community 46 - "Community 46"
+### Community 45 - "Community 45"
 Cohesion: 0.67
 Nodes (1): ApiGatewayApplicationTests
 
-### Community 47 - "Community 47"
+### Community 46 - "Community 46"
 Cohesion: 0.67
 Nodes (1): InventorySvc
 
-### Community 48 - "Community 48"
+### Community 47 - "Community 47"
 Cohesion: 0.67
 Nodes (1): InsufficientStockException
 
-### Community 49 - "Community 49"
+### Community 48 - "Community 48"
 Cohesion: 0.67
 Nodes (1): InventoryNotFoundException
 
-### Community 50 - "Community 50"
+### Community 49 - "Community 49"
 Cohesion: 0.67
 Nodes (1): Microservice1ApplicationTests
 
-### Community 51 - "Community 51"
+### Community 50 - "Community 50"
 Cohesion: 0.67
 Nodes (1): BillingPaymentApplication
 
-### Community 52 - "Community 52"
+### Community 51 - "Community 51"
 Cohesion: 0.67
 Nodes (1): BillingPaymentApplicationTests
 
-### Community 53 - "Community 53"
+### Community 52 - "Community 52"
 Cohesion: 0.67
 Nodes (1): AlertSvcApplication
 
-### Community 54 - "Community 54"
+### Community 53 - "Community 53"
 Cohesion: 0.67
 Nodes (1): AlertSvcApplicationTests
 
-### Community 55 - "Community 55"
+### Community 54 - "Community 54"
 Cohesion: 0.67
 Nodes (1): AuthApplication
 
-### Community 56 - "Community 56"
+### Community 55 - "Community 55"
 Cohesion: 0.67
 Nodes (1): AuthApplicationTests
 
-### Community 57 - "Community 57"
+### Community 56 - "Community 56"
 Cohesion: 0.67
 Nodes (1): WareHousemcsApplication
 
-### Community 58 - "Community 58"
+### Community 57 - "Community 57"
 Cohesion: 0.67
 Nodes (1): WareHousemcsApplicationTests
 
-### Community 59 - "Community 59"
+### Community 58 - "Community 58"
 Cohesion: 0.67
 Nodes (1): MovementMcsApplication
 
-### Community 60 - "Community 60"
+### Community 59 - "Community 59"
 Cohesion: 0.67
 Nodes (1): DuplicateRequestException
 
-### Community 61 - "Community 61"
+### Community 60 - "Community 60"
 Cohesion: 0.67
 Nodes (1): MovementMcsApplicationTests
 
-### Community 62 - "Community 62"
+### Community 61 - "Community 61"
 Cohesion: 0.67
 Nodes (1): TenantMvcApplication
 
-### Community 63 - "Community 63"
+### Community 62 - "Community 62"
 Cohesion: 0.67
 Nodes (1): DuplicateTenantException
 
-### Community 64 - "Community 64"
+### Community 63 - "Community 63"
 Cohesion: 0.67
 Nodes (1): TenantMvcApplicationTests
 
-### Community 65 - "Community 65"
+### Community 64 - "Community 64"
 Cohesion: 0.67
 Nodes (1): OrderServiceApplication
 
-### Community 66 - "Community 66"
+### Community 65 - "Community 65"
 Cohesion: 0.67
 Nodes (1): TenantClientFallback
 
-### Community 67 - "Community 67"
+### Community 66 - "Community 66"
 Cohesion: 0.67
 Nodes (1): OrderNotFoundException
 
-### Community 68 - "Community 68"
+### Community 67 - "Community 67"
 Cohesion: 0.67
 Nodes (1): InsufficientInventoryException
 
-### Community 72 - "Community 72"
+### Community 71 - "Community 71"
 Cohesion: 1.0
 Nodes (1): OrderCreatedEvent
 
-### Community 73 - "Community 73"
+### Community 72 - "Community 72"
 Cohesion: 1.0
 Nodes (1): InventoryRequest
 
-### Community 74 - "Community 74"
+### Community 73 - "Community 73"
 Cohesion: 1.0
 Nodes (1): Payment
 
-### Community 75 - "Community 75"
+### Community 74 - "Community 74"
 Cohesion: 1.0
 Nodes (1): CreateAlertRequest
 
-### Community 76 - "Community 76"
+### Community 75 - "Community 75"
 Cohesion: 1.0
 Nodes (1): AlertDTO
 
-### Community 77 - "Community 77"
+### Community 76 - "Community 76"
 Cohesion: 1.0
 Nodes (1): AlertEventDTO
 
-### Community 78 - "Community 78"
+### Community 77 - "Community 77"
 Cohesion: 1.0
 Nodes (1): StockMovedEvent
 
-### Community 79 - "Community 79"
+### Community 78 - "Community 78"
 Cohesion: 1.0
 Nodes (1): OrderCancelledEvent
+
+### Community 79 - "Community 79"
+Cohesion: 1.0
+Nodes (1): ZoneDTO
 
 ### Community 80 - "Community 80"
 Cohesion: 1.0
@@ -439,7 +439,7 @@ Nodes (1): WarehouseDTO
 
 ### Community 83 - "Community 83"
 Cohesion: 1.0
-Nodes (1): Warehouse
+Nodes (1): Zone
 
 ### Community 84 - "Community 84"
 Cohesion: 1.0
@@ -493,204 +493,204 @@ Nodes (1): OrderResponse
 Cohesion: 1.0
 Nodes (1): OrderItem
 
-### Community 185 - "Community 185"
+### Community 186 - "Community 186"
 Cohesion: 1.0
 Nodes (1): analysis-Inv (Project-root)
 
-### Community 186 - "Community 186"
+### Community 187 - "Community 187"
 Cohesion: 1.0
 Nodes (1): Readme (Project-root)
 
-### Community 187 - "Community 187"
+### Community 188 - "Community 188"
 Cohesion: 1.0
 Nodes (1): HELP (api-gateway)
 
-### Community 188 - "Community 188"
+### Community 189 - "Community 189"
 Cohesion: 1.0
 Nodes (1): GRAPH_REPORT (graphify-out)
 
-### Community 189 - "Community 189"
+### Community 190 - "Community 190"
 Cohesion: 1.0
 Nodes (1): ProjectStructure (Microservice1)
 
-### Community 190 - "Community 190"
+### Community 191 - "Community 191"
 Cohesion: 1.0
 Nodes (1): Readme (Microservice1)
 
-### Community 191 - "Community 191"
+### Community 192 - "Community 192"
 Cohesion: 1.0
 Nodes (1): HELP (Microservice1)
 
-### Community 192 - "Community 192"
+### Community 193 - "Community 193"
 Cohesion: 1.0
 Nodes (1): HELP (Billing-Payment)
 
-### Community 193 - "Community 193"
+### Community 194 - "Community 194"
 Cohesion: 1.0
 Nodes (1): Readme (AlertSvc)
 
-### Community 194 - "Community 194"
+### Community 195 - "Community 195"
 Cohesion: 1.0
 Nodes (1): HELP (AlertSvc)
 
-### Community 195 - "Community 195"
+### Community 196 - "Community 196"
 Cohesion: 1.0
 Nodes (1): Readme (Auth)
 
-### Community 196 - "Community 196"
+### Community 197 - "Community 197"
 Cohesion: 1.0
 Nodes (1): HELP (Auth)
 
-### Community 197 - "Community 197"
+### Community 198 - "Community 198"
 Cohesion: 1.0
 Nodes (1): Readme (WareHousemcs)
 
-### Community 198 - "Community 198"
+### Community 199 - "Community 199"
 Cohesion: 1.0
 Nodes (1): HELP (WareHousemcs)
 
-### Community 199 - "Community 199"
+### Community 200 - "Community 200"
 Cohesion: 1.0
 Nodes (1): Readme (MovementMcs)
 
-### Community 200 - "Community 200"
+### Community 201 - "Community 201"
 Cohesion: 1.0
 Nodes (1): HELP (MovementMcs)
 
-### Community 201 - "Community 201"
+### Community 202 - "Community 202"
 Cohesion: 1.0
 Nodes (1): README (TenantMvc)
 
-### Community 202 - "Community 202"
+### Community 203 - "Community 203"
 Cohesion: 1.0
 Nodes (1): HELP (TenantMvc)
 
-### Community 203 - "Community 203"
+### Community 204 - "Community 204"
 Cohesion: 1.0
 Nodes (1): Readme (OrderSvc)
 
-### Community 204 - "Community 204"
+### Community 205 - "Community 205"
 Cohesion: 1.0
 Nodes (1): README (cloudspan-inventory)
 
-### Community 205 - "Community 205"
+### Community 206 - "Community 206"
 Cohesion: 1.0
 Nodes (1): index (cloudspan-inventory)
 
 ## Knowledge Gaps
-- **61 isolated node(s):** `OrderCreatedEvent`, `InventoryRequest`, `PaymentDto`, `InitiatePaymentRequest`, `PaymentInitiateResponse` (+56 more)
+- **62 isolated node(s):** `OrderCreatedEvent`, `InventoryRequest`, `PaymentDto`, `InitiatePaymentRequest`, `PaymentInitiateResponse` (+57 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **Thin community `Community 7`** (26 nodes): `KafkaConfig.java`, `KafkaConfig.java`, `KafkaConfig.java`, `KafkaConfig.java`, `KafkaConfig.java`, `KafkaConfig.java`, `KafkaConfig.java`, `KafkaConfig`, `.alertNotificationTopic()`, `.consumerFactory()`, `.inventoryCancelledTopic()`, `.inventoryCreatedTopic()`, `.inventoryReleasedTopic()`, `.inventoryReservedTopic()`, `.inventoryUpdatedTopic()`, `.kafkaListenerContainerFactory()`, `.kafkaTemplate()`, `.lowStockAlertTopic()`, `.objectMapper()`, `.orderCancelledTopic()`, `.orderCreatedTopic()`, `.paymentFailedTopic()`, `.paymentRefundedTopic()`, `.producerFactory()`, `.warehouseAssignedTopic()`, `.warehouseEventsTopic()`
+- **Thin community `Community 9`** (26 nodes): `KafkaConfig.java`, `KafkaConfig.java`, `KafkaConfig.java`, `KafkaConfig.java`, `KafkaConfig.java`, `KafkaConfig.java`, `KafkaConfig.java`, `KafkaConfig`, `.alertNotificationTopic()`, `.consumerFactory()`, `.inventoryCancelledTopic()`, `.inventoryCreatedTopic()`, `.inventoryReleasedTopic()`, `.inventoryReservedTopic()`, `.inventoryUpdatedTopic()`, `.kafkaListenerContainerFactory()`, `.kafkaTemplate()`, `.lowStockAlertTopic()`, `.objectMapper()`, `.orderCancelledTopic()`, `.orderCreatedTopic()`, `.paymentFailedTopic()`, `.paymentRefundedTopic()`, `.producerFactory()`, `.warehouseAssignedTopic()`, `.warehouseEventsTopic()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 9`** (22 nodes): `TenantRepository.java`, `TenantService.java`, `TenantRepository`, `.existsByContactEmail()`, `.existsByTenantCode()`, `.findByStatus()`, `.findBySubscriptionTier()`, `.findByTenantCode()`, `.findExpiredSubscriptions()`, `.findExpiredTrials()`, `TenantService`, `.createTenant()`, `.deleteTenant()`, `.getAllTenants()`, `.getTenantByCode()`, `.getTenantById()`, `.mapToDto()`, `.mapToEntity()`, `.publishTenantEvent()`, `.updateTenant()`, `.updateTenantStatus()`, `.upgradeTenantSubscription()`
+- **Thin community `Community 10`** (22 nodes): `TenantRepository.java`, `TenantService.java`, `TenantRepository`, `.existsByContactEmail()`, `.existsByTenantCode()`, `.findByStatus()`, `.findBySubscriptionTier()`, `.findByTenantCode()`, `.findExpiredSubscriptions()`, `.findExpiredTrials()`, `TenantService`, `.createTenant()`, `.deleteTenant()`, `.getAllTenants()`, `.getTenantByCode()`, `.getTenantById()`, `.mapToDto()`, `.mapToEntity()`, `.publishTenantEvent()`, `.updateTenant()`, `.updateTenantStatus()`, `.upgradeTenantSubscription()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 11`** (16 nodes): `OrderController.java`, `OrderConsumer.java`, `OrderConsumer`, `.handleInventoryReleased()`, `.handleInventoryReserved()`, `.handlePaymentCompleted()`, `.handlePaymentFailed()`, `.handleWarehouseAssigned()`, `OrderController`, `.cancelOrder()`, `.createOrder()`, `.getAllOrders()`, `.getOrderById()`, `.getOrderByNumber()`, `.getOrdersByCustomerId()`, `.updateOrderStatus()`
+- **Thin community `Community 12`** (17 nodes): `WarehouseService.java`, `WarehouseService`, `.addZone()`, `.createWarehouse()`, `.deactivateWarehouse()`, `.deleteWarehouse()`, `.deleteZone()`, `.getActiveWarehouses()`, `.getAllWarehouses()`, `.getAvailableWarehouses()`, `.getWarehouseByCode()`, `.getWarehouseById()`, `.getWarehouseByStatus()`, `.getWarehousesByLocation()`, `.getZones()`, `.updateUtilization()`, `.updateWarehouse()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 12`** (14 nodes): `WarehouseService.java`, `WarehouseService`, `.createWarehouse()`, `.deactivateWarehouse()`, `.deleteWarehouse()`, `.getActiveWarehouses()`, `.getAllWarehouses()`, `.getAvailableWarehouses()`, `.getWarehouseByCode()`, `.getWarehouseById()`, `.getWarehouseByStatus()`, `.getWarehousesByLocation()`, `.updateUtilization()`, `.updateWarehouse()`
+- **Thin community `Community 13`** (16 nodes): `OrderController.java`, `OrderConsumer.java`, `OrderConsumer`, `.handleInventoryReleased()`, `.handleInventoryReserved()`, `.handlePaymentCompleted()`, `.handlePaymentFailed()`, `.handleWarehouseAssigned()`, `OrderController`, `.cancelOrder()`, `.createOrder()`, `.getAllOrders()`, `.getOrderById()`, `.getOrderByNumber()`, `.getOrdersByCustomerId()`, `.updateOrderStatus()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 13`** (13 nodes): `CacheService`, `.buildMovementKey()`, `.buildProductMovementsKey()`, `.cacheMovement()`, `.cacheProductMovements()`, `.CacheService()`, `.getMovementFromCache()`, `.getProductMovementsFromCache()`, `.invalidateMovementCache()`, `.invalidateProductMovementsCache()`, `CacheService.java`, `.getMovementsByProduct()`, `.findByTenantIdAndProductIdOrderByCreatedAtDesc()`
+- **Thin community `Community 14`** (12 nodes): `RedisConfig.java`, `RedisConfig.java`, `RedisConfig.java`, `RedisConfig.java`, `RedisConfig.java`, `RedisConfig.java`, `RedisConfig.java`, `RedisConfig.java`, `RedisConfig`, `.cacheManager()`, `.redisConnectionFactory()`, `.redisTemplate()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 15`** (12 nodes): `RedisConfig.java`, `RedisConfig.java`, `RedisConfig.java`, `RedisConfig.java`, `RedisConfig.java`, `RedisConfig.java`, `RedisConfig.java`, `RedisConfig.java`, `RedisConfig`, `.cacheManager()`, `.redisConnectionFactory()`, `.redisTemplate()`
+- **Thin community `Community 15`** (12 nodes): `AuthKafkaListener`, `.handlePasswordResetRequest()`, `.handleTenantCreated()`, `AuthKafkaListener.java`, `UserRepository.java`, `UserRepository`, `.countByTenantId()`, `.existsByEmail()`, `.findActiveUsersByTenant()`, `.findByEmailAndTenantId()`, `.findByOauth2IdAndProvider()`, `.findByTenantId()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 16`** (12 nodes): `AuthKafkaListener`, `.handlePasswordResetRequest()`, `.handleTenantCreated()`, `AuthKafkaListener.java`, `UserRepository.java`, `UserRepository`, `.countByTenantId()`, `.existsByEmail()`, `.findActiveUsersByTenant()`, `.findByEmailAndTenantId()`, `.findByOauth2IdAndProvider()`, `.findByTenantId()`
+- **Thin community `Community 16`** (11 nodes): `GlobalExceptionHandler`, `.handleDuplicateRequestException()`, `.handleDuplicateTenantException()`, `.handleGeneralException()`, `.handleGlobalException()`, `.handleTenantNotFoundException()`, `.handleValidationException()`, `.handleValidationExceptions()`, `GlobalExceptionHandler.java`, `GlobalExceptionHandler.java`, `GlobalExceptionHandler.java`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 17`** (11 nodes): `GlobalExceptionHandler`, `.handleDuplicateRequestException()`, `.handleDuplicateTenantException()`, `.handleGeneralException()`, `.handleGlobalException()`, `.handleTenantNotFoundException()`, `.handleValidationException()`, `.handleValidationExceptions()`, `GlobalExceptionHandler.java`, `GlobalExceptionHandler.java`, `GlobalExceptionHandler.java`
+- **Thin community `Community 17`** (10 nodes): `TenantController.java`, `TenantController`, `.createTenant()`, `.deleteTenant()`, `.getTenantByCode()`, `.getTenantById()`, `.getTenantsByStatus()`, `.updateTenant()`, `.updateTenantStatus()`, `.upgradeTenantSubscription()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 18`** (10 nodes): `TenantController.java`, `TenantController`, `.createTenant()`, `.deleteTenant()`, `.getTenantByCode()`, `.getTenantById()`, `.getTenantsByStatus()`, `.updateTenant()`, `.updateTenantStatus()`, `.upgradeTenantSubscription()`
+- **Thin community `Community 19`** (8 nodes): `SecurityConfig.java`, `SecurityConfig.java`, `SecurityConfig`, `.authenticationManager()`, `.authenticationProvider()`, `.corsConfigurationSource()`, `.filterChain()`, `.securityFilterChain()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 20`** (8 nodes): `SecurityConfig.java`, `SecurityConfig.java`, `SecurityConfig`, `.authenticationManager()`, `.authenticationProvider()`, `.corsConfigurationSource()`, `.filterChain()`, `.securityFilterChain()`
+- **Thin community `Community 23`** (7 nodes): `MovementController.java`, `MovementController`, `.createMovement()`, `.getAllMovements()`, `.getMovementsByDateRange()`, `.getMovementsByProduct()`, `.getMovementsByWarehouse()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 24`** (7 nodes): `MovementController.java`, `MovementController`, `.createMovement()`, `.getAllMovements()`, `.getMovementsByDateRange()`, `.getMovementsByProduct()`, `.getMovementsByWarehouse()`
+- **Thin community `Community 27`** (5 nodes): `InventoryConsumer.java`, `InventoryConsumer`, `.handleOrderCancelled()`, `.handlePaymentFailed()`, `.handleStockMoved()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 28`** (5 nodes): `InventoryConsumer.java`, `InventoryConsumer`, `.handleOrderCancelled()`, `.handlePaymentFailed()`, `.handleStockMoved()`
+- **Thin community `Community 28`** (5 nodes): `Invoice.java`, `Invoice`, `.onCreate()`, `.onUpdate()`, `InvoiceItem`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 29`** (5 nodes): `Invoice.java`, `Invoice`, `.onCreate()`, `.onUpdate()`, `InvoiceItem`
+- **Thin community `Community 29`** (5 nodes): `InventoryClient.java`, `InventoryClient`, `.getInventory()`, `.releaseInventory()`, `.reserveInventory()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 30`** (5 nodes): `InventoryClient.java`, `InventoryClient`, `.getInventory()`, `.releaseInventory()`, `.reserveInventory()`
+- **Thin community `Community 31`** (4 nodes): `InventoryReservedEvent.java`, `InventoryReservedEvent.java`, `InventoryReservedEvent.java`, `InventoryReservedEvent`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 32`** (4 nodes): `InventoryReservedEvent.java`, `InventoryReservedEvent.java`, `InventoryReservedEvent.java`, `InventoryReservedEvent`
+- **Thin community `Community 32`** (4 nodes): `InventoryReleasedEvent.java`, `InventoryReleasedEvent.java`, `InventoryReleasedEvent.java`, `InventoryReleasedEvent`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 33`** (4 nodes): `InventoryReleasedEvent.java`, `InventoryReleasedEvent.java`, `InventoryReleasedEvent.java`, `InventoryReleasedEvent`
+- **Thin community `Community 33`** (4 nodes): `Alert`, `.onCreate()`, `.onUpdate()`, `Alert.java`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 34`** (4 nodes): `Alert`, `.onCreate()`, `.onUpdate()`, `Alert.java`
+- **Thin community `Community 34`** (4 nodes): `AlertRule`, `.onCreate()`, `.onUpdate()`, `AlertRule.java`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 35`** (4 nodes): `AlertRule`, `.onCreate()`, `.onUpdate()`, `AlertRule.java`
+- **Thin community `Community 35`** (4 nodes): `AlertRuleRepository`, `.findByTenantId()`, `.findByTenantIdAndEnabled()`, `AlertRuleRepository.java`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 36`** (4 nodes): `AlertRuleRepository`, `.findByTenantId()`, `.findByTenantIdAndEnabled()`, `AlertRuleRepository.java`
+- **Thin community `Community 36`** (4 nodes): `TenantNotFoundException.java`, `TenantNotFoundException.java`, `TenantNotFoundException`, `.TenantNotFoundException()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 37`** (4 nodes): `TenantNotFoundException.java`, `TenantNotFoundException.java`, `TenantNotFoundException`, `.TenantNotFoundException()`
+- **Thin community `Community 37`** (4 nodes): `KafkaProducerConfig.java`, `KafkaProducerConfig`, `.kafkaTemplate()`, `.producerFactory()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 38`** (4 nodes): `KafkaProducerConfig.java`, `KafkaProducerConfig`, `.kafkaTemplate()`, `.producerFactory()`
+- **Thin community `Community 38`** (4 nodes): `WebConfig.java`, `WebConfig`, `.addInterceptors()`, `.WebConfig()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 39`** (4 nodes): `WebConfig.java`, `WebConfig`, `.addInterceptors()`, `.WebConfig()`
+- **Thin community `Community 39`** (4 nodes): `Order.java`, `Order`, `.onCreate()`, `.onUpdate()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 40`** (4 nodes): `Order.java`, `Order`, `.onCreate()`, `.onUpdate()`
+- **Thin community `Community 40`** (4 nodes): `getBotResponse()`, `handleSubmit()`, `sendMessage()`, `AIChatWidget.tsx`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 41`** (4 nodes): `getBotResponse()`, `handleSubmit()`, `sendMessage()`, `AIChatWidget.tsx`
+- **Thin community `Community 44`** (3 nodes): `ApiGatewayApplication`, `.main()`, `ApiGatewayApplication.java`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 45`** (3 nodes): `ApiGatewayApplication`, `.main()`, `ApiGatewayApplication.java`
+- **Thin community `Community 45`** (3 nodes): `ApiGatewayApplicationTests`, `.contextLoads()`, `ApiGatewayApplicationTests.java`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 46`** (3 nodes): `ApiGatewayApplicationTests`, `.contextLoads()`, `ApiGatewayApplicationTests.java`
+- **Thin community `Community 46`** (3 nodes): `InventorySvc.java`, `InventorySvc`, `.main()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 47`** (3 nodes): `InventorySvc.java`, `InventorySvc`, `.main()`
+- **Thin community `Community 47`** (3 nodes): `InsufficientStockException.java`, `InsufficientStockException`, `.InsufficientStockException()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 48`** (3 nodes): `InsufficientStockException.java`, `InsufficientStockException`, `.InsufficientStockException()`
+- **Thin community `Community 48`** (3 nodes): `InventoryNotFoundException.java`, `InventoryNotFoundException`, `.InventoryNotFoundException()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 49`** (3 nodes): `InventoryNotFoundException.java`, `InventoryNotFoundException`, `.InventoryNotFoundException()`
+- **Thin community `Community 49`** (3 nodes): `Microservice1ApplicationTests.java`, `Microservice1ApplicationTests`, `.contextLoads()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 50`** (3 nodes): `Microservice1ApplicationTests.java`, `Microservice1ApplicationTests`, `.contextLoads()`
+- **Thin community `Community 50`** (3 nodes): `BillingPaymentApplication`, `.main()`, `BillingPaymentApplication.java`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 51`** (3 nodes): `BillingPaymentApplication`, `.main()`, `BillingPaymentApplication.java`
+- **Thin community `Community 51`** (3 nodes): `BillingPaymentApplicationTests`, `.contextLoads()`, `BillingPaymentApplicationTests.java`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 52`** (3 nodes): `BillingPaymentApplicationTests`, `.contextLoads()`, `BillingPaymentApplicationTests.java`
+- **Thin community `Community 52`** (3 nodes): `AlertSvcApplication`, `.main()`, `AlertSvcApplication.java`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 53`** (3 nodes): `AlertSvcApplication`, `.main()`, `AlertSvcApplication.java`
+- **Thin community `Community 53`** (3 nodes): `AlertSvcApplicationTests`, `.contextLoads()`, `AlertSvcApplicationTests.java`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 54`** (3 nodes): `AlertSvcApplicationTests`, `.contextLoads()`, `AlertSvcApplicationTests.java`
+- **Thin community `Community 54`** (3 nodes): `AuthApplication`, `.main()`, `AuthApplication.java`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 55`** (3 nodes): `AuthApplication`, `.main()`, `AuthApplication.java`
+- **Thin community `Community 55`** (3 nodes): `AuthApplicationTests`, `.contextLoads()`, `AuthApplicationTests.java`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 56`** (3 nodes): `AuthApplicationTests`, `.contextLoads()`, `AuthApplicationTests.java`
+- **Thin community `Community 56`** (3 nodes): `WareHousemcsApplication.java`, `WareHousemcsApplication`, `.main()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 57`** (3 nodes): `WareHousemcsApplication.java`, `WareHousemcsApplication`, `.main()`
+- **Thin community `Community 57`** (3 nodes): `WareHousemcsApplicationTests.java`, `WareHousemcsApplicationTests`, `.contextLoads()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 58`** (3 nodes): `WareHousemcsApplicationTests.java`, `WareHousemcsApplicationTests`, `.contextLoads()`
+- **Thin community `Community 58`** (3 nodes): `MovementMcsApplication.java`, `MovementMcsApplication`, `.main()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 59`** (3 nodes): `MovementMcsApplication.java`, `MovementMcsApplication`, `.main()`
+- **Thin community `Community 59`** (3 nodes): `DuplicateRequestException`, `.DuplicateRequestException()`, `DuplicateRequestException.java`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 60`** (3 nodes): `DuplicateRequestException`, `.DuplicateRequestException()`, `DuplicateRequestException.java`
+- **Thin community `Community 60`** (3 nodes): `MovementMcsApplicationTests.java`, `MovementMcsApplicationTests`, `.contextLoads()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 61`** (3 nodes): `MovementMcsApplicationTests.java`, `MovementMcsApplicationTests`, `.contextLoads()`
+- **Thin community `Community 61`** (3 nodes): `TenantMvcApplication.java`, `TenantMvcApplication`, `.main()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 62`** (3 nodes): `TenantMvcApplication.java`, `TenantMvcApplication`, `.main()`
+- **Thin community `Community 62`** (3 nodes): `DuplicateTenantException`, `.DuplicateTenantException()`, `DuplicateTenantException.java`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 63`** (3 nodes): `DuplicateTenantException`, `.DuplicateTenantException()`, `DuplicateTenantException.java`
+- **Thin community `Community 63`** (3 nodes): `TenantMvcApplicationTests.java`, `TenantMvcApplicationTests`, `.contextLoads()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 64`** (3 nodes): `TenantMvcApplicationTests.java`, `TenantMvcApplicationTests`, `.contextLoads()`
+- **Thin community `Community 64`** (3 nodes): `OrderServiceApplication.java`, `OrderServiceApplication`, `.main()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 65`** (3 nodes): `OrderServiceApplication.java`, `OrderServiceApplication`, `.main()`
+- **Thin community `Community 65`** (3 nodes): `TenantClientFallback.java`, `TenantClientFallback`, `.validateTenant()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 66`** (3 nodes): `TenantClientFallback.java`, `TenantClientFallback`, `.validateTenant()`
+- **Thin community `Community 66`** (3 nodes): `OrderNotFoundException.java`, `OrderNotFoundException`, `.OrderNotFoundException()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 67`** (3 nodes): `OrderNotFoundException.java`, `OrderNotFoundException`, `.OrderNotFoundException()`
+- **Thin community `Community 67`** (3 nodes): `InsufficientInventoryException.java`, `InsufficientInventoryException`, `.InsufficientInventoryException()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 68`** (3 nodes): `InsufficientInventoryException.java`, `InsufficientInventoryException`, `.InsufficientInventoryException()`
+- **Thin community `Community 71`** (2 nodes): `OrderCreatedEvent.java`, `OrderCreatedEvent`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 72`** (2 nodes): `OrderCreatedEvent.java`, `OrderCreatedEvent`
+- **Thin community `Community 72`** (2 nodes): `InventoryRequest.java`, `InventoryRequest`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 73`** (2 nodes): `InventoryRequest.java`, `InventoryRequest`
+- **Thin community `Community 73`** (2 nodes): `Payment.java`, `Payment`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 74`** (2 nodes): `Payment.java`, `Payment`
+- **Thin community `Community 74`** (2 nodes): `CreateAlertRequest`, `CreateAlertRequest.java`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 75`** (2 nodes): `CreateAlertRequest`, `CreateAlertRequest.java`
+- **Thin community `Community 75`** (2 nodes): `AlertDTO`, `AlertDTO.java`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 76`** (2 nodes): `AlertDTO`, `AlertDTO.java`
+- **Thin community `Community 76`** (2 nodes): `AlertEventDTO`, `AlertEventDTO.java`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 77`** (2 nodes): `AlertEventDTO`, `AlertEventDTO.java`
+- **Thin community `Community 77`** (2 nodes): `StockMovedEvent.java`, `StockMovedEvent`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 78`** (2 nodes): `StockMovedEvent.java`, `StockMovedEvent`
+- **Thin community `Community 78`** (2 nodes): `OrderCancelledEvent.java`, `OrderCancelledEvent`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 79`** (2 nodes): `OrderCancelledEvent.java`, `OrderCancelledEvent`
+- **Thin community `Community 79`** (2 nodes): `ZoneDTO.java`, `ZoneDTO`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 - **Thin community `Community 80`** (2 nodes): `WarehouseAssignedEvent.java`, `WarehouseAssignedEvent`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
@@ -698,7 +698,7 @@ Nodes (1): index (cloudspan-inventory)
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 - **Thin community `Community 82`** (2 nodes): `WarehouseDTO.java`, `WarehouseDTO`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 83`** (2 nodes): `Warehouse.java`, `Warehouse`
+- **Thin community `Community 83`** (2 nodes): `Zone.java`, `Zone`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 - **Thin community `Community 84`** (2 nodes): `MovementResponse.java`, `MovementResponse`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
@@ -726,63 +726,63 @@ Nodes (1): index (cloudspan-inventory)
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 - **Thin community `Community 96`** (2 nodes): `OrderItem.java`, `OrderItem`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 185`** (1 nodes): `analysis-Inv (Project-root)`
+- **Thin community `Community 186`** (1 nodes): `analysis-Inv (Project-root)`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 186`** (1 nodes): `Readme (Project-root)`
+- **Thin community `Community 187`** (1 nodes): `Readme (Project-root)`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 187`** (1 nodes): `HELP (api-gateway)`
+- **Thin community `Community 188`** (1 nodes): `HELP (api-gateway)`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 188`** (1 nodes): `GRAPH_REPORT (graphify-out)`
+- **Thin community `Community 189`** (1 nodes): `GRAPH_REPORT (graphify-out)`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 189`** (1 nodes): `ProjectStructure (Microservice1)`
+- **Thin community `Community 190`** (1 nodes): `ProjectStructure (Microservice1)`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 190`** (1 nodes): `Readme (Microservice1)`
+- **Thin community `Community 191`** (1 nodes): `Readme (Microservice1)`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 191`** (1 nodes): `HELP (Microservice1)`
+- **Thin community `Community 192`** (1 nodes): `HELP (Microservice1)`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 192`** (1 nodes): `HELP (Billing-Payment)`
+- **Thin community `Community 193`** (1 nodes): `HELP (Billing-Payment)`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 193`** (1 nodes): `Readme (AlertSvc)`
+- **Thin community `Community 194`** (1 nodes): `Readme (AlertSvc)`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 194`** (1 nodes): `HELP (AlertSvc)`
+- **Thin community `Community 195`** (1 nodes): `HELP (AlertSvc)`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 195`** (1 nodes): `Readme (Auth)`
+- **Thin community `Community 196`** (1 nodes): `Readme (Auth)`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 196`** (1 nodes): `HELP (Auth)`
+- **Thin community `Community 197`** (1 nodes): `HELP (Auth)`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 197`** (1 nodes): `Readme (WareHousemcs)`
+- **Thin community `Community 198`** (1 nodes): `Readme (WareHousemcs)`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 198`** (1 nodes): `HELP (WareHousemcs)`
+- **Thin community `Community 199`** (1 nodes): `HELP (WareHousemcs)`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 199`** (1 nodes): `Readme (MovementMcs)`
+- **Thin community `Community 200`** (1 nodes): `Readme (MovementMcs)`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 200`** (1 nodes): `HELP (MovementMcs)`
+- **Thin community `Community 201`** (1 nodes): `HELP (MovementMcs)`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 201`** (1 nodes): `README (TenantMvc)`
+- **Thin community `Community 202`** (1 nodes): `README (TenantMvc)`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 202`** (1 nodes): `HELP (TenantMvc)`
+- **Thin community `Community 203`** (1 nodes): `HELP (TenantMvc)`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 203`** (1 nodes): `Readme (OrderSvc)`
+- **Thin community `Community 204`** (1 nodes): `Readme (OrderSvc)`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 204`** (1 nodes): `README (cloudspan-inventory)`
+- **Thin community `Community 205`** (1 nodes): `README (cloudspan-inventory)`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 205`** (1 nodes): `index (cloudspan-inventory)`
+- **Thin community `Community 206`** (1 nodes): `index (cloudspan-inventory)`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `InventoryService` connect `Community 3` to `Community 0`?**
-  _High betweenness centrality (0.028) - this node is a cross-community bridge._
-- **Why does `TenantService` connect `Community 9` to `Community 4`?**
+- **Why does `InventoryService` connect `Community 3` to `Community 4`, `Community 5`?**
+  _High betweenness centrality (0.031) - this node is a cross-community bridge._
+- **Why does `TenantService` connect `Community 10` to `Community 4`?**
   _High betweenness centrality (0.021) - this node is a cross-community bridge._
 - **What connects `OrderCreatedEvent`, `InventoryRequest`, `PaymentDto` to the rest of the system?**
-  _61 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _62 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.05 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.05 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
   _Cohesion score 0.07 - nodes in this community are weakly interconnected._
 - **Should `Community 3` be split into smaller, more focused modules?**
-  _Cohesion score 0.06 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05 - nodes in this community are weakly interconnected._
